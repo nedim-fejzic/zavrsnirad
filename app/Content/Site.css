@@ -1,0 +1,1382 @@
+﻿.body-layout {
+}
+
+.siva-boja{
+    background-color: #fafafb !important;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+
+.democlass {
+    width: auto;
+    height: 250px;
+}
+
+.link-4 {
+
+}
+
+.traka{
+    border-bottom: 3px solid #1c4f91;
+}
+.plavi-outline {
+    color: #1c4f91;
+    border-color: #1c4f91;
+    border-radius: 0px;
+}
+.plavi-outline:hover {
+    color: #ffffff;
+    background-color: #1c4f91;
+}
+
+.postit {
+    background-color: #f6e8a6 !important;
+    color: #262626 !important;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+    .postit .table td, .table th {
+        border-top: 1px solid #262626 !important;
+    }
+
+}
+
+.postit .table thead th {
+    border-bottom: 2px solid #262626 !important;
+}
+.postit .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #262626 !important;
+}
+
+
+
+    .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    border-right: 1px solid #eee;
+}
+
+/* Sidebar navigation */
+.sidebar {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+    .sidebar .nav {
+        margin-bottom: 20px;
+    }
+
+    .sidebar .nav-item {
+        width: 100%;
+    }
+
+        .sidebar .nav-item + .nav-item {
+            margin-left: 0;
+        }
+
+    .sidebar .nav-link {
+        border-radius: 0;
+    }
+
+/*
+ * Dashboard
+ */
+
+/* Placeholders */
+.placeholders {
+    padding-bottom: 3rem;
+}
+
+.placeholder img {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+
+
+
+
+
+
+
+
+.carousel-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+    margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+    height: 32rem;
+    background-color: #777;
+}
+
+    .carousel-item > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        height: 32rem;
+    }
+
+
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.marketing h2 {
+    font-weight: 400;
+}
+
+.marketing .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+    /* Bump up size of carousel content */
+    .carousel-caption p {
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    .featurette-heading {
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 62em) {
+    .featurette-heading {
+        margin-top: 7rem;
+    }
+}
+
+
+
+.btn-roze {
+    color: #ffffff;
+    background-color: #f51f8a;
+}
+
+
+.test {
+    color: #ffffff;
+    background-color: #f51f8a;
+}
+
+.intro {
+    margin: 0;
+    top: 0;
+    position: fixed;
+    background-color: #fff;
+    height: 40px;
+    width: 100%;
+    color: #ffffff;
+    background-color: #f51f8a;
+}
+
+
+
+.onama .slika {
+    margin-top: 50px;
+    width: 100%;
+    height: 400px;
+}
+
+.onama .natpis {
+    margin-top: -220px;
+    margin-bottom: 120px;
+}
+
+.onama {
+    color: #FFF;
+}
+
+    .onama p {
+        font-weight: 500;
+        font-size: larger;
+    }
+
+    .onama h1 {
+        color: #fff;
+        font-weight: 300;
+        font-size: 50px;
+    }
+
+.mkfplav {
+    color: #083a81;
+    font-weight: 600;
+}
+
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+    .grow:hover {
+        transform: scale(1.1);
+    }
+
+
+.faqLink a {
+    color: #1c4f91;
+}
+
+.plavo {
+    color: #1c4f91;
+}
+
+
+
+
+.zahtjev-forma {
+    margin-top: -55px;
+}
+
+.nav-link {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+
+.cijena {
+    font-size: 30px;
+    color: #676767;
+    font-weight: 500;
+}
+
+.valuta-mjesec {
+    margin-top: 2px;
+    margin-left: -4px;
+    display: inline-block;
+    font-weight: 300;
+}
+
+.valuta {
+    font-size: 16px;
+    display: block;
+    margin-bottom: -7px;
+    margin-left: -8px;
+    font-weight: 400;
+}
+
+.mini {
+    font-size: 10px;
+    display: block;
+}
+
+.btn-naruci {
+    background-color: #2980b9;
+    color: white;
+    border-radius: 0px;
+}
+
+    .btn-naruci:hover {
+        background-color: #1c4f91;
+        color: white;
+        border-radius: 0px;
+    }
+
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+    .hvr-grow:hover,
+    .hvr-grow:focus,
+    .hvr-grow:active {
+        transform: scale(1.1);
+    }
+
+
+.tip-usluge {
+    color: #676767;
+    font-weight: 300;
+    font-size: 28px;
+    margin-top: 15px;
+}
+
+.naziv-paketa {
+    color: #676767;
+    font-weight: 400;
+    font-size: 28px;
+}
+
+p {
+    margin-bottom: 5px;
+}
+
+.paket {
+    color: #676767;
+}
+
+.natpis-paket {
+    font-size: 14px;
+    color: #676767;
+}
+
+.natpis-lista-kanala {
+    font-size: 15px;
+    color: #083a81;
+    text-transform: uppercase;
+    font: 300;
+    border-bottom: 1px solid #083a81;
+}
+
+
+
+/* 888888888888888888888888888888888888888888888888888888888888888888888888888888888888 */
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+    padding-bottom: 100px;
+}
+
+.formica {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 1px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+    .formica input {
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .formica .butonce {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #083a81;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+    }
+
+        .formica .butonce:hover, .formica .butonce:active, .formica .butonce:focus {
+            background: #2980b9;
+        }
+
+.butonce2 {
+    margin-top: 15px;
+    color: #222222 !important;
+    background-color: #fff !important;
+    border: 1px solid #222222 !important;
+}
+
+.formica .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+        .formica .message a {
+            margin-left: 5px;
+            color: #563d7c;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+    .formica .register-form {
+        display: none;
+    }
+
+.bodylogin {
+    background-image: radial-gradient(circle, #2f827f, #007888, #006d91, #005f95, #1c4f91);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border-bottom: 1px solid #fff;
+}
+
+.upozorenje {
+    text-align: left;
+    font-size: 13px;
+}
+
+    .upozorenje strong {
+        font-size: 18px;
+    }
+
+
+
+.faq-kategorija {
+    font-size: 15px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.faq-kategorije-banner {
+    background-color: #676767;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    color: white;
+    width: 100%;
+    background: url('../Slike/faq-banner.jpg');
+}
+
+.bg-meni {
+    background-color: #1c4f91;
+    color: white;
+    width: 100%;
+    /*background: url('../Slike/bgmenu.jpg');*/
+}
+
+
+.bg.meni img {
+    width: 80%;
+    height: auto;
+}
+
+.meni-red {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+/*section .section-title {
+        text-align: center;
+        color: #007b5e;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+    }*/
+.nav-tabs {
+    border: none;
+}
+
+#tabs {
+    /*background: #007b5e;*/
+    color: #3c3c3c;
+}
+
+    #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: #f3f3f3;
+        background-color: transparent;
+        border-color: transparent transparent #f3f3f3;
+        border-bottom: 4px solid !important;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #tabs .nav-tabs .nav-link {
+        /*border: 1px solid transparent;
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem;*/
+        color: #eee;
+        font-size: 20px;
+    }
+
+
+.acc-naslov {
+    color: #676767;
+    font-size: 19px;
+    font-weight: 300;
+}
+
+.acc-sadrzaj {
+    color: #1d1d1d;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.card-header {
+    background-color: #fff;
+}
+
+.kartica {
+}
+
+.short-banner {
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.poruka-zahtjev {
+    margin-top: 20px;
+    font-size: 30px;
+    color: #4a4a4a;
+    font-weight: 300;
+    color: #777;
+}
+
+
+.tip-usluge {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 300;
+    color: #083a81;
+}
+
+
+
+.poruka-checkbox {
+    padding-left: 6px;
+    vertical-align: top;
+    display: inline-block;
+}
+/* Switch 1 Specific Styles Start */
+input[type="checkbox"].switch_1 {
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 60px;
+    height: 25px;
+    background: #ddd;
+    border-radius: 3em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+    input[type="checkbox"].switch_1:checked {
+        background: linear-gradient(to right, #1a5192, #30817f);
+    }
+
+    input[type="checkbox"].switch_1:after {
+        position: absolute;
+        content: "";
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 50%;
+        background: #fff;
+        -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3);
+        box-shadow: 0 0 .25em rgba(0,0,0,.3);
+        -webkit-transform: scale(.7);
+        transform: scale(.7);
+        left: 0;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+
+    input[type="checkbox"].switch_1:checked:after {
+        left: calc(100% - 1.5em);
+    }
+
+
+
+
+.zahtjev-label {
+    color: #777;
+    font-size: 14px;
+    margin-top: 14px;
+    margin-bottom: -3px;
+}
+
+.stil11 {
+    margin-top: 3px;
+    height: 6px;
+    background: url(../Slike/hr-11.png) repeat-x 0 0;
+    border: 0;
+}
+
+
+
+.btn-zahtjev {
+    margin-top: 70px;
+    color: #FFFFFF;
+    background-color: #2ECC71;
+    border-color: #D1D1D1;
+}
+
+    .btn-zahtjev:hover,
+    .btn-zahtjev:focus,
+    .btn-zahtjev:active,
+    .btn-zahtjev.active,
+    .open .dropdown-toggle.btn-zahtjev {
+        color: #FFFFFF;
+        background-color: #5AD68E;
+        border-color: #D1D1D1;
+    }
+
+
+.poruka-zahtjev {
+    padding-bottom: 3px;
+    border-bottom: 2px solid #d1d1d1;
+}
+
+
+.btn-primary {
+    background-color: #1c4f91;
+}
+
+    .btn-primary:hover {
+        background-color: #2980b9;
+    }
+
+
+.big-icon {
+    font-size: 32px;
+}
+
+
+.text-flyer {
+    font-size: 26px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.footer-color-row {
+    background-image: linear-gradient(to right, #1c4f91, #006095, #006e90, #007987, #36837e);
+}
+
+    .footer-color-row h6 {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+.footer-social-icons {
+    color: #fff;
+    font-size: 32px;
+}
+
+.bg-light {
+    background-image: linear-gradient(to bottom, #f8f9fa, #fafafb, #fcfcfd, #fdfdfe, #ffffff);
+}
+
+
+.zahtjev {
+}
+
+.btn-naruci {
+    font-weight: 300;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 5px 35px 5px 35px;
+    background-image: linear-gradient(to right, #1c4f91, #1b4c8b, #1a4884, #1a457e, #194278);
+}
+
+
+.naslov-tabela {
+    color: red;
+    font-size: 36px;
+    padding-bottom: 5px;
+}
+
+.faq-pitanja {
+    min-height: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-confirm {
+    color: #1c4f91;
+    width: 350px;
+}
+
+    .modal-confirm .modal-content {
+        padding: 20px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .modal-confirm .modal-header {
+        border-bottom: none;
+        position: relative;
+    }
+
+    .modal-confirm h4 {
+        text-align: center;
+        font-size: 26px;
+        margin: 30px 0 -15px;
+    }
+
+    .modal-confirm .form-control, .modal-confirm .btn {
+        min-height: 40px;
+        border-radius: 3px;
+    }
+
+    .modal-confirm .close {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+    }
+
+    .modal-confirm .modal-footer {
+        border: none;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 13px;
+    }
+
+.modal-title {
+    color: #1c4f91;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.modal-confirm .icon-box {
+    color: #fff;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -70px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #1c4f91;
+    /*background: #82ce34;*/
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.icon-box img {
+    width: 100%;
+    height: auto;
+}
+
+.modal-confirm .icon-box i {
+    font-size: 58px;
+    position: relative;
+    top: 3px;
+}
+
+.modal-confirm.modal-dialog {
+    margin-top: 120px;
+}
+
+.modal-body p {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.modal-confirm .btn {
+    color: #fff;
+    border-radius: 4px;
+    background: #1c4f91;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    border: none;
+}
+
+    .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+        background: #006b91;
+        outline: none;
+    }
+
+
+.field-validation-error {
+    color: red;
+    font-size: 12px;
+}
+
+.korisnik-label {
+    margin-left: 20px;
+}
+
+.meni {
+    background-image: url('../Slike/bgmenu.jpg');
+    width: 100%;
+    height: 120px;
+}
+
+
+.hvr-shrink {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+    .hvr-shrink:hover, .hvr-shrink:focus, .hvr-shrink:active {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+
+
+.btn-lozinka {
+    width: 260px;
+    color: #1c4f91;
+    border: 1px solid #1c4f91;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 0px;
+}
+
+    .btn-lozinka:hover {
+        color: #fff;
+        background-color: #1c4f91;
+        font-size: 16px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 0px;
+    }
+
+
+.profil-red {
+    margin-top: 15px;
+}
+
+.profil-uvod {
+    color: #676767;
+    font-size: 16px;
+    padding-right: 5px;
+}
+
+.profil-value {
+    color: #1c4f91;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+
+.card {
+    font-size: 1em;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    border-radius: .28571429rem;
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+}
+
+.card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    border-top: 1px solid rgba(34, 36, 38, .1);
+    box-shadow: none;
+}
+
+.card-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.card-title {
+    font-size: 1.28571429em;
+    font-weight: 700;
+    line-height: 1.2857em;
+}
+
+.card-text {
+    clear: both;
+    margin-top: .5em;
+    color: rgba(0, 0, 0, .68);
+}
+
+.card-footer {
+    font-size: 1em;
+    position: static;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    padding: .75em 1em;
+    color: rgba(0, 0, 0, .4);
+    border-top: 1px solid rgba(0, 0, 0, .05) !important;
+    background: #fff;
+}
+
+.card-inverse .btn {
+    border: 1px solid rgba(0, 0, 0, .05);
+}
+
+.profile {
+    position: absolute;
+    top: -12px;
+    display: inline-block;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+
+.profile-avatar {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.profile-inline {
+    position: relative;
+    top: 0;
+    display: inline-block;
+}
+
+    .profile-inline ~ .card-title {
+        display: inline-block;
+        margin-left: 4px;
+        vertical-align: top;
+    }
+
+.text-bold {
+    font-weight: 700;
+}
+
+.meta {
+    font-size: 1em;
+    color: rgba(0, 0, 0, .4);
+}
+
+    .meta a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, .4);
+    }
+
+        .meta a:hover {
+            color: rgba(0, 0, 0, .87);
+        }
+
+
+.btn-info {
+    background-color: #1c4f91;
+}
+
+.btn-info:hover{
+    background-color: #0b356b;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1500; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The closee Button */
+.closee {
+    position: absolute;
+    top: 5px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 55px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+    .closee:hover,
+    .closee:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+
+.naslov{
+    color: #1c4f91;
+    font-size: 25px;
+}
+
+.pitanje-kategorija {
+    color: #34495e;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.pitanje-kategorija-odgovor {
+    color: #34495e;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.breadcrumb{
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
+
+.plavi-header {
+    background-color: #1c4f91;
+    color: #fff;
+    padding: 10px 0px 10px 30px;
+    height: 50px;
+}
+
+
+.tabela-ikona {
+    display: inline-block;
+}
+
+.tabela-ikona-img {
+    margin-top: -9px;
+    height: 30px;
+    width: auto;
+}
+
+.tabela-text {
+    margin: 0px 0px 0px 10px;
+    padding: 0;
+    display: inline-block;
+}
+
+    .tabela-text h4 {
+        font-weight: 300;
+    }
+
+
+.bottom-20 {
+    margin-bottom: 20px;
+}
+
+
+.kocka {
+    min-height: 180px;
+    background-color: #1c4f91;
+    color: #fff;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.kocka-natpis{
+    font-size: 18px;
+    font-weight: 300;
+
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.visina-400{
+    min-height: 400px;
+}
+
+.btn-plav{
+    background-color: #fff;
+    color: #1c4f91;
+    border-color: #1c4f91;
+    border-radius: 0px;
+}
+
+.btn-plav:hover {
+    background-color: #1c4f91;
+    color: #fff;
+}
+
+.btn-odgovor {
+    border-color: #1c4f91;
+    border-radius: 0px;
+    height: 110px;
+    margin-top: 33px;
+}
+
+
+.textarea-odgovor {
+    min-height: 100px;
+}
+
+.odgovor-smetnja-desno {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #f5ebeb;
+    padding: 10px 25px 10px 25px;
+    position: relative;
+    background: #fff;
+}
+
+
+    .odgovor-smetnja-desno:after, .odgovor-smetnja-desno:before {
+        left: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .odgovor-smetnja-desno:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-left-color: #fff;
+        border-width: 30px;
+        margin-top: -30px;
+    }
+
+    .odgovor-smetnja-desno:before {
+        border-color: rgba(245, 235, 235, 0);
+        border-left-color: #f5ebeb;
+        border-width: 31px;
+        margin-top: -31px;
+    }
+
+
+
+.odgovor-smetnja-lijevo {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #f5ebeb;
+    padding: 10px 25px 10px 25px;
+    position: relative;
+    background: #fff;
+}
+
+    .odgovor-smetnja-lijevo:after, .odgovor-smetnja-lijevo:before {
+        right: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .odgovor-smetnja-lijevo:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-right-color: #fff;
+        border-width: 30px;
+        margin-top: -30px;
+    }
+
+    .odgovor-smetnja-lijevo:before {
+        border-color: rgba(245, 235, 235, 0);
+        border-right-color: #f5ebeb;
+        border-width: 31px;
+        margin-top: -31px;
+    }
+
+
+
+
+.nav-item .active {
+    /*background-color: #1c4f91 !important;*/
+    /*color: #ffffff !important;*/
+    color: #1c4f91 !important;
+    border-radius: 0px !important;
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 990px) {
+    .tab-content{
+        margin-top: 20px;
+    }
+}
+
+
+.upustvo-card {
+    padding-top: 10px;
+}
+.naslov-uputstva {
+    display: inline-block;
+    float: left;
+}
+
+.link-uputstva {
+    float: right;
+
+    display: inline-block;
+  
+
+}
+
+    .link-uputstva a {
+        color: #1c4f91;
+    }
+
+.kartica-uputstvo {
+    padding: 10px 20px 10px 20px;
+}
+
+.racuni-div{
+    min-height: 400px;
+}

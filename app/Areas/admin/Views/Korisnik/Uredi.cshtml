@@ -1,0 +1,85 @@
+﻿@model app.Areas.admin.ViewModels.KorisnikUrediVM
+@{
+    ViewBag.Title = "Dodaj";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="naslov">Uredi korisnika</div>
+<hr />
+
+@using (Html.BeginForm())
+{   
+    @Html.HiddenFor(m=> Model.Id)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.Ime, "Ime: ")
+        @Html.TextBoxFor(m => @Model.Ime, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Ime, "", new { @class = "text-danger" })
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.Prezime, "Prezime: ")
+        @Html.TextBoxFor(m => @Model.Prezime, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Prezime, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.ListaOpcina, "Opcina:  ")
+        @Html.DropDownListFor(x => x.OpcinaId, Model.ListaOpcina.Select(x => new SelectListItem
+        {
+            Value = x.Id.ToString(),
+            Text = x.NazivOpcine
+        }).ToList(), "Izaberite općinu prebivališta...", new { @class = "form-control" })
+
+
+        @Html.ValidationMessageFor(model => Model.OpcinaId, "", new { @class = "text-danger" })
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Naselje, "Naselje: ")
+            @Html.TextBoxFor(m => @Model.Naselje, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Naselje, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.JMBG, "JMBG: ")
+            @Html.TextBoxFor(m => @Model.JMBG, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.JMBG, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Adresa, "Adresa: ")
+            @Html.TextBoxFor(m => @Model.Adresa, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Adresa, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Email, "Email: ")
+            @Html.TextBoxFor(m => @Model.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Telefon, "Telefon: ")
+            @Html.TextBoxFor(m => @Model.Telefon, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Telefon, "", new { @class = "text-danger" })
+        </div>
+
+
+        <hr />
+
+        <button type="submit" value="Save" class="btn btn-primary">Spremi</button>
+
+        <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+            <i class="fas fa-chevron-circle-left "></i>
+            Nazad
+        </a>
+
+
+}
+
+<br />
+<br />
+

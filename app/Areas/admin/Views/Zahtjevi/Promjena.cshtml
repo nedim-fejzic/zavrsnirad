@@ -1,0 +1,63 @@
+﻿@model app.Areas.admin.ViewModels.ZahtjevPromjenaVM
+
+@{
+    ViewBag.Title = "Iskljuci uslugu";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+
+
+}
+
+
+<div class="container">
+
+    @using (Html.BeginForm("Promjena", "Zahtjevi"))
+    {
+
+        @Html.HiddenFor(c => c.AktivnaUslugaId)
+        @Html.HiddenFor(c => c.ZahtjevId)
+        @Html.HiddenFor(c => c.NovaUslugaId)
+        <br />
+        <div class="row">
+            <div class="iskljucenje-message">
+                Isključenje aktivne usluge:
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="row">
+                <span class="pitanje-kategorija">Usluga:</span>  <span class="pitanje-kategorija-odgovor">@Model.AktivnaUsluga.Paket.Naziv</span> <br />
+            </div>
+            <div class="row">
+                <span class="pitanje-kategorija"> Datum podnošenja:</span>  <span class="pitanje-kategorija-odgovor">@Model.Datum</span> <br />
+            </div>
+            <div class="row">
+            </div>
+            <div class="row">
+                <span class="pitanje-kategorija">  Napomena:</span>  <span class="pitanje-kategorija-odgovor">@Model.Napomena</span> <br />
+            </div>
+
+            <div class="row">
+                <br />
+                <span class="pitanje-kategorija">  Nova usluga:</span>  <span class="pitanje-kategorija-odgovor">@Model.PaketNovi.TipUsluga.Naziv @Model.PaketNovi.Naziv</span> <br />
+            </div>
+            <br />
+
+
+        </div>
+        <br />
+
+        <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+            <i class="fas fa-chevron-circle-left "></i>
+            Nazad
+        </a>
+
+        <button type="submit" value="Save" class="btn btn-primary">Promjeni</button>
+
+
+                <br /><br />
+
+
+
+    }
+
+</div>

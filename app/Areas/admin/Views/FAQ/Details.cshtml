@@ -1,0 +1,49 @@
+﻿@model app.Areas.admin.ViewModels.FaqDetaljiVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-12">
+
+
+            <div class="card  pitanje-panel">
+                <div class="card-header">
+                   <div class="row">
+                       <div class="col-8">
+                           <div class="naslov">
+                               @Html.Raw(Model.Pitanje)
+                           </div>
+                       </div>
+                       <div class="col-4 ">
+                          <span class="pitanje-kategorija">Kategorija:</span>  <span class="pitanje-kategorija-odgovor">@Html.Raw(Model.Kategorija)</span> <br />
+                           <span class="pitanje-kategorija">Vidljivo korisnicima:</span> <span class="pitanje-kategorija-odgovor">@Html.Raw(Model.Vidljivo)</span>
+                       </div>
+                   </div>
+                </div>
+
+
+                <div class="card-body pitanje-sadrzaj">@Html.Raw(Model.Odgovor)</div>
+
+
+            </div>
+
+
+            @Html.ActionLink("Uredi", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary btn-sm" })
+            @Html.ActionLink("Nazad", "Search", null, null, new { @class = "btn btn-secondary btn-sm" })
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+

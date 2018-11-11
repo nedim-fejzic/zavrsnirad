@@ -1,0 +1,125 @@
+﻿@model app.Areas.admin.ViewModels.KorisnikSearchVM
+
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="naslov">Pretraga korisnika</div>
+<hr />
+
+@using (Html.BeginForm("Search", "Korisnik", FormMethod.Get))
+{
+    <div class="row">
+
+
+        <div class="col-9">
+            @Html.TextBoxFor(m => @Model.JMBG, new { @class = "form-control", @placeholder = "Unesite JMBG korisnika..." })
+
+
+        </div>
+        <div class="col-3">
+            <input type="submit" name="submit" value="Prikaži" class="btn btn-secondary btn-block" />
+
+        </div>
+
+       
+
+    </div>
+
+}
+
+
+
+
+<div class="">
+    <br />
+    <div class="row">
+        <br />
+        <table class="table table-hover ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>JMBG</th>
+                   
+
+                    <th>Akcija</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.ListaRezultata.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <div class="nemarezultatapretrage">
+                                Nema rezultata pretrage
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var x in Model.ListaRezultata)
+                    {
+                        <tr>
+                            <td>@x.Id</td>
+                            <td>@x.Ime</td>
+                            <td>@x.Prezime</td>
+                            <td>@x.JMBG</td>
+                           
+
+
+                            <td>
+                                @if (Session["role"].ToString() == "admin" || Session["role"].ToString() == "support")
+                                {
+                                    @Html.ActionLink("Promjeni lozinku", "Lozinka", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                }
+                                @if (Session["role"].ToString() == "admin" || Session["role"].ToString() == "sales")
+                                {
+                                    @Html.ActionLink("Uredi", "Uredi", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                    @Html.ActionLink("Detalji", "Detalji", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                }
+                             
+                            </td>
+
+                        </tr>
+                    }
+                }
+
+
+            </tbody>
+
+
+        </table>
+    </div>
+
+
+
+    <div class="pagination">
+        @Html.PagedListPager((IPagedList)Model.ListaRezultata, page => Url.Action("Search", new
+   {
+       page,
+       OdabranaKategorija = Request.QueryString["OdabranaKategorija"]
+   }))
+
+
+    </div>
+
+    <hr />
+    <a href="@Url.Action("Dodaj", "Korisnik")" class="btn btn-primary ">
+        <i class="fas fa-user-plus"></i> DODAJ KORISNIKA
+    </a>
+
+    <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-chevron-circle-left "></i>
+        Nazad
+    </a>
+
+</div>

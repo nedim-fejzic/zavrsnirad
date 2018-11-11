@@ -1,0 +1,58 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model app.ViewModels.VijestIndexVM
+@{
+    ViewBag.Title = "Vijesti";
+}
+
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var x in Model.ListaRezultata)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+            <div class="card card-inverse card-info">
+                <img class="card-img-top" src="@Url.Content(x.ImageUrl)" />
+                <div class="card-block">
+                    <h4 class="card-title">@x.Naslov</h4>
+                    <div class="card-text">
+                        @x.Opis
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <small>Objavljeno: @x.DatumObjave.ToShortDateString()</small>
+                    <a href='@Url.Action("Detalji", "Vijest", new { @id = x.Id})' class="btn btn-info float-right btn-sm">
+                        Detalji
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        }
+
+
+
+
+
+
+
+    </div>
+
+
+    <br />
+
+    <div class="pagination pagination-lg justify-content-center">
+        @Html.PagedListPager((IPagedList)Model.ListaRezultata, page => Url.Action("Index", new
+   {
+       page
+   }))
+    </div>
+
+
+    </div>
+
+
+
+
+    <br />

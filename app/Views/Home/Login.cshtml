@@ -1,0 +1,113 @@
+﻿@model app.ViewModels.HomeLoginVM
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "Home"))
+{
+
+    <div class="bodylogin">
+        <div class="login-page">
+            <div class="formica">
+             
+                <form class="login-form">
+
+
+                    @if (Model.poruka == "nema")
+                {
+                        <div class="alert alert-danger alert-dismissible fade show upozorenje" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>Greška!</strong><br /> Provjerite podatke za prijavu.
+                        </div>
+                    }
+
+                    <div class="form-group">
+
+                        @Html.TextBoxFor(m => @Model.Username, new { placeholder = "Korisnicko ime" })
+                        @Html.ValidationMessageFor(m => @Model.Username)
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.PasswordFor(m => @Model.Password, new { placeholder = "Lozinka" })
+                        @Html.ValidationMessageFor(m => @Model.Password)
+                    </div>
+
+
+                    <button type="submit" value="Save" class="butonce">Prijavi se</button>
+
+                    <br />
+                    <button type="button" class="butonce butonce2" data-toggle="modal" data-target="#exampleModal">
+                        <i class="far fa-question-circle"></i>
+                       Otvori login podatke
+                    </button>
+                </form>
+            </div>
+        
+        
+        
+        
+        </div>
+    </div>
+}
+
+
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content postit">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Role</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Administrator</td>
+                            <td>admin</td>
+                            <td>Admin12</td>
+                        </tr>
+                        <tr>
+                            <td>Prodaja</td>
+                            <td>prodaja</td>
+                            <td>Prodaja1</td>
+                        </tr>
+                        <tr>
+                            <td>Menadžer</td>
+                            <td>menadzer</td>
+                            <td>Menadzer1</td>
+                        </tr>
+                        <tr>
+                            <td>Tehnička podrška</td>
+                            <td>podrska</td>
+                            <td>Podrska1</td>
+                        </tr>
+
+                        <tr>
+                            <td>Korisnik</td>
+                            <td>nedim.fejzic</td>
+                            <td>NedimFejzic12</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

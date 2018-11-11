@@ -1,0 +1,71 @@
+﻿@model app.Areas.admin.ViewModels.FaqDodajVM
+
+@{
+    ViewBag.Title = "Dodaj";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="naslov">Dodaj pitanje</div>
+<hr />
+
+@using (Html.BeginForm("Dodaj","FAQ"))
+{
+    
+    <div class="form-horizontal">
+       
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => @Model.ListaKategorija, "Kategorija pitanja:  ")
+                @Html.DropDownListFor(x => x.KategorijaId, Model.ListaKategorija.Select(x => new SelectListItem
+           {
+               Value = x.Id.ToString(),
+               Text = x.Naziv
+           }).ToList(), "Izaberite kategoriju", new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => Model.KategorijaId, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => @Model.Pitanje, "Pitanje: ")
+                @Html.TextBoxFor(m => @Model.Pitanje, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => Model.Pitanje, "", new { @class = "text-danger" })
+            </div>
+        
+        
+            <div class="form-group">
+                    @Html.LabelFor(m => @Model.Odgovor, "Odgovor: ")
+                    @Html.TextAreaFor(m => @Model.Odgovor, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => Model.Odgovor, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => @Model.Vidljiv, "Vidljivo korisnicima: ")
+                <div class="form-control">
+                    @Html.EditorFor(m => @Model.Vidljiv, new { @class = "form-control" })
+                </div>
+                </div>
+
+
+
+        <button type="submit" value="Save" class="btn btn-primary">Spremi</button>
+        @Html.ActionLink("Nazad", "Search", null, null, new { @class = "btn btn-secondary " })
+
+            
+        
+        <br />
+        <br /><br /><br />
+
+        </div>
+
+}
+
+
+
+<script src="~/Scripts/tinymce/tinymce.js"></script>
+<script src="~/Scripts/main.js"></script>

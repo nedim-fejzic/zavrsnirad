@@ -1,0 +1,96 @@
+﻿@model app.Areas.admin.ViewModels.PaketiDetailsVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-12">
+
+
+            <div class="card  pitanje-panel">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="naslov">
+                                <span class="pitanje-kategorija">Naziv paketa:</span> @Html.Raw(Model.Naziv) <br />
+
+                             
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <span class="pitanje-kategorija">Kategorija:</span>  <span class="pitanje-kategorija-odgovor">@Html.Raw(Model.TipUsluge)</span> <br />
+                            <span class="pitanje-kategorija">Aktivna usluga:</span> <span class="pitanje-kategorija-odgovor">@Html.Raw(Model.AktivnaUsluga)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-body paket-sadrzaj">
+                    
+                  <div  class="row">
+                      <div class="col-8 paket-list">
+
+                          <span class="pitanje-kategorija">Cijena bez PDV:</span>  <span class="paket-opis">@Html.Raw(Model.CijenaBezPdv)KM</span> <br />
+                          <span class="pitanje-kategorija">Cijena sa PDV:</span>  <span class="paket-opis">@Html.Raw(Model.CijenaSaPdv)KM</span> <br />
+
+                          <span class="pitanje-kategorija">Download speed:</span>  <span class="paket-opis">@Html.Raw(Model.DownloadSpeed)Mb/s</span> <br />
+
+                          <span class="pitanje-kategorija">Upload speed:</span>  <span class="paket-opis">@Html.Raw(Model.UploadSpeed)Mb/s</span> <br />
+
+
+                          <span class="pitanje-kategorija">Flat rate:</span>  <span class="paket-opis">@Html.Raw(Model.FlatRate)</span> <br />
+
+                      </div>
+
+                      <div class="col-4">
+                          @if (Model.ImageUrl == null)
+                          {<img id="image" />}
+                          else
+                          {<img id="image" src="@Url.Content(Model.ImageUrl)" width="100%" />}
+                      </div>
+                  </div>
+                
+                </div>
+
+
+            </div>
+
+
+    
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<div id="myModal" class="modal">
+    <span class="closee">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
+
+
+<hr />
+
+<p>
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary btn-sm" })
+    @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-secondary btn-sm" })
+</p>
+
+
+<script src="~/Scripts/test.js"></script>

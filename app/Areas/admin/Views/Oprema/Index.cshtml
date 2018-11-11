@@ -1,0 +1,221 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model app.Areas.admin.ViewModels.OpremaIndexVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+
+    
+
+
+
+    <div class="col-md-4 hvr-shrink">
+        <a href="@Url.Action("Index", "Oprema",new { tip = "S" })">
+            <div class="info-blok">
+
+                <div class="info-part-1">
+                    <div class="blok-natpis">
+                        <h3>@Html.Raw(Model.SlobodnoUredajaja)</h3>
+                        <p>slobodnih uređaja</p>
+                    </div>
+                </div>
+
+                <div class="info-part-2">
+                    <div class="">
+                        <img src="~/Slike/ikone/ikona-router.png" class="blok-slika" />
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 hvr-shrink">
+        <a href="@Url.Action("Index", "Oprema",new { tip = "Z" })">
+            <div class="info-blok">
+
+                <div class="info-part-1">
+                    <div class="blok-natpis">
+                        <h3>@Html.Raw(Model.ZauzetoUredjaja)</h3>
+                        <p>uređaj u upotrebi</p>
+                    </div>
+                </div>
+
+                <div class="info-part-2">
+                    <div class="">
+                        <img src="~/Slike/ikone/ikona-router.png" class="blok-slika" />
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+    @*<div class="col-md-4">
+        <div class="category-list-card">
+            <div class="category-image">
+                <img src="~/Slike/ikone/ikona-router.png" />
+            </div>
+            <div class="category-name">
+                <h3>Fruits & Vegetables</h3>
+                <p>Fruit & Vegetable Baskets, Fruits, Vegetables, Cut Fresh & Herbs, Mangoes</p>
+            </div>
+        </div>
+    </div>*@
+
+
+</div>
+
+
+
+
+<br />
+
+@using (Html.BeginForm("Index", "Oprema", FormMethod.Get, new { tip = "-" }))
+{
+    <div class="row">
+
+        @Html.HiddenFor(m=>m.tip)
+
+        <div class="col-12 col-sm-6">
+
+            <div class="form-group">
+                @*@Html.LabelFor(m => @Model.device, "Uređaj: ")*@
+                @Html.TextBoxFor(model => model.device, new { @class = "form-control", @placeholder = "Unesite naziv uređaja ili serijski broj..." })
+
+                @*@Html.TextBoxFor(m => @Model.device, new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => Model.device, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-sm-3 col-lg-3">
+            <input  type="submit" name="submit" value="Prikaži" class="btn btn-secondary btn-block" />
+
+        </div>
+
+        <div class="col-12 col-md-12 col-sm-3 col-lg-3">
+            <a href="@Url.Action("Dodaj", "Oprema")" class="btn btn-primary ">
+                <i class="fas fa-user-plus"></i> DODAJ OPREMU
+            </a>
+
+        </div>
+
+    </div>
+
+}
+
+
+
+
+<br />
+<div class="row">
+
+    <div class="col-12">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>S/N</th>
+                    <th>Proizvodžač</th>
+                    <th>Naziv</th>
+                    <th>Datum nabavke</th>
+                    <th>U upotrebi</th>
+
+                    <th>Akcija</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.ListaRezultata.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <div class="nemarezultatapretrage">
+                                Nema rezultata pretrage
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var x in Model.ListaRezultata)
+                    {
+                        <tr>
+                            <td>@x.Id</td>
+                            <td>@x.SerijskiBroj</td>
+                            <td>@x.Proizvodjac</td>
+                            <td>@x.Naziv</td>
+                            <td>@x.DatumNabavke.ToString("dd-MM-yyyy")</td>
+                            <td>
+                                @if (x.UUpotrebi == true)
+                                {
+                                    @Html.Raw("DA");
+                                }
+                                else
+                                {
+                                    @Html.Raw("NE");
+                                }
+                            </td>
+
+
+                            <td>
+                                @Html.ActionLink("Uredi", "Uredi", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                @if (x.UUpotrebi == false)
+                                {
+                                    @*@Html.ActionLink("Zaduzi", "Zaduzi", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })*@
+                                    <a href="@Url.Action("Zaduzi",new { id = x.Id })" class="btn btn-secondary btn-sm ">
+                                        <i class="fas fa-plus"></i> Zaduzi
+                                    </a>
+                                }
+                                else
+                                {
+                                    @*@Html.ActionLink("Razduzi", "Zaduzi", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })*@
+                                    <a href="@Url.Action("Zaduzi",new { id = x.Id })" class="btn btn-secondary btn-sm ">
+                                        <i class="fas fa-minus"></i> Razduzi
+                                    </a>
+                                }
+
+                             </td>
+
+                        </tr>
+                    }
+                }
+
+
+            </tbody>
+
+
+        </table>
+    </div>
+
+</div>
+
+
+
+<div class="pagination">
+    @Html.PagedListPager((IPagedList)Model.ListaRezultata, page => Url.Action("Index", new
+{
+    page,
+    device = Request.QueryString["device"],
+    tip = Model.tip
+
+}))
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<br />
+<br />
+

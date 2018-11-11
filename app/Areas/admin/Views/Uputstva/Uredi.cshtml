@@ -1,0 +1,75 @@
+﻿@model app.Areas.admin.ViewModels.UputstvoUrediVM
+
+@{
+    ViewBag.Title = "Uredi";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="naslov">Uredi uputstvo</div>
+<hr />
+
+@using (Html.BeginForm("Uredi", "Uputstva", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+    <div class="form-horizontal">
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="col-12">
+            @Html.LabelFor(m => @Model.ListaKategorija, "Kategorija uputstva:  ")
+            @Html.DropDownListFor(x => x.UputstvoKategorijaID, Model.ListaKategorija.Select(x => new SelectListItem
+       {
+           Value = x.Id.ToString(),
+           Text = x.Naziv
+       }).ToList(), "Izaberite kategoriju", new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => Model.UputstvoKategorijaID, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-12 ">
+            @Html.LabelFor(m => @Model.Naslov, "Naslov: ")
+            @Html.TextBoxFor(m => @Model.Naslov, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Naslov, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-12">
+            @Html.LabelFor(m => @Model.Vidljivo, "Vidljivo korisnicima: ", new { @class = "" })
+            @Html.EditorFor(model => model.Vidljivo, new { htmlAttributes = new { @class = "cekbox-m" } })
+            @Html.ValidationMessageFor(model => model.Vidljivo, "", new { @class = "text-danger" })
+        </div>
+
+          <div class="col-12 ">
+              <br />
+              @Html.LabelFor(m => @Model.FileUpload, "Prikaz postojećeg dokumenta: ", new { @class = "" }) <br />
+              <object data="@Url.Action("GetPDF", "Uputstva", new { s = Model.Putanja })" type="application/pdf" width="100%" height="450px"></object>
+        </div>
+
+
+        <div class="col-12 ">
+            @Html.LabelFor(m => @Model.FileUpload, "Izaberite novi dokument: ", new { @class = "" }) <br />
+            <input type="file" name="FileUpload" accept="application/pdf" />  <br />
+            @Html.ValidationMessageFor(model => Model.FileUpload, "", new { @class = "text-danger" })
+        </div>
+
+
+        <br />
+        <br />
+     
+
+        @Html.ActionLink("Nazad", "Index", null, null, new { @class = "btn btn-secondary " })
+        <button type="submit" value="Save" class="btn btn-primary">Spremi</button>
+
+
+
+        <br />
+        <br /><br /><br />
+
+    </div>
+
+}
+

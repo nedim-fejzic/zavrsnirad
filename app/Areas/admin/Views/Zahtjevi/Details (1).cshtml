@@ -1,0 +1,211 @@
+﻿@model app.Areas.admin.ViewModels.ZahtjevDetaljiVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+
+  }
+
+
+
+<div>
+    
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <h2 class="">
+                Zahtjev
+                <b>@Html.DisplayFor(model => model.Id)</b>
+            </h2>
+            <br />
+        </div>
+        <br />
+        <div class="col-6 text-left zahtjev-tekst">
+            <b>Licni podaci:</b> <br />
+
+          
+            @Html.DisplayFor(model => model.Ime)
+            @Html.DisplayFor(model => model.Prezime) 
+            <br />
+
+           <b>@Html.DisplayFor(model => model.JMBG)</b><br />
+
+            @Html.DisplayFor(model => model.Opcina),
+            @Html.DisplayFor(model => model.Naselje)
+            <br />
+            @Html.DisplayFor(model => model.Ulica)
+            @Html.DisplayFor(model => model.Broj) 
+
+        </div>
+        <div class="col-6 text-right zahtjev-tekst">
+            <b>Kontakt podaci:</b> <br />
+
+
+            Telefon: @Html.DisplayFor(model => model.Telefon)<br />
+            Email: @Html.DisplayFor(model => model.Email)
+            <br />
+            Kontakt: 
+            @Html.DisplayFor(model => model.TipKontakta)
+            <br />
+           
+
+        </div>
+        <div class="col-12">
+          
+           
+                Napomena korisnika:<b>
+                @Html.DisplayFor(model => model.Napomena)
+            </b>
+
+
+
+
+
+
+
+
+            <br />
+            <br />
+
+            Trenutni status:<b>
+                @Html.DisplayFor(model => model.Status)
+            </b>
+
+
+            <br /><br />
+
+        </div>
+
+
+      <div class="col-12">
+          <div class="panel panel-default">
+              <div class="panel-heading">Order summary</div>
+              <div class="panel-body">
+                 
+                  
+
+
+
+
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th>Šifra paketa</th>
+                              <th>Naziv paketa</th>
+                              <th>Iznos</th>
+                              <th>Datum podnosenja</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach (var z in Model.ListaTraznihUsluga)
+                          {
+                              <tr>
+                                  <td>@z.Id</td>
+                                  <td class="text-center">@z.PaketId</td>
+                                  <td>@z.Paket.Naziv</td>
+                                  <td>@z.Paket.CijenaSaPdv KM</td>
+                                  <td>@z.Zahtjev.DatumPodnosenja</td>
+
+                              
+
+                                  @*<td>
+                                      @Html.ActionLink("Uredi", "Edit", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                      @Html.ActionLink("Detalji", "Details", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                  </td>*@
+                              </tr>
+                          }
+                      </tbody>
+                  </table>
+
+
+                  
+              </div>
+          </div>
+      </div>
+
+
+    </div>
+    <br />
+
+
+
+@using (Html.BeginForm("Napomena", "Zahtjevi", FormMethod.Post, new { }))
+{
+
+    @Html.HiddenFor(model => model.Id)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Komentar, "Komentar: ")
+            @Html.TextAreaFor(model => model.Komentar, new { @class = "form-control", @rows = 4 })
+            @Html.ValidationMessageFor(model => Model.Komentar, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+        <button type="submit" value="Napomena" class="btn btn-primary">SPASI KOMENTAR</button>
+
+}
+
+
+
+
+
+    <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-chevron-circle-left "></i>
+        Nazad
+    </a>
+
+
+    <a href="#" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-window-close "></i>
+        ZATVORI ZAHTJEV
+    </a>
+
+    <a href="#" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-exchange-alt "></i>
+        PROMJENI STATUS
+    </a>
+
+    <a href="@Url.Action("Zahtjev", "Korisnik", new { ZahtjevId = Model.Id , area = "Admin" })" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-exchange-alt "></i>
+         GENERISI KORISNIKA
+    </a>
+
+    <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-chevron-circle-left "></i>
+        Nazad
+    </a>
+
+
+</div>
+
+
+<br /><br />
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"> Greška</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Raw(ViewBag.Message)
+
+                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        Html.Raw(ViewBag.Message);
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal">Zatvori</button>
+                </div>
+            </div>
+        </div>
+    </div>

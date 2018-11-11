@@ -1,0 +1,140 @@
+﻿@using app.Areas.admin.ViewModels
+@model app.Areas.admin.ViewModels.VijestiIndexVM
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Vijesti";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+
+
+@using (Html.BeginForm("Index", "Vijesti", FormMethod.Get))
+{
+    <div class="row">
+
+
+        <div class="col-12 col-sm-4">
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Naziv, new { @class = "form-control", @placeholder = "Unesite naziv uputstva..." })
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-4">
+            <div class="form-group">
+                @Html.DropDownListFor(x => x.OdabranaKategorija, @Model.ListaKategorija.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Naziv }).ToList(), new { @class = "form-control" })
+            </div>
+        </div>
+
+
+
+        <div class="col-12 col-md-2 col-sm-2 col-lg-2">
+
+            <button type="submit" class="btn btn-secondary btn-block" name="submit" value="Prikaži">
+                <i class="fas fa-search"></i>
+                Prikaži
+            </button>
+
+        </div>
+
+
+        <div class="col-12 col-sm-2">
+            <a href="@Url.Action("Dodaj", "VIJESTI")" class="btn btn-primary ">
+                <i class="fas fa-plus-circle"></i> DODAJ VIJEST
+            </a>
+        </div>
+
+
+
+
+    </div>
+
+}
+
+
+
+<div class="row">
+    <div class="col-12">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Naziv</th>
+                    <th>Opis</th>
+                    <th>Datum objave</th>
+                    <th>Vrijeme objave</th>
+                    <th>Vidljivo korisnicima</th>
+                    <th>Kategorija</th>
+                    <th>Akcija</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @if (Model.ListaRezultata.Count() == 0)
+            {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <div class="nemarezultatapretrage">
+                                Nema rezultata pretrage
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+
+                else
+                {
+                    foreach (var x in Model.ListaRezultata)
+                    {
+                        <tr>
+                            <td>@x.Id</td>
+                            <td>@x.Naslov</td>
+                            <td>@x.Opis.Substring(0, Math.Min(x.Opis.Length, 50)).....</td>
+                            <td>@x.DatumObjave.ToShortDateString()</td>
+                            <td>@x.DatumObjave.ToString("HH:mm")</td>
+                            <td>@(x.Vidljivo ? "DA" : "NE")</td>
+                            <td>@x.VijestiKategorija.Naziv</td>
+                            <td>
+                                @Html.ActionLink("Uredi", "Edit", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                @Html.ActionLink("Detalji", "Details", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                            </td>
+                        </tr>
+                    }
+                }
+
+
+
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="pagination">
+    @Html.PagedListPager((IPagedList)Model.ListaRezultata, page => Url.Action("Index", new
+{
+    page,
+    OdabranaKategorija = Request.QueryString["OdabranaKategorija"],
+    Naziv = Request.QueryString["Naziv"]
+
+}))
+
+
+</div>
+<br />
+<br />
+<br>
+<br>
+
+
+

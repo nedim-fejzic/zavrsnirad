@@ -1,0 +1,118 @@
+﻿@model app.Areas.admin.ViewModels.FaqSearchVM
+
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+
+@using (Html.BeginForm("Search", "FAQ", FormMethod.Get))
+{
+    <div class="row">
+        
+
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+                @Html.DropDownListFor(x => x.OdabranaKategorija, @Model.ListaKategorija.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Naziv }).ToList(), new { @class = "form-control" })
+            </div>
+            </div>
+        <div class="col-12 col-md-6 col-sm-3 col-lg-3">
+            <input type="submit" name="submit" value="Prikaži" class="btn btn-secondary btn-block" />
+
+        </div>
+
+        <div class="col-12 col-md-12 col-sm-3 col-lg-3">
+            @Html.ActionLink("Dodaj novo pitanje", "Dodaj", null, new { @class = "btn btn-primary btn-block" })
+
+        </div>
+       
+    </div>
+
+}
+
+
+
+
+    <br />
+    <div class="row">
+       
+        <div class="col-12">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Pitanje</th>
+                        <th>Odgovor</th>
+                        <th>Kategorija</th>
+                        <th>Vidljivo</th>
+
+                        <th>Akcija</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model.ListaRezultata.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <div class="nemarezultatapretrage">
+                                    Nema rezultata pretrage
+                                    <br />
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var x in Model.ListaRezultata)
+                        {
+                            <tr>
+                                <td>@x.Id</td>
+                                <td>@x.Pitanje</td>
+                                <td>@x.Odgovor</td>
+                                <td>@x.FAQKategorija.Naziv</td>
+                                <td>
+                                    @if (x.Vidljiv == true)
+                                    {
+                                        @Html.Raw("DA");
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("NE");
+                                    }
+                                </td>
+
+
+                                <td>
+                                    @Html.ActionLink("Uredi", "Edit", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                    @Html.ActionLink("Detalji", "Details", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+
+
+            </table>
+        </div>
+      
+    </div>
+
+  
+
+    <div class="pagination">
+        @Html.PagedListPager((IPagedList)Model.ListaRezultata, page => Url.Action("Search", new
+       {
+            page,
+            OdabranaKategorija = Request.QueryString["OdabranaKategorija"]
+   }))
+
+
+    </div>
+

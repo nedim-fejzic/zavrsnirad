@@ -1,0 +1,71 @@
+﻿@model app.ViewModels.ProfilLozinkaVM
+@{
+    ViewBag.Title = "Promjena lozinke";
+}
+
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <h4>@Model.ImePrezime </h4>
+
+            @using (Html.BeginForm())
+            {
+
+
+                <div class="row">
+
+                    @Html.HiddenFor(m => @Model.Id)
+                    @Html.HiddenFor(m => @Model.StariPassword)
+                    @*@Html.ValidationSummary()*@
+
+                    <div class="col-12 input-group-lg">
+                        @Html.LabelFor(m => @Model.StaraLozinka, "Stara lozinka: ", new { @class = "form-naslov" })
+                        @Html.EditorFor(model => model.StaraLozinka, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaraLozinka, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12 input-group-lg">
+                        @Html.LabelFor(m => @Model.NovaLozinka, "Nova lozinka: ", new { @class = "form-naslov" })
+                        @Html.EditorFor(model => model.NovaLozinka, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NovaLozinka, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+                    <div class="col-12 input-group-lg">
+                        @Html.LabelFor(m => @Model.NovaLozinkaPotvrda, "Potvrdite novu lozinku: ", new { @class = "form-naslov" })
+                        @Html.EditorFor(model => model.NovaLozinkaPotvrda, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NovaLozinkaPotvrda, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+
+
+                </div>
+
+                <br />
+                <br />
+
+
+
+                <a href="@Url.Action("Index", "Profil", new { id = Model.Id})" class="btn btn-primary ">
+                    <i class="fas fa-chevron-circle-left fff-icon"></i> PONIŠTI
+                </a>
+
+
+                <button type="submit" value="Save" class="btn btn-primary" aria-label="Left Align">
+                    <span class="fas fa-save fff-icon" aria-hidden="true"></span> SPREMI
+                </button>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+<br />
+<br />

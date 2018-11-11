@@ -1,0 +1,91 @@
+﻿@using app.Areas.admin.ViewModels
+@using app.Models
+@model app.Areas.admin.ViewModels.PaketIndexVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+
+@foreach (TipUsluga j in Model.KategorijeL)
+{
+    <h4>@Html.Raw(j.Naziv)</h4>
+
+        <table class="table table-hover ">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Naziv</th>
+                        <th>Cijena sa PDV</th>
+                        <th>Upload speed</th>
+                        <th>Download speed</th>
+                        <th>Flat</th>
+                        <th>Akcija</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (PaketRed x in Model.PaketRedovi)
+                    {
+                        if (x.KategorijaId == j.Id)
+                        {
+
+                            <tr>
+                                <td>@x.Id</td>
+                                <td>@x.Naziv</td>
+                                <td>@x.CijenaSaPDV</td>
+                                <td>@x.UpSpeed</td>
+                                <td>@x.DownSpeed</td>
+                                <td>@x.Flat</td>
+
+                                <td>
+                                    @Html.ActionLink("Uredi", "Edit", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                    @Html.ActionLink("Detalji", "Details", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                   
+                </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+}
+
+<br />
+
+<a href="@Url.Action("Create", "Pakets")" class="btn btn-primary ">
+    <i class="fas fa-plus-circle"></i> DODAJ PAKET
+</a>
+<a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+    <i class="fas fa-chevron-circle-left "></i>
+    Nazad
+</a>
+
+
+<br />
+<br />
+<br />
+

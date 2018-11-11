@@ -1,0 +1,95 @@
+﻿@using app.ViewModels
+@using app.Models
+@model app.ViewModels.HomePaketiVM
+
+@{
+    ViewBag.Title = "Paketi";
+}
+<div class="container">
+
+
+    @foreach (TipUsluga j in Model.KategorijeL)
+    {
+
+        <hr />
+        <h2 class="tip-usluge">@Html.Raw(j.Naziv) paketi</h2>
+        <hr />
+
+        <div class="row text-center">
+
+            @foreach (PaketRed x in Model.PaketRedovi)
+            {
+                if (x.KategorijaId == j.Id)
+                {
+
+                    if ( x.KategorijaId == 3)
+                    {
+                        //televizija i duo paketi
+                        <div class="col-4">
+                            <div class="paket"> <img src="@Url.Content(x.SlikaPutanja)" height="120px" width="auto" /></div>
+
+                            <p class="naziv-paketa">@x.Naziv</p>
+                            <p>@x.Kategorija</p>
+
+                            <p> @x.DownSpeed Mb/s <span class="natpis-paket">Mb/s </span></p>
+                            <p> @x.UpSpeed Mb/s <span class="natpis-paket">Mb/s </span></p>
+                            @*<p><span class="natpis-lista-kanala">Lista kanala </span></p>*@
+
+
+                            <p class="cijena">@x.CijenaSaPDV <span class="valuta-mjesec"><span class="valuta">KM</span><span class="mini">mjesec</span></span></p>
+                            <br />
+                            @Html.ActionLink("Naručite", "ZahtjevUsluga", new { id = x.Id }, new { @class = "btn  btn-sm btn-naruci hvr-grow" })
+                        </div>
+
+                    }
+                    else if (x.KategorijaId == 2)
+                    {
+                        // tv nema neta
+                        <div class="col-4">
+                            <div class="paket"> <img src="@Url.Content(x.SlikaPutanja)" height="120px" width="auto" /></div>
+
+                            <p class="naziv-paketa">@x.Naziv</p>
+                            <p>@x.Kategorija</p>
+
+                            @*<p> @x.DownSpeed Mb/s <span class="natpis-paket">Mb/s </span></p>
+                            <p> @x.UpSpeed Mb/s <span class="natpis-paket">Mb/s </span></p>*@
+                            @*<p><span class="natpis-lista-kanala">Lista kanala </span></p>*@
+
+
+                            <p class="cijena">@x.CijenaSaPDV <span class="valuta-mjesec"><span class="valuta">KM</span><span class="mini">mjesec</span></span></p>
+                            <br />
+                            @Html.ActionLink("Naručite", "ZahtjevUsluga", new { id = x.Id }, new { @class = "btn  btn-sm btn-naruci hvr-grow" })
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="col-3">
+                            <div class="paket"> <img src="@Url.Content(x.SlikaPutanja)" height="120px" width="auto" /></div>
+
+                            <p class="naziv-paketa">@x.Naziv</p>
+                            <p>@x.Kategorija</p>
+                            <p> <span class="natpis-paket">Download: </span> @x.DownSpeed Mb/s</p>
+                            <p> <span class="natpis-paket">Upload: </span> @x.UpSpeed Mb/s</p>
+                            <p class="cijena">@x.CijenaSaPDV <span class="valuta-mjesec"><span class="valuta">KM</span><span class="mini">mjesec</span></span></p>
+
+
+                            <br />
+                            @Html.ActionLink("Naručite", "ZahtjevUsluga", new { id = x.Id }, new { @class = "btn  btn-sm btn-naruci hvr-grow" })
+                        </div>
+                    }
+
+                }
+
+
+            }
+
+        </div>
+    }
+</div>
+
+
+<br />
+<br />
+
+

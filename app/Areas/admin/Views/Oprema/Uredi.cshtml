@@ -1,0 +1,66 @@
+﻿@model app.Areas.admin.ViewModels.OpremaUrediVM
+@{
+    ViewBag.Title = "Uredi";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+
+<h4>Uredi uređaj: </h4>
+
+@using (Html.BeginForm())
+{
+
+
+    <div class="row">
+
+
+        <div class="col-12 input-group-lg">
+            @Html.LabelFor(m => @Model.Proizvodzac, "Proizvodžač: ", new { @class = "form-naslov" })
+            @Html.EditorFor(model => model.Proizvodzac, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Proizvodzac, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-12 input-group-lg">
+            @Html.LabelFor(m => @Model.Naziv, "Naziv uređaja: ", new { @class = "form-naslov" })
+            @Html.EditorFor(model => model.Naziv, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Naziv, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-12 input-group-lg">
+                @Html.LabelFor(m => @Model.SerijskiBroj, "Serijski broj: ", new { @class = "form-naslov" })
+                @Html.EditorFor(model => model.SerijskiBroj, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SerijskiBroj, "", new { @class = "text-danger" })
+            </div>
+
+
+
+        <div class="col-6 input-group-lg">
+            @Html.LabelFor(m => @Model.DatumNabavke, "Datum nabavke: ", new { @class = "form-naslov" })
+            @Html.EditorFor(model => model.DatumString, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.TextBoxFor(m => m.DatumNabavke, "{0:dd-MM-yyyy}", new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(model => model.DatumString, "", new { @class = "text-danger" })
+        </div>
+
+
+
+   
+
+    </div>
+
+    <br />
+    <br />
+
+
+
+    <a href="@Url.Action("Index", "Oprema")" class="btn btn-primary ">
+        <i class="fas fa-chevron-circle-left fff-icon"></i> PONIŠTI
+    </a>
+
+
+    <button type="submit" value="Save" class="btn btn-primary" aria-label="Left Align">
+        <span class="fas fa-chevron-circle-right fff-icon" aria-hidden="true"></span> SPREMI
+    </button>
+
+}

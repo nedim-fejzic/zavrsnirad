@@ -1,0 +1,410 @@
+﻿@{
+    ViewBag.Code = TempData["code"];
+    ViewBag.Message = TempData["message"];
+    ViewBag.zahtjev = TempData["zahtjev"];
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - OPERATOR 1</title>
+
+    <link href="~/Content/bootstrap2.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
+
+</head>
+<body>
+
+    @* Navigacija  *@
+
+
+    @if (Session["logiran_korisnik"] == null)
+    {
+        <div class="navigacija container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+
+
+                <a href='@Url.Action("Index", "Home")'>
+                    <img src="~/Slike/LOGO2.png">
+                </a>
+
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                       
+                        
+                        
+                        
+                        @if (Session["logiran_uposlenik"] != null)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("ADMIN PANEL", "Index", "Start", new { area = "admin" }, new { @class = "nav-link" })
+                            </li>
+                        }
+
+
+
+                        <li class="nav-item">
+                            @Html.ActionLink("Paketi", "Paketi", "Home", null, new { @class = "nav-link" })
+                        </li>
+
+
+
+
+                        <li class="nav-item">
+                            @Html.ActionLink("Zahtjev", "Zahtjev", "Home", null, new { @class = "nav-link" })
+                        </li>
+
+
+                        <li class="nav-item">
+                            @Html.ActionLink("Podrška", "FAQ", "Home", null, new { @class = "nav-link" })
+                        </li>
+
+
+                    
+
+
+                        <li class="nav-item">
+
+
+                            @if (Session["logiran_korisnik"] == null && Session["logiran_uposlenik"] == null)
+                            {
+                                @Html.ActionLink("Prijavi se", "Login", "Home", null, new { @class = "nav-link" })
+                            }
+                            else
+                            {
+                            <li class="nav-item dropdown korisnik-label">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@(Session["imeprezime"])</a>
+                                <div class="dropdown-menu">
+                                    @if (Session["logiran_korisnik"] != null)
+                                    {
+                                        @Html.ActionLink("Profil", "Index", "Profil", new { @id = Convert.ToInt32(Session["logiran_korisnik"]) }, new { @class = "dropdown-item" })
+                                    }
+                                  
+                                    @Html.ActionLink("Odjavi se", "Odjava", "Home", null, new { @class = "dropdown-item" })
+                                </div>
+                            </li>
+                            }
+                            </li>
+
+
+
+
+                        </ul>
+
+                </nav>
+            </div>
+
+    }
+    else
+    {
+        <div class="row siva-boja">
+            <div class="container">
+                <div class="text-center">
+                    <a href='@Url.Action("Index", "Home")'>
+                        <img src="~/Slike/LOGO2.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-center traka">
+
+            <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
+                <ul class="navbar-nav mx-auto text-center">
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Paketi", "Paketi", "Home", null, new { @class = "nav-link" })
+                    </li>
+
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Uputstva", "Index", "Uputstvo", null, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Vijesti", "Index", "Vijest", null, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Podrška", "FAQ", "Home", null, new { @class = "nav-link" })
+                    </li>
+
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Smetnje", "Index", "Smetnja", null, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Računi", "Index", "Racuni", new { @id = Convert.ToInt32(Session["logiran_korisnik"])}, new { @class = "nav-link" })
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Moj profil", "Index", "Profil", new { @id = Convert.ToInt32(Session["logiran_korisnik"]) }, new { @class = "nav-link" })
+                    </li>
+
+
+                </ul>
+
+
+                <ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
+                    <li class="nav-item"><a class="nav-link link-4" href="@Url.Action("Odjava","Home")">Odjavi se <i class="fas fa-sign-out-alt"></i> </a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+    <div class="body-layout">
+        @RenderBody()
+
+    </div>
+
+
+
+    <!--Footer-->
+    <footer class="page-footer font-small blue-grey lighten-5 pt-0">
+
+        <div class="footer-color-row">
+            <div class="container">
+                <!--Grid row-->
+                <div class="row py-4 d-flex align-items-center">
+
+                    <!--Grid column-->
+                    <div class="col-12 col-md-7 text-left mb-4 mb-md-0">
+                        <h6 class="mb-0 white-text text-center text-md-left ">
+                            <strong class="text-flyer">Budimo u dodiru na socijalnim mrežama!</strong>
+                        </h6>
+                    </div>
+                    <div class="col-12 col-md-5 text-center text-md-right footer-social-icons">
+                        <a class="">
+                            <i class="fab fa-facebook-square mr-lg-4 "> </i>
+                        </a>
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter-square  mr-lg-4"> </i>
+                        </a>
+                        <a class="gplus-ic">
+                            <i class="fab fa-google-plus-square  mr-lg-4  "> </i>
+                        </a>
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin  mr-lg-4    "> </i>
+                        </a>
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram  mr-lg-4   "> </i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Footer Links-->
+        <div class="container mt-5 mb-4 text-center text-md-left">
+            <div class="row mt-3">
+
+                <!--First column-->
+                <div class="col-md-3 col-lg-4 col-xl-3 mb-4 dark-grey-text">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Operator 1</strong>
+                    </h6>
+                    <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        Budite dio najboljeg tima.<br />
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </p>
+                </div>
+                <!--/.First column-->
+                <!--Second column-->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 dark-grey-text">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Usluge</strong>
+                    </h6>
+                    <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!" class="dark-grey-text">Internet paketi</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="dark-grey-text">Televizijski paketi</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="dark-grey-text">DUO paketi</a>
+                    </p>
+
+                </div>
+                <!--/.Second column-->
+                <!--Third column-->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 dark-grey-text">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Korisni linkovi</strong>
+                    </h6>
+                    <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!" class="dark-grey-text">Vaš račun</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="dark-grey-text">Kontaktiraje nas</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="dark-grey-text">Podrška</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="dark-grey-text">Prijavite smetnje</a>
+                    </p>
+                </div>
+                <!--/.Third column-->
+                <!--Fourth column-->
+                <div class="col-md-4 col-lg-3 col-xl-3 dark-grey-text">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <strong>Kontakt</strong>
+                    </h6>
+                    <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fa fa-home mr-3"></i> Goražde, Panorama bb, BIH
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope mr-3"></i> info@operator1.ba
+                    </p>
+                    <p>
+                        <i class="fa fa-phone mr-3"></i> + 38 222 333
+                    </p>
+                    <p>
+                        <i class="fa fa-print mr-3"></i> + 38 222 334
+                    </p>
+                </div>
+                <!--/.Fourth column-->
+
+            </div>
+        </div>
+        <!--/.Footer Links-->
+        <!-- Copyright-->
+        <div class="footer-copyright py-3 text-center">
+            © 2018 Copyright:
+            <a href="">
+                <strong> operator1.ba</strong>
+            </a>
+        </div>
+        <!--/.Copyright -->
+
+    </footer>
+    <!--/.Footer-->
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+
+
+                        @if (ViewBag.Code == "error")
+                        {
+                            @Html.Raw("<i class=\"fas fa-exclamation-triangle\" aria-hidden=\"true\"></i>  Greška! ");
+                        }
+                        else if (ViewBag.Code == "info")
+                        {
+                            @Html.Raw("<i class=\"fas fa-info-circle\" aria-hidden=\"true\"></i> Obavijest");
+                        }
+                        else
+                        {
+
+                            @Html.Raw(ViewBag.Code);
+                        }
+
+
+
+
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    @Html.Raw(ViewBag.Message)
+
+
+                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        Html.Raw(ViewBag.Message);
+                    }
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Zatvori</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="modal-zahtjev" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <img src="~/Slike/checked.png" />
+                    </div>
+                    <h4 class="modal-title">Sjajno!</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="">Vaš zahtjev je uspješno primljen. <br />Očekujte kontakt od strane naših operatera.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <script>
+            $('#myModal').modal();
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.zahtjev))
+    {
+        <script>
+            $('#modal-zahtjev').modal();
+        </script>
+    }
+
+
+
+</body>
+</html>

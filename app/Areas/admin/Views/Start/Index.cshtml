@@ -1,0 +1,270 @@
+﻿@model app.Areas.admin.ViewModels.StartIndexVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="container-fluid">
+    
+
+
+    @if (Session["role"].ToString() == "admin" || Session["role"].ToString() == "sales")
+    {
+
+       <div class="row">
+           <div class="col-4 hvr-shrink">
+               <a href="@Url.Action("Index", "Korisnik")">
+                   <div class="info-blok">
+
+                       <div class="info-part-1">
+                           <div class="blok-natpis">
+                               <h3>@Html.Raw(Model.ProdajaKorisnici)</h3>
+                               <p>ukupno korisnika</p>
+                           </div>
+                       </div>
+
+                       <div class="info-part-2">
+                           <div class="">
+                               <img src="~/Slike/ikone/korisnici.png" class="blok-slika" />
+                           </div>
+                       </div>
+                   </div>
+               </a>
+           </div>
+
+           <div class="col-4 hvr-shrink">
+               <a href="@Url.Action("Index", "Zahtjevi", new { OdabranaKategorija = 1 })">
+                   <div class="info-blok">
+
+                       <div class="info-part-1">
+                           <div class="blok-natpis">
+                               <h3>@Html.Raw(Model.ProdajaZahtjevi)</h3>
+                               <p>aktivnih zahtjeva</p>
+                           </div>
+                       </div>
+
+                       <div class="info-part-2">
+                           <div class="">
+                               <img src="~/Slike/ikone/zahtjevi.png" class="blok-slika" />
+                           </div>
+                       </div>
+                   </div>
+               </a>
+           </div>
+
+           <div class="col-4 hvr-shrink">
+               <a href="@Url.Action("Index", "Racun")">
+                   <div class="info-blok">
+
+                       <div class="info-part-1">
+                           <div class="blok-natpis">
+                               <h3>@Html.Raw(Model.ProdajaRacuni)</h3>
+                               <p>neplacenih racuna</p>
+                           </div>
+                       </div>
+
+                       <div class="info-part-2">
+                           <div class="">
+                               <img src="~/Slike/ikone/racuni.png" class="blok-slika" />
+                           </div>
+                       </div>
+                   </div>
+               </a>
+           </div>
+       </div>
+
+    }
+
+    @if (Session["role"].ToString() == "admin" || Session["role"].ToString() == "support")
+    {
+
+        <div class="row">
+            <div class="col-4 hvr-shrink">
+                <a href="@Url.Action("Index", "Smetnje")">
+                    <div class="info-blok">
+
+                        <div class="info-part-1">
+                            <div class="blok-natpis">
+                                <h3>@Html.Raw(Model.PodrskaSmetnje)</h3>
+                                <p>aktivnih smetnji</p>
+                            </div>
+                        </div>
+
+                        <div class="info-part-2">
+                            <div class="">
+                                <img src="~/Slike/ikone/smetnje.png" class="blok-slika" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-4 hvr-shrink">
+                <a href="@Url.Action("Index", "Uputstva")">
+                    <div class="info-blok">
+
+                        <div class="info-part-1">
+                            <div class="blok-natpis">
+                                <h3>@Html.Raw(Model.PodrskaUputstva)</h3>
+                                <p>ukupno uputstava</p>
+                            </div>
+                        </div>
+
+                        <div class="info-part-2">
+                            <div class="">
+                                <img src="~/Slike/ikone/uputstva.png" class="blok-slika" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-4 hvr-shrink">
+                <a href="@Url.Action("Search", "Korisnik")">
+                    <div class="info-blok">
+
+                        <div class="info-part-1">
+                            <div class="blok-natpis">
+                                <h3>@Html.Raw(Model.PodrskaLozinka)</h3>
+                                <p>promjena lozinke za korisnike</p>
+                            </div>
+                        </div>
+
+                        <div class="info-part-2">
+                            <div class="">
+                                <img src="~/Slike/ikone/promjenapass.png" class="blok-slika" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    }
+
+   
+    @if (Session["role"].ToString() == "admin" || Session["role"].ToString() == "manager")
+    {
+
+        <div class="row">
+            <div class="col-4 hvr-shrink">
+                <a href="@Url.Action("Index", "Vijesti")">
+                    <div class="info-blok">
+
+                        <div class="info-part-1">
+                            <div class="blok-natpis">
+                                <h3>@Html.Raw(Model.MenadzerVijesti)</h3>
+                                <p>aktivnih vijesti</p>
+                            </div>
+                        </div>
+
+                        <div class="info-part-2">
+                            <div class="">
+                                <img src="~/Slike/ikone/vijesti.png" class="blok-slika" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-4 hvr-shrink">
+                <a href="@Url.Action("Search", "FAQ")">
+                    <div class="info-blok">
+
+                        <div class="info-part-1">
+                            <div class="blok-natpis">
+                                <h3>@Html.Raw(Model.MenadzerFaq)</h3>
+                                <p>ukupno pitanja</p>
+                            </div>
+                        </div>
+
+                        <div class="info-part-2">
+                            <div class="">
+                                <img src="~/Slike/ikone/faq.png" class="blok-slika" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-4 hvr-shrink">
+                <a href="@Url.Action("Index", "Oprema")">
+                    <div class="info-blok">
+
+                        <div class="info-part-1">
+                            <div class="blok-natpis">
+                                <h3>@Html.Raw(Model.MenadzerOprema)</h3>
+                                <p>slobodne opreme</p>
+                            </div>
+                        </div>
+
+                        <div class="info-part-2">
+                            <div class="">
+                                <img src="~/Slike/ikone/oprema.png" class="blok-slika" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+
+            <div class="col-4 hvr-shrink">
+                <a href="@Url.Action("Index", "Pakets")">
+                    <div class="info-blok">
+
+                        <div class="info-part-1">
+                            <div class="blok-natpis">
+                                <h3>@Html.Raw(Model.MenadzerPaketi)</h3>
+                                <p>paketa u ponudi</p>
+                            </div>
+                        </div>
+
+                        <div class="info-part-2">
+                            <div class="">
+                                <img src="~/Slike/ikone/paketi.png" class="blok-slika" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-4 hvr-shrink">
+                <a href="@Url.Action("Index", "AktivneUsluge")">
+                    <div class="info-blok">
+
+                        <div class="info-part-1">
+                            <div class="blok-natpis">
+                                <h3>@Html.Raw(Model.MenadzerAktivneUsluge)</h3>
+                                <p>aktiviranih usluga</p>
+                            </div>
+                        </div>
+
+                        <div class="info-part-2">
+                            <div class="">
+                                <img src="~/Slike/ikone/aktivneusluge.png" class="blok-slika" />
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+    }
+
+
+
+</div>

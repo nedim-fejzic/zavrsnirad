@@ -1,0 +1,160 @@
+﻿@model app.Areas.admin.ViewModels.PaketDodajVM
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+   
+
+}
+
+
+
+@using (Html.BeginForm("Create", "Pakets", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+<div class="col-md-12">
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <br />
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.Naziv, "Naziv: ")    
+        @Html.TextBoxFor(m => @Model.Naziv, new { @class = "form-control"})
+        @Html.ValidationMessageFor(model => Model.Naziv, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("ImageUpload", "Slika: ")
+        <label for="Slika" class="btn btn-primary btn-block btn-info">Izaberi sliku</label>
+        <input type="file" id="Slika" name="ImageUpload" accept="image/*" style="display: none">
+        @Html.ValidationMessageFor(model => Model.ImageUpload, "", new { @class = "text-danger" })
+    </div>
+
+    <img id="image" />
+   
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.AltText, "Opis slike: ")
+        @Html.TextBoxFor(m => @Model.AltText, new { @class = "form-control" })
+    </div>
+
+ 
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.DownloadSpeed, "Download speed: ")
+        <div class="input-group">
+            @Html.TextBoxFor(m => @Model.DownloadSpeed, new { @class = "form-control"})
+       @*     @Html.TextBoxFor(m => @Model.DownloadSpeed, new { @class = "form-control", placeholder = "2048" })*@
+            <span class="input-group-addon"><span class="">kb/s</span></span>
+        </div>
+        @Html.ValidationMessageFor(model => Model.DownloadSpeed, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.UploadSpeed, "Upload speed: ")
+        <div class="input-group">
+            @Html.TextBoxFor(m => @Model.UploadSpeed, new { @class = "form-control" })
+            @*     @Html.TextBoxFor(m => @Model.DownloadSpeed, new { @class = "form-control", placeholder = "2048" })*@
+            <span class="input-group-addon"><span class="">kb/s</span></span>
+        </div>
+        @Html.ValidationMessageFor(model => Model.UploadSpeed, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.FlatRate, "Flat rate: ")
+        <div class="form-control">
+            @Html.EditorFor(m => @Model.FlatRate, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.FlatRate, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+   
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.CijenaBezPdv, "Cijena bez PDV: ")
+        <div class="input-group">
+            @Html.TextBoxFor(m => @Model.CijenaBezPdv, new { @class = "form-control"})
+            <span class="input-group-addon"><span class="">KM</span></span>
+        </div>
+        @Html.ValidationMessageFor(model => Model.CijenaBezPdv, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.CijenaSaPdv, "Cijena sa PDV: ")
+        <div class="input-group">
+            @Html.TextBoxFor(m => @Model.CijenaSaPdv, new { @class = "form-control" })
+            <span class="input-group-addon"><span class="">KM</span></span>
+        </div>
+        @Html.ValidationMessageFor(model => Model.CijenaSaPdv, "", new { @class = "text-danger" })
+    </div>
+
+    
+  
+   
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.AktivnaUsluga, "Aktivna usluga: ")
+        <div class="form-control">
+            @Html.EditorFor(m => @Model.AktivnaUsluga, new { @class = "" })
+            @Html.ValidationMessageFor(model => Model.AktivnaUsluga, "", new { @class = "text-danger" })
+        </div>
+       </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => @Model.ListaTipovaUsluga, "Kategorija:  ")
+        @Html.DropDownListFor(x => x.TipUslugaId, Model.ListaTipovaUsluga.Select(x => new SelectListItem
+   {
+       Value = x.Id.ToString(),
+       Text = x.Naziv
+   }).ToList(), "Izaberite kategoriju", new { @class = "form-control" })
+
+
+        @Html.ValidationMessageFor(model => Model.TipUslugaId, "", new { @class = "text-danger" })
+    </div>
+
+
+
+
+
+
+
+    <div id="myModal" class="modal">
+        <span class="closee">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+
+
+
+
+
+    <hr />
+
+</div>
+
+
+<button type="submit" value="Save" class="btn btn-primary">Spremi</button>
+    <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-chevron-circle-left "></i>
+        Nazad
+    </a>
+
+}
+<br />
+<br />
+
+
+
+
+
+
+<script src="~/Scripts/slike.js"></script>
+
+
+
+

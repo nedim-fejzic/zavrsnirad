@@ -1,0 +1,141 @@
+﻿@model app.ViewModels.ProfilIndexVM
+@{
+    ViewBag.Title = "Profil";
+}
+
+<div class="container">
+    <br />
+
+
+     
+   <div class="row">
+       <div class="col-12">
+           <div class="float-left">
+               <h2 class="plavo">Korisnički podaci:</h2>
+           </div>
+           <div class="float-right">
+                
+               <a href="@Url.Action("Lozinka","Profil", new { id = Model.Id})" class="btn btn-lozinka">PROMJENI LOZINKU</a>
+           </div>
+       </div>
+
+
+       <div class="col-12">
+           <hr />
+
+           <div class="profil-red ">
+               <span class="profil-uvod">  Ime i prezime: </span>
+               <span class="profil-value"> @Model.ImePrezime</span>
+               <br />
+           </div>
+
+           <div class="profil-red ">
+                   <span class="profil-uvod">  JMBG: </span>
+                   <span class="profil-value"> @Model.JBMG</span>
+               <br />
+           </div>
+
+           <div class="profil-red ">
+               <span class="profil-uvod">  Naselje i općina: </span>
+               <span class="profil-value"> @Model.Opcina, @Model.Naselje</span>
+               <br />
+           </div>
+         
+
+           <div class="profil-red ">
+               <span class="profil-uvod">  Adresa: </span>
+               <span class="profil-value"> @Model.Adresa</span>
+               <br />
+           </div>
+
+           <div class="profil-red ">
+               <span class="profil-uvod">  Email: </span>
+               <span class="profil-value"> @Model.Email</span>
+               <br />
+           </div>      
+
+
+           <div class="profil-red ">
+               <span class="profil-uvod">  Telefon: </span>
+               <span class="profil-value"> @Model.Telefon</span>
+               <br />
+           </div>      
+
+
+
+
+       </div>
+
+   </div>
+
+    <hr />
+
+    <br />
+
+
+ 
+
+
+
+</div>
+
+<div class="container">
+    <div class="">
+        <div class="plavi-header bottom-20">
+            <div class="tabela-ikona"><img src="~/Slike/Ikone/info.png" class="tabela-ikona-img" /></div>
+            <div class="tabela-text"><h4>Aktivne usluge</h4></div>
+        </div>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Tip usluge</th>
+                    <th>Naziv usluge</th>
+                    <th>Adresa instalacije</th>
+                    <th>Datum instalacije</th>
+                    <th>Akcija</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @if (Model.ListaAktivnihUsluga.Count() == 0)
+            {
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            <div class="nemarezultatapretrage">
+                                Korisnik nema aktivnih usluga!
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+
+
+
+                    foreach (var z in Model.ListaAktivnihUsluga)
+                    {
+                        <tr>
+                            <td>@z.Paket.TipUsluga.Naziv</td>
+                            <td>@z.Paket.Naziv</td>
+                            <td>@z.AdresaInstalacije</td>
+                            <td>@z.DatumInstalacije</td>
+
+
+                            <td>
+                                    @Html.ActionLink("Promjeni", "Promjena", "Home", new { id = z.Id }, new { @class = "btn btn-outline-secondary btn-sm plavi-outline" }) 
+                                @Html.ActionLink("Iskljuci ", "Iskljuci", "Home", new { id = z.Id }, new { @class = "btn btn-outline-secondary btn-sm plavi-outline" })
+                                </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <br /><br />
+</div>
+

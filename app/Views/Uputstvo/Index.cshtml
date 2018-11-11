@@ -1,0 +1,77 @@
+﻿@model app.ViewModels.UputstvoIndexVM
+@{
+}
+
+<br />
+
+<div class="container visina-400">
+    <div class="row">
+        <div class="col-12 col-lg-4  col-xl-4 ">
+            <ul class="nav nav-tabs flex-column" id="myTab" role="tablist">
+
+               @foreach (var x in Model.ListaKategorija)
+               {
+                <li class="nav-item">
+                    <a class="nav-link  @(Model.ListaKategorija.First()== x? "active":"")" data-toggle="tab" href="#@Html.Raw(x.Id)" role="tab" aria-controls="profile">@Html.Raw(x.Naziv)</a>
+                </li>
+               }
+
+            </ul>
+        </div>
+
+        <div class="col-12 col-lg-8  col-xl-8">
+            <div class="tab-content">
+
+                @foreach (var x in Model.ListaKategorija)
+                {
+
+                    <div class="tab-pane @(Model.ListaKategorija.First()== x? "active":"")" id="@Html.Raw(x.Id)" role="tabpanel">
+                      <h4 class="mkfplav">@Html.Raw(x.Naziv)</h4>
+
+                        @foreach (var c in Model.ListaUputstva)
+                        {
+                            if (c.UputstvoKategorijaID == x.Id)
+                            {
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="upustvo-card">
+                                            <div class="card ">
+                                              <div class="kartica-uputstvo">
+                                                  <div class="naslov-uputstva">
+                                                      @Html.Raw(c.Naslov)
+                                                  </div>
+
+                                                  <div class="link-uputstva">
+                                                      <a href="@Url.Action("GetPDF", "Uputstva", new { s = c.Putanja })" target="_blank"    >OTVORI</a>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+
+
+                                </div>
+
+
+
+                            }
+                        }
+
+                    </div>
+
+                }
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>

@@ -1,0 +1,133 @@
+﻿@model app.ViewModels.SmetnjaDetaljiVM
+@{
+    ViewBag.Title = "Details";
+}
+
+<br />
+<div class="container">
+
+    <div class="row">
+
+
+        <div class="col-12">
+
+
+
+
+            <div class="card  pitanje-panel smetnje-glavno">
+                <div class="card-header smetnja-naslov">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="naslov">
+                                <span class="smetnja-span2">Šifra:</span> <span class="smetnja-span3">@Html.Raw(Model.Sifra)</span>
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <span class="smetnja-span1">Datum prijave:</span>  <span class="smetnja-span2">@Html.Raw(Model.DatumPodnosenja)</span> <br />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-body pitanje-sadrzaj">
+                    <span class="smetnja-span1">Datum uočavanja:</span>  <span class="smetnja-span2">@Html.Raw(Model.DatumUocavanja)</span> <br />
+                    <span class="smetnja-span1">Usluga:</span>  <span class="smetnja-span2">@Html.Raw(Model.Usluga)</span> <br />
+
+                    <hr />
+                    @Html.Raw(Model.Opis)
+                </div>
+
+
+            </div>
+
+            @if (Model.ListaOdgovora != null)
+            {
+                foreach (var x in Model.ListaOdgovora)
+                {
+                    <div class="  @(x.KorisnikId == null ? "odgovor-smetnja-desno":"odgovor-smetnja-lijevo")">
+                        <div class="row">
+
+                            <div class="col-12">
+                                <div class="float-left">
+                                    <span class="pitanje-kategorija">Datum:</span>  <span class="pitanje-kategorija-odgovor">@Html.Raw(x.Datum.ToString("dd-MM-yyyy"))</span> <br />
+                                </div>
+
+                                <div class="float-right">
+                                    @if (x.UposlenikId != null)
+                                    {
+                                        <span class="pitanje-kategorija-odgovor">@Html.Raw(x.Uposlenik.Ime + " " + x.Uposlenik.Prezime)</span> <br />
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 ">
+                                <hr />
+                                @Html.Raw(x.Poruka)
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+
+            }
+
+
+
+            @if (Model.StatusSmetnje == "OTVORENA")
+            {
+                using (Html.BeginForm("Odgovor", "Smetnja", FormMethod.Post, new { }))
+                {
+
+                    @Html.HiddenFor(model => model.Id)
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-horizontal">
+                        <br />
+                        <hr />
+                        <div class="row">
+                            <div class="col-10">
+                                @Html.LabelFor(m => @Model.Odgovor, "Odgovor: ")
+                                @Html.TextAreaFor(model => model.Odgovor, new { @class = "form-control textarea-odgovor odgovor-smetnja-desno", @rows = 4 })
+                                @Html.ValidationMessageFor(model => Model.Odgovor, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-2">
+                                <button type="submit" value="Napomena" class="btn btn-primary btn-block btn-odgovor">
+                                    <i class=" fas fa-arrow-circle-right "></i>
+                                    ODGOVORI
+                                </button>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <br />
+
+
+                }
+            }
+
+        </div>
+
+
+    </div>
+    <hr />
+    <a href="@Request.UrlReferrer" class="btn btn-secondary btn-plav hvr-icon-back " title="Nazad">
+        <i class="fas fa-chevron-circle-left "></i>
+        Nazad
+    </a>
+    <br />
+    <br />
+
+
+
+</div>
+
+
+
+

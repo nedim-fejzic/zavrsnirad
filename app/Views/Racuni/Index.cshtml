@@ -1,0 +1,72 @@
+﻿@model app.ViewModels.RacuniIndexVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<div class="container">
+    <br />
+    <div class="row">
+        <br />
+       <div class="col-12 racuni-div">
+           <div class="plavi-header bottom-20">
+               <div class="tabela-ikona"><img src="~/Slike/Ikone/info.png" class="tabela-ikona-img" /></div>
+               <div class="tabela-text"><h4>Vaši računi</h4></div>
+           </div>
+
+           <table class="table table-hover ">
+               <thead>
+                   <tr>
+                       <th>Sifra</th>
+                       <th>Datum izdavanja</th>
+                       <th>Obracunski period</th>
+                       <th>Status</th>
+                       <th>Akcija</th>
+                   </tr>
+               </thead>
+               <tbody>
+
+                   @if (Model.ListaRacuna.Count() == 0)
+                   {
+                       <tr>
+                           <td colspan="5" class="text-center">
+                               <div class="nemarezultatapretrage">
+                                  Nema računa
+                                   <br />
+                               </div>
+                           </td>
+                       </tr>
+                   }
+                   else
+                   {
+                       foreach (var x in Model.ListaRacuna)
+                       {
+                           <tr>
+                               <td>@x.Sifra</td>
+                               <td>@x.DatumIzdavanja.ToShortDateString()</td>
+                               <td>@x.ObracunskiPeriodOD.ToShortDateString() - @x.ObracunskiPeriodDO.ToShortDateString()</td>
+                               <td>@(x.Placen ? "PLAĆEN" : "NIJE PLAĆEN")</td>
+
+                               <td>
+                                   @Html.ActionLink("Detalji racuna", "Detalji", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                               </td>
+
+                           </tr>
+                       }
+                   }
+
+
+               </tbody>
+
+
+           </table>
+       </div>
+    </div>
+
+
+    </div>
+
+

@@ -1,0 +1,181 @@
+﻿@using app.Areas.admin.ViewModels
+@model app.Areas.admin.ViewModels.UputstvaIndexVM
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+
+@using (Html.BeginForm("Index", "Uputstva", FormMethod.Get))
+{
+    <div class="row">
+
+
+        <div class="col-12 col-sm-4">
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Naziv, new { @class = "form-control", @placeholder = "Unesite naziv uputstva..." })
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-4">
+            <div class="form-group">
+                @Html.DropDownListFor(x => x.OdabranaKategorija, @Model.ListaKategorija.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Naziv }).ToList(), new { @class = "form-control" })
+            </div>
+        </div>
+
+
+
+        <div class="col-12 col-md-2 col-sm-2 col-lg-2">
+            <input type="submit" name="submit" value="Prikaži" class="btn btn-secondary btn-block" />
+
+        </div>
+
+
+        <div class="col-12 col-sm-2">
+            <a href="@Url.Action("Dodaj", "Uputstva")" class="btn btn-primary ">
+                <i class="fas fa-user-plus"></i> DODAJ UPUTSTVO
+            </a>
+        </div>
+
+
+
+       
+    </div>
+
+}
+
+
+
+
+<div class="row">
+    <div class="col-12">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Naziv</th>
+                    <th>Datum dodavanja</th>
+                    <th>Kategorija</th>
+                    <th>Naziv dokumenta</th>
+                    <th>Vidljivo</th>
+                    <th>Akcija</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @if (Model.ListaRezultata.Count() == 0)
+            {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <div class="nemarezultatapretrage">
+                                Nema rezultata pretrage
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+
+                else
+                {
+                    foreach (var x in Model.ListaRezultata)
+                    {
+                        <tr>
+                            <td>@x.Id</td>
+                            <td>@x.Naslov</td>
+                            <td>@x.DatumDodavanja.ToString("dd-MM-yyyy")</td>
+                            <td>@x.UputstvaKategorije.Naziv</td>
+                            <td>@x.NazivDokumenta</td>
+                            <td>@(x.Vidljivo?"DA":"NE")</td>
+                            <td>
+                                @Html.ActionLink("Uredi", "Uredi", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                @Html.ActionLink("Detalji", "Detalji", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                            </td>
+                        </tr>
+                    }
+                }
+
+
+
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="pagination">
+    @Html.PagedListPager((IPagedList)Model.ListaRezultata, page => Url.Action("Index", new
+{
+    page,
+    OdabranaKategorija = Request.QueryString["OdabranaKategorija"],
+    Naziv = Request.QueryString["Naziv"]
+
+}))
+
+
+</div>
+<br />
+<br />
+
+
+
+<br><br>
+
+
+
+
+
+
+
+
+@*<div class="uputstva-tab">
+    <div class="">
+        <div class="row">
+            <div class="col-xl-3">
+                <ul class="nav nav-pills nav-stacked flex-column">
+
+                    @foreach (var x in Model.ListaKategorija)
+                    {
+                        <li><a href="#@Html.Raw(x.Id)" data-toggle="pill">   @Html.Raw(x.Naziv)    </a></li>
+                    }
+                </ul>
+            </div>
+            <div class="col-xl-9">
+                <div class="tab-content">
+
+                    @foreach (var x in Model.ListaKategorija)
+                    {
+
+                        <div class="tab-pane @(@Model.ListaKategorija.First()==x ? "active" : "" )" id="@Html.Raw(x.Id)">
+
+
+                                <h3>@Html.Raw(x.Naziv)</h3>
+                                <p>
+
+
+                                    @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa  <br />
+                                    @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa  <br />
+                                    @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa  <br />
+                                    @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa  <br />
+                                   @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa @Html.Raw(x.Naziv) - fsa  <br />
+                                </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
+                                    bibendum laoreet.
+                                </p>
+                            </div>
+                            }
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>*@

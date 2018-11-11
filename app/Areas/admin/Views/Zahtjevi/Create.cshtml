@@ -1,0 +1,421 @@
+﻿@model app.Areas.admin.ViewModels.ZahtjevDodajVM
+
+@{
+    ViewBag.Title = "Create";
+      Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row zahtjev-forma">
+
+
+       
+
+        <div class="col-12">
+            <p class="poruka-zahtjev">Lični podaci: </p>
+        </div>
+        <hr />
+
+
+
+
+            <div class="col-12 col-md-6">
+                @Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "zahtjev-label" })
+                @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" })
+            </div>
+      
+            <div class="col-12 col-md-6">
+                @Html.LabelFor(model => model.Prezime, htmlAttributes: new { @class = "zahtjev-label" })
+                @Html.EditorFor(model => model.Prezime, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" })
+            </div>
+
+        <div class="col-12 col-md-12">
+            @Html.LabelFor(model => model.JMBG, htmlAttributes: new { @class = "zahtjev-label" })
+            @Html.EditorFor(model => model.JMBG, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+            @Html.ValidationMessageFor(model => model.JMBG, "", new { @class = "text-danger" })
+        </div>
+
+           <div class="col-12 col-md-6">
+               @Html.LabelFor(model => model.OpcinaId, htmlAttributes: new { @class = "zahtjev-label" })
+               @Html.DropDownListFor(x => x.OpcinaId, Model.ListaOpcina.Select(x => new SelectListItem
+                 {
+                       Value = x.Id.ToString(),
+                       Text = x.NazivOpcine
+                   }).ToList(), "Izaberite mjesto prebivalista:", new { @class = "form-control" })
+
+
+               @Html.ValidationMessageFor(model => Model.OpcinaId, "", new { @class = "text-danger" })
+           </div>
+           <div class="col-12 col-md-6">
+               @Html.LabelFor(model => model.Naselje, htmlAttributes: new { @class = "zahtjev-label" })
+                   @Html.EditorFor(model => model.Naselje, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.Naselje, "", new { @class = "text-danger" })
+           </div>
+
+           <div class="col-12 col-md-9">
+                   @Html.LabelFor(model => model.NazivUlice, htmlAttributes: new { @class = "zahtjev-label" })
+                   @Html.EditorFor(model => model.NazivUlice, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.NazivUlice, "", new { @class = "text-danger" })
+           </div>
+
+           <div class="col-12 col-md-3">
+               @Html.LabelFor(model => model.Broj, htmlAttributes: new { @class = "zahtjev-label" })
+                   @Html.EditorFor(model => model.Broj, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.Broj, "", new { @class = "text-danger" })
+           </div>
+       
+
+      
+
+        <div class="col-12">
+
+                @Html.LabelFor(model => model.NapomenaKorisnika, htmlAttributes: new { @class = "zahtjev-label" })
+                @Html.TextAreaFor(model => model.NapomenaKorisnika, new { @class = "form-control", @rows = 4 })
+                @*@Html.EditorFor(model => model.NapomenaKorisnika, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.NapomenaKorisnika, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-12  ">
+            <p class="poruka-zahtjev"> Kontakt podaci:</p>
+        </div>
+     <hr class="stil11">
+        
+
+        <div class="col-12 col-md-6">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "zahtjev-label" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-12 col-md-6">
+            @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "zahtjev-label" })
+            @Html.EditorFor(model => model.Telefon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-12 col-md-12">
+            @Html.LabelFor(model => model.ListaTipKontakta, htmlAttributes: new { @class = "zahtjev-label" })
+            @Html.DropDownListFor(x => x.TipKontaktaId, Model.ListaTipKontakta.Select(x => new SelectListItem
+       {
+           Value = x.Id.ToString(),
+           Text = x.Naziv
+       }).ToList(), "Izaberite tip kontakta", new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => Model.TipKontaktaId, "", new { @class = "text-danger" })
+        </div>
+
+
+
+        <div class="col-12 ">
+            <p class="poruka-zahtjev">Izaberite pakete:</p>
+        </div>
+
+
+
+       <div class="col-12">
+           <div class="row">
+
+
+               <div class="col-12 col-sm-4">
+                   <div class="tip-usluge">Internet paketi</div>
+
+                   @foreach (var x in Model.ListaPaketica)
+                {
+                    if (x.Paket.TipUslugaId == 1)
+                    {
+                           <div class=" ">
+                               <input type="checkbox" name="IzabraniPaketi" value="@x.Paket.Id" class="switch_1" checked="@x.Izabran">
+                               <div class="poruka-checkbox">
+                                   @Html.Raw(x.Paket.Id + "-" + x.Paket.Naziv)
+                               </div>
+                           </div>
+
+
+
+                       }
+
+                   }
+
+               </div>
+
+               <div class="col-12 col-sm-4" >
+                   <div class="tip-usluge">TV paketi</div>
+
+                   @foreach (var x in Model.ListaPaketica)
+                {
+
+                    if (x.Paket.TipUslugaId == 2)
+                    {
+                           <div class="">
+                               <input type="checkbox" name="IzabraniPaketi" value="@x.Paket.Id" class="switch_1" checked="@x.Izabran">
+                               <div class="poruka-checkbox">
+                                   @Html.Raw(x.Paket.Id + "-" + x.Paket.Naziv)
+                               </div>
+                           </div>
+
+
+
+                       }
+
+                   }
+
+               </div>
+
+               <div class="col-12 col-sm-4">
+                   <div class="tip-usluge">DUO paketi</div>
+
+                   @foreach (var x in Model.ListaPaketica)
+                {
+                    if (x.Paket.TipUslugaId == 3)
+                    {
+                           <div class=" ">
+                               <input type="checkbox" name="IzabraniPaketi" value="@x.Paket.Id" class="switch_1" checked="@x.Izabran">
+                               <div class="poruka-checkbox">
+                                   @Html.Raw(x.Paket.Id + "-" + x.Paket.Naziv)
+                               </div>
+                           </div>
+
+                       }
+
+                   }
+
+               </div>
+
+               <div class="col-12">
+                   @Html.ValidationMessageFor(model => Model.IzabraniPaketi, "", new { @class = "text-danger" })
+               </div>
+
+           </div>
+       </div>
+
+
+
+        </div>
+
+
+
+    <br />
+
+            <input type="submit" value="POŠALJI ZAHTJEV" class="btn btn-primary" />
+            @Html.ActionLink("Nazad", "Index", null, null, new { @class = "btn btn-secondary " })
+
+
+}
+
+
+<br />
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Zahtjev</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prezime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prezime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.ListaOpcina, "Opcina:  ")
+            @Html.DropDownListFor(x => x.OpcinaId, Model.ListaOpcina.Select(x => new SelectListItem
+       {
+           Value = x.Id.ToString(),
+           Text = x.Naziv
+       }).ToList(), "Izaberite mjesto prebivalista:", new { @class = "form-control" })
+
+
+            @Html.ValidationMessageFor(model => Model.OpcinaId, "", new { @class = "text-danger" })
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Naselje, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Naselje, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Naselje, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NazivUlice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NazivUlice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NazivUlice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Broj, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Broj, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Broj, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NapomenaKorisnika, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NapomenaKorisnika, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NapomenaKorisnika, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Telefon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.ListaTipKontakta, "Kategorija:  ")
+            @Html.DropDownListFor(x => x.TipKontaktaId, Model.ListaTipKontakta.Select(x => new SelectListItem
+           {
+               Value = x.Id.ToString(),
+               Text = x.Naziv
+           }).ToList(), "Izaberite kategoriju", new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => Model.TipKontaktaId, "", new { @class = "text-danger" })
+        </div>
+      
+
+       
+        <hr />
+
+      
+       @foreach (var x in Model.ListaPaket)
+       {
+       
+           bool vecJe = false;
+           if (Model.IzabraniPaketi != null)
+            {
+                foreach (var y in Model.IzabraniPaketi)
+                {
+                    if (x.Id == y)
+                    {
+                        vecJe = true;
+                    }
+
+                }
+            }
+           
+
+
+         
+           if (vecJe)
+            {   
+                <h5>@x.Cijena - @x.TipUsluga.Naziv</h5>
+                <input type="checkbox" class="checkbox" name="IzabraniPaketi" value="@x.Id" id="@x.Id" checked />
+                <label for="@x">@x.Naziv</label>
+           }
+           else
+           {
+            <h5>@x.Cijena - @x.TipUsluga.Naziv</h5>
+                <input type="checkbox" class="checkbox" name="IzabraniPaketi" value="@x.Id" id="@x.Id" />
+                <label for="@x">@x.Naziv</label>
+            }
+
+
+
+      
+       }
+
+
+    
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@

@@ -1,0 +1,73 @@
+﻿@model app.Areas.admin.ViewModels.FaqEditVM
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="naslov">Uredi pitanje</div>
+<hr />
+
+@using (Html.BeginForm("Edit", "FAQ"))
+{
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @Html.HiddenFor(m=> m.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.ListaKategorija, "Kategorija:  ")
+            @Html.DropDownListFor(x => x.KategorijaId, Model.ListaKategorija.Select(x => new SelectListItem
+           {
+               Value = x.Id.ToString(),
+               Text = x.Naziv
+           }).ToList(), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.KategorijaId, "", new { @class = "text-danger" })
+
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Pitanje, "Pitanje: ")
+                        @Html.TextBoxFor(m => @Model.Pitanje, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => Model.Pitanje, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Odgovor, "Odgovor: ")
+            @Html.TextAreaFor(m => @Model.Odgovor, new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => Model.Odgovor, "", new { @class = "text-danger" })
+        </div>
+
+      
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Vidljiv, "Vidljivo korisnicima: ")
+            <div class="form-control">
+                @Html.EditorFor(m => @Model.Vidljiv, new { @class = "form-control" })
+            </div>
+        </div>
+
+
+
+
+        <button type="submit" value="Save" class="btn btn-primary">Spremi</button>
+        <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad"> 
+            <i class="fas fa-chevron-circle-left "></i>
+                Nazad
+        </a>
+
+        <br />
+        <br /><br /><br />
+
+    </div>
+
+}
+
+
+
+<script src="~/Scripts/tinymce/tinymce.js"></script>
+<script src="~/Scripts/main.js"></script>

@@ -1,0 +1,67 @@
+﻿@model app.Areas.admin.ViewModels.OpremaDodajVM
+@{
+    ViewBag.Title = "Dodaj2";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+    int temp = 0;
+}
+<br />
+
+<h4>Dodaj serijske brojeve: </h4>
+
+<h2>
+    @Html.Raw(@Model.Proizvodzac)  -  @Html.Raw(@Model.Naziv)  </h2>
+
+
+@using (Html.BeginForm("SerijskiBrojevi", "Oprema"))
+{
+
+    @Html.HiddenFor(model => Model.Id)
+    @Html.HiddenFor(model => Model.Kolicina)
+    @Html.HiddenFor(model => Model.Naziv)
+    @Html.HiddenFor(model => Model.Proizvodzac)
+    @Html.HiddenFor(model => Model.Kolicina)
+    @Html.HiddenFor(model => Model.DatumNabavke)
+    @Html.HiddenFor(model => Model.DatumString)
+
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+    <div class="row">
+
+        @for (int i = 0; i < Model.Kolicina; i++)
+        {
+            temp = i + 1;
+            <div class="col-12">
+                @Html.LabelFor(m => @Model.ListaSerijskihBrojeva[i], "Serijski broj uređaja " + temp +":", new { @class = "form-naslov" })
+                @Html.EditorFor(model => model.ListaSerijskihBrojeva[i], new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ListaSerijskihBrojeva[i], "", new { @class = "text-danger" })
+            </div>
+        }
+
+
+
+    </div>
+
+    @Html.HiddenFor(model => Model.DatumNabavke)
+
+
+
+
+    <br />
+    <br />
+
+    <a href="@Url.Action("Index", "Oprema")" class="btn btn-primary ">
+        <i class="fas fa-chevron-circle-left fff-icon"></i> PONIŠTI
+    </a>
+
+
+    <button type="submit" value="Save" class="btn btn-primary" aria-label="Left Align">
+        <span class="fas fa-chevron-circle-right fff-icon" aria-hidden="true"></span> SPREMI
+    </button>
+
+
+}

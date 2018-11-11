@@ -1,0 +1,245 @@
+﻿@using app.ViewModels
+@using app.Models
+@model app.ViewModels.HomeFaqVM
+@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="faq">
+   <div class="row justify-content-center">
+       <nav class="faq-kategorije-banner">
+           
+           <div class="row">
+               <div class="col-2">
+                  
+               </div>
+               <div class="col-8">
+                   <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+
+
+                       <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                           <img src="https://png.icons8.com/ios/64/ffffff/tv-filled.png">
+                           <div class="faq-kategorija">Televizija</div>
+                       </a>
+
+
+                       <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                           <img src="https://png.icons8.com/ios/64/ffffff/cisco-router-filled.png">
+                           <div class="faq-kategorija">Internet</div>
+
+                       </a>
+                       <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">
+                           <img src="https://png.icons8.com/ios/64/ffffff/ask-question-filled.png">
+                           <div class="faq-kategorija">DUO</div>
+
+
+                       </a>
+
+                       <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">
+                           <img src="https://png.icons8.com/ios/64/ffffff/home-automation-filled.png">
+                           <div class="faq-kategorija">Prikljucenje</div>
+
+                       </a>
+                       <a class="nav-item nav-link" id="nav-5-tab" data-toggle="tab" href="#nav-5" role="tab" aria-controls="nav-about" aria-selected="false">
+                           <img src="https://png.icons8.com/ios/64/ffffff/network-cable-filled.png">
+                           <div class="faq-kategorija">Racuni</div>
+
+                       </a>
+                   </div>
+
+               </div>
+           </div>
+          
+           
+       </nav>
+   </div>
+
+
+   <div class="container">
+       <div class="row">
+          
+           <div class="col-12 faq-pitanja">
+               
+
+               <section id="tabs ">
+
+                   <div class=" ">
+                       @* 1 tv
+                2 interenet
+                 3 fuo
+                 4 prikljucenje
+                 5 racuni
+
+                       *@
+                       <div class="tab-content py-3 px-3 px-sm-0 col-12" id="nav-tabContent">
+
+                           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                               <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+
+
+                                   @foreach (FaqRed x in Model.FaqRedovi)
+                                   {
+                                       if (x.KategorijaId == 1)
+                                       {
+                                           <div class="card ">
+                                               <div class="card-header" role="tab" id="headingFour">
+                                                   <h5 class="mb-0">
+                                                       <a class="collapsed acc-naslov" data-toggle="collapse" data-parent="#accordion" href="#@Html.Raw(x.Id)" aria-expanded="false" aria-controls="4">
+                                                           @Html.Raw(x.Pitanje)
+                                                       </a>
+                                                   </h5>
+                                               </div>
+                                               <div id="@Html.Raw(x.Id)" class="collapse acc-sadrzaj" role="tabpanel" aria-labelledby="">
+                                                   <div class="card-body">
+
+                                                       @Html.Raw(x.Odgovor)
+
+
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       }
+                                   }
+
+
+
+
+
+
+
+
+                               </div>
+
+                           </div>
+
+                           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                               <div id="accordion" role="tablist">
+
+
+                                   @foreach (FaqRed x in Model.FaqRedovi)
+                                   {
+                                       if (x.KategorijaId == 2)
+                                       {
+                                           <div class="card">
+                                               <div class="card-header" role="tab" id="headingFour">
+                                                   <h5 class="mb-0">
+                                                       <a class="collapsed acc-naslov" data-toggle="collapse" data-parent="#accordion" href="#@Html.Raw(x.Id)" aria-expanded="false" aria-controls="4">
+                                                           @Html.Raw(x.Pitanje)
+                                                       </a>
+                                                   </h5>
+                                               </div>
+                                               <div id="@Html.Raw(x.Id)" class="collapse acc-sadrzaj" role="tabpanel" aria-labelledby="">
+                                                   <div class="card-body">
+
+                                                       @Html.Raw(x.Odgovor)
+
+
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       }
+                                   }
+
+                               </div>
+                           </div>
+
+                           <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+                               @foreach (FaqRed x in Model.FaqRedovi)
+                               {
+                                   if (x.KategorijaId == 3)
+                                   {
+                                       <div class="card col-12 col-sm-12">
+                                           <div class="card-header" role="tab" id="headingFour">
+                                               <h5 class="mb-0">
+                                                   <a class="collapsed acc-naslov" data-toggle="collapse" data-parent="#accordion" href="#@Html.Raw(x.Id)" aria-expanded="false" aria-controls="4">
+                                                       @Html.Raw(x.Pitanje)
+                                                   </a>
+                                               </h5>
+                                           </div>
+                                           <div id="@Html.Raw(x.Id)" class="collapse acc-sadrzaj" role="tabpanel" aria-labelledby="">
+                                               <div class="card-body">
+
+                                                   @Html.Raw(x.Odgovor)
+
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                   }
+                               }
+
+
+                           </div>
+                           <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+
+                               @foreach (FaqRed x in Model.FaqRedovi)
+                               {
+                                   if (x.KategorijaId == 4)
+                                   {
+                                       <div class="card ">
+                                           <div class="card-header" role="tab" id="headingFour">
+                                               <h5 class="mb-0">
+                                                   <a class="collapsed acc-naslov" data-toggle="collapse" data-parent="#accordion" href="#@Html.Raw(x.Id)" aria-expanded="false" aria-controls="4">
+                                                       @Html.Raw(x.Pitanje)
+                                                   </a>
+                                               </h5>
+                                           </div>
+                                           <div id="@Html.Raw(x.Id)" class="collapse acc-sadrzaj" role="tabpanel" aria-labelledby="">
+                                               <div class="card-body">
+
+                                                   @Html.Raw(x.Odgovor)
+
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                   }
+                               }
+                           </div>
+
+                           <div class="tab-pane fade" id="nav-5" role="tabpanel" aria-labelledby="nav-5-tab">
+                               @foreach (FaqRed x in Model.FaqRedovi)
+                               {
+                                   if (x.KategorijaId == 5)
+                                   {
+                                       <div class="card ">
+                                           <div class="card-header" role="tab" id="headingFour">
+                                               <h5 class="mb-0">
+                                                   <a class="collapsed acc-naslov" data-toggle="collapse" data-parent="#accordion" href="#@Html.Raw(x.Id)" aria-expanded="false" aria-controls="4">
+                                                       @Html.Raw(x.Pitanje)
+                                                   </a>
+                                               </h5>
+                                           </div>
+                                           <div id="@Html.Raw(x.Id)" class="collapse acc-sadrzaj" role="tabpanel" aria-labelledby="">
+                                               <div class="card-body">
+
+                                                   @Html.Raw(x.Odgovor)
+
+
+                                               </div>
+                                           </div>
+                                       </div>
+                                   }
+                               }
+                           </div>
+                       </div>
+
+                   </div>
+
+               </section>
+
+               </div>
+           <!-- ./Tabs -->
+
+       </div>
+       
+   </div>
+</div>
+
+
+

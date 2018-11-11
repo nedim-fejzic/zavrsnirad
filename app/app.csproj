@@ -1,0 +1,667 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C18995F-6FE4-4AAA-8225-D48E57F92D19}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>app</RootNamespace>
+    <AssemblyName>app</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\admin4b.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap2.css" />
+    <Content Include="Content\bootstrap4.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\admin\Views\FAQ\Dodaj.cshtml" />
+    <Content Include="Areas\admin\Views\FAQ\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\FAQ\Details.cshtml" />
+    <Content Include="Areas\admin\Views\FAQ\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\FAQ\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Vijesti\Dodaj.cshtml" />
+    <Content Include="Areas\admin\Views\Vijesti\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Vijesti\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Vijesti\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Vijesti\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Pakets\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Pakets\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Pakets\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Pakets\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Pakets\Index.cshtml" />
+    <Content Include="Areas\admin\Views\TipUslugas\Create.cshtml" />
+    <Content Include="Areas\admin\Views\TipUslugas\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\TipUslugas\Details.cshtml" />
+    <Content Include="Areas\admin\Views\TipUslugas\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\TipUslugas\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevs\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevs\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevs\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevs\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevs\Index.cshtml" />
+    <Content Include="Areas\admin\Views\TipKontaktas\Create.cshtml" />
+    <Content Include="Areas\admin\Views\TipKontaktas\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\TipKontaktas\Details.cshtml" />
+    <Content Include="Areas\admin\Views\TipKontaktas\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\TipKontaktas\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\Dodaj.cshtml" />
+    <Content Include="Scripts\admin4b.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\admin\Views\FAQ\Search.cshtml" />
+    <Content Include="Areas\admin\Views\Korisnik\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Korisnik\Dodaj.cshtml" />
+    <Content Include="Areas\admin\Views\Start\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Korisnik\Uredi.cshtml" />
+    <Content Include="Areas\admin\Views\Korisnik\Detalji.cshtml" />
+    <Content Include="Areas\admin\Views\Korisnik\Search.cshtml" />
+    <Content Include="Areas\admin\Views\Usluge\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Korisnik\Lozinka.cshtml" />
+    <Content Include="Areas\admin\Views\AktivneUsluge\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Oprema\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Oprema\Dodaj.cshtml" />
+    <Content Include="Areas\admin\Views\Oprema\SerijskiBrojevi.cshtml" />
+    <Content Include="Areas\admin\Views\Oprema\Uredi.cshtml" />
+    <Content Include="Areas\admin\Views\Oprema\Zaduzi.cshtml" />
+    <Content Include="Areas\admin\Views\Oprema\Razduzi.cshtml" />
+    <Content Include="Areas\admin\Views\AktivneUsluge\Detalji.cshtml" />
+    <Content Include="Areas\admin\Views\AktivneUsluge\Aktiviraj.cshtml" />
+    <Content Include="Areas\admin\Views\AktivneUsluge\NovaAktivacija.cshtml" />
+    <Content Include="Areas\admin\Views\Uputstva\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Uputstva\Dodaj.cshtml" />
+    <Content Include="Areas\admin\Views\Uputstva\Uredi.cshtml" />
+    <Content Include="Areas\admin\Views\Uputstva\Detalji.cshtml" />
+    <Content Include="Areas\admin\Views\Smetnje\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Smetnje\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\Smetnje\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Smetnje\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Smetnje\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\IndexPromjena.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\Iskljuci.cshtml" />
+    <Content Include="Areas\admin\Views\Zahtjevi\Promjena.cshtml" />
+    <Content Include="Areas\admin\Views\Racun\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Racun\Kreiraj.cshtml" />
+    <Content Include="Areas\admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\admin\Views\Racun\Detalji.cshtml" />
+    <Content Include="PDF\pdf-uputstvo1.pdf" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Scripts\jquery-3.2.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\slike.js" />
+    <Content Include="Scripts\test.js" />
+    <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
+    <Content Include="Scripts\tinymce\langs\hr.js" />
+    <Content Include="Scripts\tinymce\license.txt" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\codesample\css\prism.css" />
+    <Content Include="Scripts\tinymce\plugins\codesample\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\css\dialog.css" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\buttons.png" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\icons.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\items.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\menu_arrow.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\menu_check.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\progress.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\tabs.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\tiny_mce_popup.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\editable_selects.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\form_utils.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\mctabs.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\validate.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cool.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cry.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-frown.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-innocent.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-kiss.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-laughing.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-money-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-sealed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-smile.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-surprised.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-tongue-out.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-undecided.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-wink.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-yell.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\help\img\logo.png" />
+    <Content Include="Scripts\tinymce\plugins\help\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\hr\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\imagetools\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\imagetools\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\print\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\template\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\toc\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\toc\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.inline.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.mobile.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.mobile.min.css" />
+    <Content Include="Scripts\tinymce\themes\inlite\theme.js" />
+    <Content Include="Scripts\tinymce\themes\inlite\theme.min.js" />
+    <Content Include="Scripts\tinymce\themes\mobile\theme.js" />
+    <Content Include="Scripts\tinymce\themes\mobile\theme.min.js" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.js" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Scripts\tinymce\tinymce.js" />
+    <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Slike\1.jpg" />
+    <Content Include="Slike\404.jpg" />
+    <Content Include="Slike\bgmenu.jpg" />
+    <Content Include="Slike\checked.png" />
+    <Content Include="Slike\DUO-FULL.png" />
+    <Content Include="Slike\DUO-MEGA.png" />
+    <Content Include="Slike\DUO-START.png" />
+    <Content Include="Slike\faq-banner.jpg" />
+    <Content Include="Slike\header.png" />
+    <Content Include="Slike\hr-11.png" />
+    <Content Include="Slike\ikone\aktivneusluge.png" />
+    <Content Include="Slike\ikone\faq.png" />
+    <Content Include="Slike\ikone\forma.png" />
+    <Content Include="Slike\ikone\forma2.png" />
+    <Content Include="Slike\ikone\forma3.png" />
+    <Content Include="Slike\ikone\forma4.png" />
+    <Content Include="Slike\ikone\ikona-router-leased.png" />
+    <Content Include="Slike\ikone\ikona-router.png" />
+    <Content Include="Slike\ikone\info.png" />
+    <Content Include="Slike\ikone\korisnici.png" />
+    <Content Include="Slike\ikone\lista-color.png" />
+    <Content Include="Slike\ikone\lock.png" />
+    <Content Include="Slike\ikone\oprema.png" />
+    <Content Include="Slike\ikone\paketi.png" />
+    <Content Include="Slike\ikone\promjenapass.png" />
+    <Content Include="Slike\ikone\racuni.png" />
+    <Content Include="Slike\ikone\smetnje.png" />
+    <Content Include="Slike\ikone\status.png" />
+    <Content Include="Slike\ikone\uputstva.png" />
+    <Content Include="Slike\ikone\user-color.png" />
+    <Content Include="Slike\ikone\user.png" />
+    <Content Include="Slike\ikone\vijesti.png" />
+    <Content Include="Slike\ikone\zahtjevi.png" />
+    <Content Include="Slike\L-paket.png" />
+    <Content Include="Slike\LOGO2.png" />
+    <Content Include="Slike\M-paket.png" />
+    <Content Include="Slike\OSNOVNI.png" />
+    <Content Include="Slike\PROSIRENI.png" />
+    <Content Include="Slike\S-paket.png" />
+    <Content Include="Slike\slika1.png" />
+    <Content Include="Slike\slika2.png" />
+    <Content Include="Slike\START.png" />
+    <Content Include="Slike\user-photo.png" />
+    <Content Include="Slike\wall.png" />
+    <Content Include="Slike\XL-paket.png" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\AktivneUslugeController.cs" />
+    <Compile Include="Areas\admin\Controllers\FAQController.cs" />
+    <Compile Include="Areas\admin\Controllers\FileUploader.cs" />
+    <Compile Include="Areas\admin\Controllers\KorisnikController.cs" />
+    <Compile Include="Areas\admin\Controllers\OpremaController.cs" />
+    <Compile Include="Areas\admin\Controllers\PaketsController.cs" />
+    <Compile Include="Areas\admin\Controllers\RacunController.cs" />
+    <Compile Include="Areas\admin\Controllers\SmetnjeController.cs" />
+    <Compile Include="Areas\admin\Controllers\StartController.cs" />
+    <Compile Include="Areas\admin\Controllers\TipKontaktasController.cs" />
+    <Compile Include="Areas\admin\Controllers\TipUslugasController.cs" />
+    <Compile Include="Areas\admin\Controllers\UputstvaController.cs" />
+    <Compile Include="Areas\admin\Controllers\UslugeController.cs" />
+    <Compile Include="Areas\admin\Controllers\VijestiController.cs" />
+    <Compile Include="Areas\admin\Controllers\ZahtjeviController.cs" />
+    <Compile Include="Areas\admin\ViewModels\AktivneUslugeAktivirajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\AktivneUslugeDetaljiVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\AktivneUslugeIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\AktivneUslugeNovaAktivacijaVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\FaqDetaljiVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\FaqDodajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\FaqEditVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\FaqIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\FaqSearchVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\KorisnikDetaljiVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\KorisnikDodajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\KorisnikIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\KorisnikLozinkaVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\KorisnikSearchVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\KorisnikUrediVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\ListaPaketaView.cs" />
+    <Compile Include="Areas\admin\ViewModels\OpremaDodaj2VM.cs" />
+    <Compile Include="Areas\admin\ViewModels\OpremaDodajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\OpremaIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\OpremaRazduziVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\OpremaUrediVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\OpremaZaduziVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\PaketDodajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\PaketiDetailsVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\PaketIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\PaketUrediVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\RacunDetaljiVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\RacunIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\RacunKreirajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\RacunPrintajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\SmetnjeDetaljiVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\SmetnjeDodajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\SmetnjeIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\StartIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\UputstvaDetaljiVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\UputstvaDodajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\UputstvaIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\UputstvoUrediVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\VijestiDetaljiVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\VijestiDodajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\VijestiEditVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\VijestiIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\ZahtjevDetaljiVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\ZahtjevDodajVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\ZahtjevIndexPromjenaVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\ZahtjevIndexVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\ZahtjevIskljuciVM.cs" />
+    <Compile Include="Areas\admin\ViewModels\ZahtjevPromjenaVM.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfilController.cs" />
+    <Compile Include="Controllers\RacuniController.cs" />
+    <Compile Include="Controllers\SmetnjaController.cs" />
+    <Compile Include="Controllers\UputstvoController.cs" />
+    <Compile Include="Controllers\VijestController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811041643202_updatebazica.cs" />
+    <Compile Include="Migrations\201811041643202_updatebazica.Designer.cs">
+      <DependentUpon>201811041643202_updatebazica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AktivneUsluge.cs" />
+    <Compile Include="Models\AktivneUslugeStatus.cs" />
+    <Compile Include="Models\AuthKorisnik.cs" />
+    <Compile Include="Models\AuthUposlenik.cs" />
+    <Compile Include="Models\FAQ.cs" />
+    <Compile Include="Models\FAQKategorija.cs" />
+    <Compile Include="Models\Jezik.cs" />
+    <Compile Include="Models\Kanal.cs" />
+    <Compile Include="Models\KanaliPaketi.cs" />
+    <Compile Include="Models\Korisnik.cs" />
+    <Compile Include="Models\Kvalitet.cs" />
+    <Compile Include="Models\MojKontekst.cs" />
+    <Compile Include="Models\Opcine.cs" />
+    <Compile Include="Models\Paket.cs" />
+    <Compile Include="Models\PokriveneOpcine.cs" />
+    <Compile Include="Models\Racuni.cs" />
+    <Compile Include="Models\RacuniStavke.cs" />
+    <Compile Include="Models\Razlog.cs" />
+    <Compile Include="Models\Smetnje.cs" />
+    <Compile Include="Models\SmetnjeOdgovori.cs" />
+    <Compile Include="Models\SmetnjeStatus.cs" />
+    <Compile Include="Models\TipKontakta.cs" />
+    <Compile Include="Models\TipUsluga.cs" />
+    <Compile Include="Models\Uloga.cs" />
+    <Compile Include="Models\Uposlenici.cs" />
+    <Compile Include="Models\UputstvaKategorije.cs" />
+    <Compile Include="Models\Uputstva.cs" />
+    <Compile Include="Models\Uredjaj.cs" />
+    <Compile Include="Models\UredjajZaduzenje.cs" />
+    <Compile Include="Models\Vijesti.cs" />
+    <Compile Include="Models\VijestiKategorija.cs" />
+    <Compile Include="Models\ZahtjevPromjena.cs" />
+    <Compile Include="ViewModels\HomeIskljuciVM.cs" />
+    <Compile Include="ViewModels\HomePromjeniVM.cs" />
+    <Compile Include="ViewModels\ProfilLozinkaVM.cs" />
+    <Compile Include="ViewModels\RacuniDetaljiVM.cs" />
+    <Compile Include="ViewModels\RacuniIndexVM.cs" />
+    <Compile Include="ViewModels\VijestDetaljiVM.cs" />
+    <Compile Include="ViewModels\VijestIndexVM.cs" />
+    <Compile Include="Models\Zahtjev.cs" />
+    <Compile Include="Models\ZahtjevStatus.cs" />
+    <Compile Include="Models\ZahtjevUsluge.cs" />
+    <Compile Include="Models\Zanr.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\HomeFaqVM.cs" />
+    <Compile Include="ViewModels\HomeLoginVM.cs" />
+    <Compile Include="ViewModels\HomeLozinkaVM.cs" />
+    <Compile Include="ViewModels\HomePaketiVM.cs" />
+    <Compile Include="ViewModels\ProfilIndexVM.cs" />
+    <Compile Include="ViewModels\SmetnjaDetaljiVM.cs" />
+    <Compile Include="ViewModels\SmetnjaIndexVM.cs" />
+    <Compile Include="ViewModels\SmetnjaPrijavaVM.cs" />
+    <Compile Include="ViewModels\HomeVijestDetaljiVM.cs" />
+    <Compile Include="ViewModels\HomeVijestiVM.cs" />
+    <Compile Include="ViewModels\HomeZahtjevVM.cs" />
+    <Compile Include="ViewModels\UputstvoIndexVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Areas\admin\Views\web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
+    <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\Home\Paketi.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\Zahtjev.cshtml" />
+    <Content Include="Views\Profil\Index.cshtml" />
+    <Content Include="Views\Profil\Lozinka.cshtml" />
+    <Content Include="Views\Smetnja\Prijava.cshtml" />
+    <Content Include="Views\Smetnja\Index.cshtml" />
+    <Content Include="Views\Smetnja\Detalji.cshtml" />
+    <Content Include="Views\Uputstvo\Index.cshtml" />
+    <Content Include="Views\Vijest\Index.cshtml" />
+    <Content Include="Views\Vijest\Detalji.cshtml" />
+    <Content Include="Views\Home\Promjena.cshtml" />
+    <Content Include="Views\Home\Iskljuci.cshtml" />
+    <Content Include="Views\Racuni\Index.cshtml" />
+    <Content Include="Views\Racuni\Detalji.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\admin\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811041643202_updatebazica.resx">
+      <DependentUpon>201811041643202_updatebazica.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57805</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:57805/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

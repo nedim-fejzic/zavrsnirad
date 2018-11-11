@@ -1,0 +1,50 @@
+﻿@using app.Areas.admin.ViewModels
+@model app.Areas.admin.ViewModels.RacunKreirajVM
+
+@{
+    ViewBag.Title = "Racuni kreiraj";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="naslov">Kreiraj račune</div>
+<hr />
+
+@using (Html.BeginForm("Kreiraj", "Racun"))
+{
+
+    <div class="form-horizontal">
+
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Mjesec, "Mjesec: ")
+            @Html.TextBoxFor(m => @Model.Mjesec, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Mjesec, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => @Model.Godina, "Godina: ")
+            @Html.TextAreaFor(m => @Model.Godina, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Godina, "", new { @class = "text-danger" })
+        </div>
+
+
+
+        <button type="submit" value="Save" class="btn btn-primary">Kreiraj</button>
+        @Html.ActionLink("Nazad", "Index", null, null, new { @class = "btn btn-secondary " })
+
+
+
+        <br />
+        <br /><br /><br />
+
+    </div>
+
+}
+
+

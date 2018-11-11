@@ -1,0 +1,135 @@
+﻿@model app.Areas.admin.ViewModels.AktivneUslugeDetaljiVM
+@{
+    ViewBag.Title = "Detalji";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <h3 class="">
+                Aktivne usluge - 
+                <b>@Html.Raw(Model.Korisnik.Ime) @Html.Raw(Model.Korisnik.Prezime) </b>
+            </h3>
+            <br />
+        </div>
+       
+
+            <br /><br />
+
+        </div>
+
+
+        <div class="col-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Aktivne usluge</div>
+                <div class="panel-body">
+
+
+
+
+
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tip usluge</th>
+                                <th>Naziv usluge</th>
+                                <th>Iznos</th>
+                                <th>Adresa instalacije</th>
+                                <th>Datum instalacije</th>
+                                <th>Datum aktivacije</th>
+                                <th>Akcija</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @if (Model.ListaAktivnihUsluga.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="8" class="text-center">
+                                        <div class="nemarezultatapretrage">
+                                            Korisnik nema aktivnih usluga!
+                                            <br />
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+
+
+
+                            foreach (var z in Model.ListaAktivnihUsluga)
+                            {
+                                                               <tr>
+                                    <td>@z.Id</td>
+                                    <td>@z.Paket.TipUsluga.Naziv</td>
+                                    <td>@z.Paket.Naziv</td>
+                                    <td>@z.Paket.CijenaSaPdv KM</td>
+                                    <td>@z.AdresaInstalacije</td>
+                                    <td>@z.DatumInstalacije</td>
+                                    <td>@z.DatumAktivacije</td>
+
+
+                                    <td>
+                                            @Html.ActionLink("Iskljuci uslugu", "Iskljuci", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                        </td>
+                                </tr>
+                            }}
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <br />
+
+
+
+  
+
+   
+
+
+
+
+    
+
+
+
+
+
+
+
+    <a href="@Url.Action("Aktiviraj", "AktivneUsluge", new { id = Model.KorisnikId , area = "Admin" })" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-exchange-alt "></i>
+        AKTIVIRAJ NOVU USLUGU
+    </a>
+
+
+
+    <a href="@Url.Action("IskljuciSve", "AktivneUsluge", new { Id = Model.KorisnikId , area = "Admin" })" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-exchange-alt "></i>
+        ISKLJUČI SVE USLUGE
+    </a>
+
+
+
+    <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+        <i class="fas fa-chevron-circle-left "></i>
+        Nazad
+    </a>
+
+

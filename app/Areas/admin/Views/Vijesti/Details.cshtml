@@ -1,0 +1,69 @@
+﻿@model app.Areas.admin.ViewModels.VijestiDetaljiVM
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-12">
+
+
+            <div class="card  pitanje-panel">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="naslov">
+                                @Html.Raw(Model.Naslov)
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <span class="pitanje-kategorija">Kategorija:</span>  <span class="pitanje-kategorija-odgovor">@Html.Raw(Model.Kategorija)</span> <br />
+                            <span class="pitanje-kategorija">Vidljivo korisnicima:</span> <span class="pitanje-kategorija-odgovor">@Html.Raw(Model.Vidljivo?"DA":"NE")</span> <br />
+                            <span class="pitanje-kategorija">Datum dodavanja:</span> <span class="pitanje-kategorija-odgovor">@Html.Raw(Model.DatumObjave)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-body pitanje-sadrzaj">
+                    <div class="row">
+                        <div class="col-8">
+                            <p>@Html.Raw(Model.Opis)</p>
+                        </div>
+
+                        <div class="col-4">
+                            @if (Model.ImageUrl == null)
+                            {<img id="image" />}
+                            else
+                            {<img id="image" src="@Url.Content(Model.ImageUrl)" width="100%" />}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="myModal" class="modal">
+    <span class="closee">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
+
+
+<hr />
+
+<p>
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary btn-sm" })
+    @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-secondary btn-sm" })
+</p>
+
+
+<script src="~/Scripts/test.js"></script>
+

@@ -1,0 +1,82 @@
+﻿@model app.Areas.admin.ViewModels.OpremaDodajVM
+@{
+    ViewBag.Title = "Dodaj";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+
+<h4>Dodaj uređaj: </h4>
+
+@using (Html.BeginForm())
+{
+
+
+    <div class="row">
+
+
+        <div class="col-12 input-group-lg">
+            @Html.LabelFor(m => @Model.Proizvodzac, "Proizvodžač: ", new { @class = "form-naslov" })
+            @Html.EditorFor(model => model.Proizvodzac, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Proizvodzac, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-12 input-group-lg">
+            @Html.LabelFor(m => @Model.Naziv, "Naziv uređaja: ", new { @class = "form-naslov" })
+            @Html.EditorFor(model => model.Naziv, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Naziv, "", new { @class = "text-danger" })
+        </div>
+
+
+        @*<div class="col-12 input-group-lg">
+                @Html.LabelFor(m => @Model.SerijskiBroj, "Serijski broj: ", new { @class = "form-naslov" })
+                @Html.EditorFor(model => model.SerijskiBroj, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SerijskiBroj, "", new { @class = "text-danger" })
+            </div>*@
+
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(m => @Model.DatumNabavke, "Datum nabavke: ")
+               @Html.EditorFor(m => @Model.DatumNabavke, new { @class = "form-control" })
+                @Html.EditorFor(model => model.DatumNabavke, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.DatumNabavke, "", new { @class = "text-danger" })
+            </div>*@
+
+
+        <div class="col-6 input-group-lg">
+            @Html.LabelFor(m => @Model.DatumNabavke, "Datum nabavke: ", new { @class = "form-naslov" })
+            @Html.EditorFor(model => model.DatumNabavke, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.TextBoxFor(m => m.DatumNabavke, "{0:dd-MM-yyyy}", new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(model => model.DatumNabavke, "", new { @class = "text-danger" })
+        </div>
+
+
+
+
+
+        <div class="col-6 input-group-lg">
+            @Html.LabelFor(m => @Model.Kolicina, "Kolicina: ", new { @class = "form-naslov" })
+            @Html.EditorFor(model => model.Kolicina, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Kolicina, "", new { @class = "text-danger" })
+        </div>
+
+
+
+    </div>
+
+    <br />
+    <br />
+
+
+
+    <a href="@Url.Action("Index", "Oprema")" class="btn btn-primary ">
+        <i class="fas fa-chevron-circle-left fff-icon"></i> PONIŠTI
+    </a>
+
+
+    <button type="submit" value="Save" class="btn btn-primary" aria-label="Left Align">
+        <span class="fas fa-chevron-circle-right fff-icon" aria-hidden="true"></span> NASTAVI
+    </button>
+
+}

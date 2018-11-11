@@ -1,0 +1,126 @@
+﻿@model app.Areas.admin.ViewModels.KorisnikDetaljiVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-12">
+
+
+            <div class="card  pitanje-panel">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="naslov">
+                                ID: @Html.Raw(Model.Id)
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <div class="naslov">
+                               JMBG: @Html.Raw(Model.JMBG)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-body pitanje-sadrzaj">
+                    <b>Ime:</b>     @Html.Raw(Model.Ime) <br />
+                    <b>Prezime:</b>    @Html.Raw(Model.Prezime) <br />
+                <b>Adresa:</b> @Html.Raw(Model.Lokacija) <br />
+                
+                
+
+
+
+                    <br />
+                    <br />
+                    
+
+                    <div class="">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Aktivne usluge:</div>
+                            <div class="panel-body">
+
+
+
+
+
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Šifra paketa</th>
+                                            <th>Tip</th>
+                                            <th>Paket</th>
+                                            <th>Cijena</th>
+                                            <th>Datum Aktivacije</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var z in Model.ListaAktivnihUsluga)
+                                        {
+                                            <tr>
+                                                <td>@z.Id</td>
+                                                <td class="text-center">@z.PaketId</td>
+                                                <td class="text-center">@z.Paket.TipUsluga.Naziv</td>
+                                                <td class="text-center">@z.Paket.Naziv</td>
+                                                <td class="text-center">@z.Paket.CijenaSaPdv</td>
+                                                <td class="text-center">@z.DatumAktivacije.ToShortDateString()</td>
+
+
+                                                @*<td>
+                                        @Html.ActionLink("Uredi", "Edit", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                        @Html.ActionLink("Detalji", "Details", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                    </td>*@
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+         
+
+
+            <br />
+            <br />
+
+
+            <br />
+            <a href="@Url.Action("Uredi", "Korisnik",new { id = Model.Id})" class="btn btn-primary ">
+                <i class="fas fa-user"></i> UREDI
+            </a>
+
+            <a href="@Url.Action("Search", "Korisnik",new { id = Model.Id})" class="btn btn-primary ">
+                <i class="fas fa-user"></i> PRETRAGA
+            </a>
+
+
+            <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
+                <i class="fas fa-chevron-circle-left "></i>
+                Nazad
+            </a>
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,194 @@
+﻿@using app.Areas.admin.ViewModels
+@model app.Areas.admin.ViewModels.SmetnjeIndexVM
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+
+
+<div class="smetnje-forma">
+    @using (Html.BeginForm("Index", "Smetnje", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="">
+
+
+                    <div class="col-md-4 hvr-shrink">
+                       
+                            <div class="info-blok">
+
+                                <div class="info-part-1">
+                                    <div class="blok-natpis">
+                                        <h3>@Html.Raw(Model.BrojAktivnihSmetnji)</h3>
+                                        <p>Aktivnih smetnji</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-part-2">
+                                    <div class="">
+                                        <img src="~/Slike/ikone/forma4.png" class="blok-slika" />
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="col-md-4 hvr-shrink">
+                            <div class="info-blok">
+
+                                <div class="info-part-1">
+                                    <div class="blok-natpis">
+                                        <h3>@Html.Raw(Model.BrojSmetnji)</h3>
+                                        <p>Ukupno smetnji</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-part-2">
+                                    <div class="">
+                                        <img src="~/Slike/ikone/forma.png" class="blok-slika" />
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+
+
+                    @*<div class="col-md-4 col-xl-4">
+                            <div class="card bg-c-blue order-card">
+                                <a href="@Url.Action("Pretraga", "Uposlenici")" class="hvr-shrink">
+                                    <div class="card-block">
+                                        <h6 class="m-b-20">Otvorenih smetnji</h6>
+                                        <h2 class="text-right"><i class="fas fa-list f-left"></i><span>31</span></h2>
+
+
+
+                                        <p class="m-b-0">Ukupno smetnji<span class="f-right ukupno-card">252</span></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>*@
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-3">
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.Sifra, new { @class = "form-control", @placeholder = "Unesite šifru smetnje.." })
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-3">
+                <div class="form-group">
+                    @Html.DropDownListFor(x => x.OdabraniKorisnik, @Model.ListaKorisnika.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Ime + " " + x.Prezime }).ToList(), new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-3">
+                <div class="form-group">
+                    @Html.DropDownListFor(x => x.OdabraniStatus, @Model.ListaStatusa.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Naziv }).ToList(), new { @class = "form-control" })
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-3 col-sm-3 col-lg-3">
+                <input type="submit" name="submit" value="Prikaži" class="btn btn-secondary btn-block" />
+
+            </div>
+
+
+
+
+        </div>
+
+    }
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-12">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Sifra</th>
+                    <th>Datum prijave</th>
+                    <th>Korisnik</th>
+                    <th>Status</th>
+                    <th>Akcija</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @if (Model.ListaRezultata.Count() == 0)
+            {
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <div class="nemarezultatapretrage">
+                                Nema rezultata pretrage
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+
+                else
+                {
+                    foreach (var x in Model.ListaRezultata)
+                    {
+                        <tr>
+                            <td>@x.Id</td>
+                            <td>@x.BrojSmetnje</td>
+                            <td>@x.DatumOtvaranja.ToString("dd-MM-yyyy") - @x.DatumOtvaranja.ToShortTimeString()</td>
+                            <td>@x.Korisnik.Ime @x.Korisnik.Prezime</td>
+                            <td>@x.SmetnjeStatus.Naziv</td>
+                            <td>
+                                @Html.ActionLink("Detalji", "Details", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })
+                            </td>
+                        </tr>
+                    }
+                }
+
+
+
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="pagination">
+    @Html.PagedListPager((IPagedList)Model.ListaRezultata, page => Url.Action("Index", new
+{
+    page,
+    Sifra = Request.QueryString["BrojSmetnje"],
+    OdabraniKorisnik = Request.QueryString["OdabraniKorisnik"],
+    OdabraniStatus = Request.QueryString["OdabraniStatus"]
+
+}))
+
+
+</div>
+<br />
+<br />
+
+
+

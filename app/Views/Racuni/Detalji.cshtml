@@ -1,0 +1,128 @@
+﻿@using app.ViewModels
+@model app.ViewModels.RacuniDetaljiVM
+@{
+    ViewBag.Title = "Detalji";
+}
+
+
+<br />
+<br />
+
+
+<div class="">
+
+
+    <div class="container ">
+        <div class="row">
+
+            <div class="col-12">
+
+
+                <a href="@Url.Action("Printaj", "Racuni", new { id = Model.Id })" class="btn btn-primary ">
+                    <i class="fas fa-print"></i> PRINTAJ RAČUN
+                </a>
+                <br />
+
+            </div>
+        </div>
+
+        <div class="row">
+            <br />
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row p-5">
+                            <div class="col-md-6">
+                                <img src="~/Slike/LOGO2.png">
+
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <p class="font-weight-bold mb-1"># @Html.Raw(Model.Sifra) </p>
+                                <p class="text-muted">Rok plaćanja: @Html.Raw(Model.RokPlacanja.ToShortDateString()) </p>
+                            </div>
+                        </div>
+                        <hr class="my-5">
+                        <div class="row pb-5 p-5">
+                            <div class="col-md-6">
+                                <p class="font-weight-bold mb-4">Klijent</p>
+                                <p class="mb-1">@Html.Raw(Model.Korisnik.Ime)  @Html.Raw(Model.Korisnik.Prezime)</p>
+                                <p class="mb-1">@Html.Raw(Model.Korisnik.Adresa)</p>
+                                <p class="mb-1">@Html.Raw(Model.Korisnik.Opcina.NazivOpcine)</p>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <p class="font-weight-bold mb-4">Detalji o računu</p>
+                                <p class="mb-1"><span class="text-muted">Plaćen: </span> @Html.Raw(Model.Placen)</p>
+                                <p class="mb-1"><span class="text-muted">Datum izdavanja: </span> @Html.Raw(Model.DatumIzdavanja.ToShortDateString())</p>
+                                <p class="mb-1"><span class="text-muted">Period od: </span> @Html.Raw(Model.PeriodOd.ToShortDateString())</p>
+                                <p class="mb-1"><span class="text-muted">Period do: </span> @Html.Raw(Model.PeriodDo.ToShortDateString())</p>
+                            </div>
+                        </div>
+                        <div class="row p-5">
+                            <div class="col-md-12">
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Usluga</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Naziv</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Datum od</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Datum do</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Cijena </th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">PDV</th>
+                                            <th class="border-0 text-uppercase small font-weight-bold">Ukupno</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var x in Model.ListaStavki)
+                                    {
+                                            <tr>
+                                                <td>@x.AktivnaUsluga.Paket.Naziv</td>
+                                                <td>@x.AktivnaUsluga.Paket.TipUsluga.Naziv</td>
+
+                                                <td>@x.DatumPocetka.ToShortDateString()</td>
+                                                <td>@x.DatumKraja.ToShortDateString()</td>
+
+
+                                                <td>@x.IznosBezPDV</td>
+                                                <td>@(x.IznosSaPDV - x.IznosBezPDV)</td>
+                                                <td>@x.IznosSaPDV</td>
+
+
+                                            </tr>
+                                    }
+
+
+
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row-reverse bg-light p-4">
+                            <div class="py-3 px-5 text-right">
+                                <div class="mb-2">Ukupno sa PDV</div>
+                                <div class="h2 font-weight-light">@Html.Raw(Model.UkupnoPDV) KM</div>
+                            </div>
+                            <div class="py-3 px-5 text-right">
+                                <div class="mb-2">PDV 17%</div>
+                                <div class="h2 font-weight-light">@Html.Raw(Model.PDF) KM</div>
+                            </div>
+                            <div class="py-3 px-5 text-right">
+                                <div class="mb-2">Ukupno bez PDV</div>
+                                <div class="h2 font-weight-light">@Html.Raw(Model.Ukupno) KM</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br /><br />

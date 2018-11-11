@@ -1,0 +1,227 @@
+﻿@using app.ViewModels
+@using app.Models
+@model app.ViewModels.HomeZahtjevVM
+
+@{
+    ViewBag.Title = "Dodaj";
+}
+<br /><br />
+<div class="zahtjev">
+
+    <div class="container ">
+        <div class="row">
+
+
+            @using (Html.BeginForm("Zahtjev","Home"))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row zahtjev-forma">
+
+
+
+
+                    <div class="col-12">
+                        <p class="poruka-zahtjev">Lični podaci: </p>
+                    </div>
+                    <hr />
+
+
+
+
+                    <div class="col-12 col-md-6">
+                        @Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                        @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        @Html.LabelFor(model => model.Prezime, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.EditorFor(model => model.Prezime, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                        @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12 col-md-12">
+                        @Html.LabelFor(model => model.JMBG, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.EditorFor(model => model.JMBG, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                        @Html.ValidationMessageFor(model => model.JMBG, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        @Html.LabelFor(model => model.OpcinaId, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.DropDownListFor(x => x.OpcinaId, Model.ListaOpcina.Select(x => new SelectListItem
+               {
+                   Value = x.Id.ToString(),
+                   Text = x.NazivOpcine
+               }).ToList(), "Izaberite mjesto prebivalista:", new { @class = "form-control" })
+
+
+                        @Html.ValidationMessageFor(model => Model.OpcinaId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-12 col-md-6">
+                        @Html.LabelFor(model => model.Naselje, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.EditorFor(model => model.Naselje, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Naselje, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12 col-md-9">
+                        @Html.LabelFor(model => model.NazivUlice, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.EditorFor(model => model.NazivUlice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NazivUlice, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        @Html.LabelFor(model => model.Broj, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.EditorFor(model => model.Broj, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Broj, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+
+                    <div class="col-12">
+
+                        @Html.LabelFor(model => model.NapomenaKorisnika, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.TextAreaFor(model => model.NapomenaKorisnika, new { @class = "form-control", @rows = 4 })
+                        @*@Html.EditorFor(model => model.NapomenaKorisnika, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.ValidationMessageFor(model => model.NapomenaKorisnika, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12  ">
+                        <p class="poruka-zahtjev"> Kontakt podaci:</p>
+                    </div>
+                    <hr class="stil11">
+
+
+                    <div class="col-12 col-md-6">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.EditorFor(model => model.Telefon, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="col-12 col-md-12">
+                        @Html.LabelFor(model => model.ListaTipKontakta, htmlAttributes: new { @class = "zahtjev-label" })
+                        @Html.DropDownListFor(x => x.TipKontaktaId, Model.ListaTipKontakta.Select(x => new SelectListItem
+               {
+                   Value = x.Id.ToString(),
+                   Text = x.Naziv
+               }).ToList(), "Izaberite tip kontakta", new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => Model.TipKontaktaId, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+                    <div class="col-12 ">
+                        <p class="poruka-zahtjev">Izaberite pakete:</p>
+                    </div>
+
+
+
+                    <div class="col-12">
+                        <div class="row">
+
+
+                            <div class="col-12 col-sm-4">
+                                <div class="tip-usluge">Internet paketi</div>
+
+                                @foreach (var x in Model.ListaPaketica)
+                {
+                    if (x.Paket.TipUslugaId == 1)
+                    {
+                                        <div class=" ">
+                                            <input type="checkbox" name="IzabraniPaketi" value="@x.Paket.Id" class="switch_1" checked="@x.Izabran">
+                                            <div class="poruka-checkbox">
+                                                @Html.Raw(x.Paket.Id + "-" + x.Paket.Naziv)
+                                            </div>
+                                        </div>
+
+
+
+                                    }
+
+                                }
+
+                            </div>
+
+                            <div class="col-12 col-sm-4">
+                                <div class="tip-usluge">TV paketi</div>
+
+                                @foreach (var x in Model.ListaPaketica)
+                {
+
+                    if (x.Paket.TipUslugaId == 2)
+                    {
+                                        <div class="">
+                                            <input type="checkbox" name="IzabraniPaketi" value="@x.Paket.Id" class="switch_1" checked="@x.Izabran">
+                                            <div class="poruka-checkbox">
+                                                @Html.Raw(x.Paket.Id + "-" + x.Paket.Naziv)
+                                            </div>
+                                        </div>
+
+
+
+                                    }
+
+                                }
+
+                            </div>
+
+                            <div class="col-12 col-sm-4">
+                                <div class="tip-usluge">DUO paketi</div>
+
+                                @foreach (var x in Model.ListaPaketica)
+                {
+                    if (x.Paket.TipUslugaId == 3)
+                    {
+                                        <div class=" ">
+                                            <input type="checkbox" name="IzabraniPaketi" value="@x.Paket.Id" class="switch_1" checked="@x.Izabran">
+                                            <div class="poruka-checkbox">
+                                                @Html.Raw(x.Paket.Id + "-" + x.Paket.Naziv)
+                                            </div>
+                                        </div>
+
+                                    }
+
+                                }
+
+                            </div>
+
+                            <div class="col-12">
+                                @Html.ValidationMessageFor(model => Model.IzabraniPaketi, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+
+                <br />
+
+                <input type="submit" value="POŠALJI ZAHTJEV" class="btn btn-primary" />
+                @Html.ActionLink("Nazad", "Index", null, null, new { @class = "btn btn-secondary " })
+
+
+            }
+
+
+        </div>
+    </div>
+
+</div>
+
+<br />
+<br />
+
+
