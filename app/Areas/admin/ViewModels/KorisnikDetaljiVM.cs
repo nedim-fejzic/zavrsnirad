@@ -15,15 +15,7 @@ namespace app.Areas.admin.ViewModels
         public string Lokacija { get; set; }
 
         public List<AktivneUsluge> ListaAktivnihUsluga { get; set; }
-        public List<Zahtjev> ListaZahtjeva { get; set; }
-        public List<Racuni> ListaRacuna { get; set; }
-        public List<Smetnje> ListaSmetnji { get; set; }
 
-
-
-        //aktivne usluge
-        // racuni tog korisnika
-        // prijavljeni kvarovi
 
 
     }

@@ -45,7 +45,6 @@
 
                     <div class="">
                         <div class="panel panel-default">
-
                             <div class="panel-heading">Aktivne usluge:</div>
                             <div class="panel-body">
 
@@ -63,25 +62,10 @@
                                             <th>Paket</th>
                                             <th>Cijena</th>
                                             <th>Datum Aktivacije</th>
-                                            <th>Akcija</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-@if (Model.ListaAktivnihUsluga.Count() == 0)
-{
-    <tr>
-        <td colspan="7" class="text-center">
-            <div class="nemarezultatapretrage">
-                Korisnik nema aktivnih usluga
-                <br />
-            </div>
-        </td>
-    </tr>
-}
-else
-{
- foreach (var z in Model.ListaAktivnihUsluga)
+                                        @foreach (var z in Model.ListaAktivnihUsluga)
                                         {
                                             <tr>
                                                 <td>@z.Id</td>
@@ -91,178 +75,13 @@ else
                                                 <td class="text-center">@z.Paket.CijenaSaPdv</td>
                                                 <td class="text-center">@z.DatumAktivacije.ToShortDateString()</td>
 
-                                                <td>
-                                                    @Html.ActionLink("Detalji", "Detalji", "AktivneUsluge", new { id = z.KorisnikId }, new { @class = "btn btn-secondary btn-sm" })
-                                                </td>
-                                            </tr>
-    }
-}
-                                    </tbody>
-                                </table>
 
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Zahtjevi:</div>
-                            <div class="panel-body">
-
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Broj</th>
-                                            <th class="text-center">Datum podnošenja zahtjeva</th>
-                                            <th class="text-center">Zahtjev status</th>
-                                            <th class="text-center">Akcija</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-@if (Model.ListaZahtjeva.Count() == 0)
-{
-    <tr>
-        <td colspan="5" class="text-center">
-            <div class="nemarezultatapretrage">
-                Korisnik nema zahtjeva
-                <br />
-            </div>
-        </td>
-    </tr>
-}
-else
-{
-                                       foreach (var z in Model.ListaZahtjeva)
-                                        {
-                                            <tr>
-                                                <td class="text-center">@z.Id</td>
-                                                <td class="text-center">@z.Broj</td>
-                                                <td class="text-center">@z.DatumPodnosenja.ToShortDateString()</td>
-                                                <td class="text-center">@z.ZahtjevStatus.Naziv</td>
-                                                <td class="text-center">
-                                                    @Html.ActionLink("Detalji", "Details", "Zahtjevi", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
-                                                </td>
-                                            </tr>
-    }
-}
-                                    </tbody>
-                                </table>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Smetnje:</div>
-                            <div class="panel-body">
-
-
-
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Broj smetnje</th>
-                                            <th class="text-center">Datum otvaranja smetnje</th>
-                                            <th class="text-center">Status smetnje</th>
-                                            <th class="text-center">Akcije</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-@if (Model.ListaSmetnji.Count() == 0)
-{
-    <tr>
-        <td colspan="5" class="text-center">
-            <div class="nemarezultatapretrage">
-                Korisnik nema prijavljenih smetnji
-                <br />
-            </div>
-        </td>
-    </tr>
-}
-else
-{
- foreach (var z in Model.ListaSmetnji)
-                                        {
-                                            <tr>
-                                                <td class="text-center">@z.Id</td>
-                                                <td class="text-center">@z.BrojSmetnje</td>
-                                                <td class="text-center">@z.DatumOtvaranja.ToShortDateString()</td>
-                                                <td class="text-center">@z.SmetnjeStatus.Naziv</td>
-
-                                                <td class="text-center">
-                                                    @Html.ActionLink("Detalji o smetnji", "Details", "Smetnje", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
-                                                </td>
-                                            </tr>
-    }
-}
-                                    </tbody>
-                                </table>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Racuni:</div>
-                            <div class="panel-body">
-
-
-
-
-
-
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Sifra</th>
-                                            <th class="text-center">Datum izdavanja</th>
-                                            <th class="text-center">Obracunski period</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Akcija</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-
-@if (Model.ListaRacuna.Count() == 0)
-{
-    <tr>
-        <td colspan="5" class="text-center">
-            <div class="nemarezultatapretrage">
-                Korisnik nema računa
-                <br />
-            </div>
-        </td>
-    </tr>
-}
-else
-{
-                                        foreach (var z in Model.ListaRacuna)
-                                        {
-                                            <tr>
-                                                <td class="text-center">@z.Sifra</td>
-                                                <td class="text-center">@z.DatumIzdavanja.ToShortDateString()</td>
-                                                <td class="text-center">@z.ObracunskiPeriodOD.ToShortDateString() - @z.ObracunskiPeriodDO.ToShortDateString()</td>
-                                                <td class="text-center">@(z.Placen ? "PLAĆEN" : "NIJE PLAĆEN")</td>
-                                                <td class="text-center">
-                                                    @Html.ActionLink("Detalji racuna", "Detalji", "Racun", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
-                                                </td>
+                                                @*<td>
+                                        @Html.ActionLink("Uredi", "Edit", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                        @Html.ActionLink("Detalji", "Details", new { id = z.Id }, new { @class = "btn btn-secondary btn-sm" })
+                                    </td>*@
                                             </tr>
                                         }
-}
                                     </tbody>
                                 </table>
 
