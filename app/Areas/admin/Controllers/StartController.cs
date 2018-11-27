@@ -46,8 +46,8 @@ namespace app.Areas.admin.Controllers
             Session["logiran_uposlenik"] = null;
             Session["role"] = null;
 
-            TempData["Message"] = "Uspješno ste se odjavili!";
-            TempData["code"] = "info";
+            //TempData["Message"] = "Uspješno ste se odjavili!";
+            //TempData["code"] = "info";
 
 
             return RedirectToAction("Index", "Home", new { area = "" });

@@ -254,8 +254,9 @@ namespace app.Areas.admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Korisnik k = db.KorisnikDbSet.Find(id);
 
-            if (db.KorisnikDbSet.Find(id) == null)
+            if (k == null)
             {
                 return HttpNotFound();
             }
@@ -269,9 +270,14 @@ namespace app.Areas.admin.Controllers
                   Ime = f.Ime,
                   Prezime = f.Prezime,
                   Lokacija = f.Opcina.NazivOpcine + " " + f.Naselje + " " + f.Adresa,
-                  ListaAktivnihUsluga = db.AktivneUslugeDbSet.Where(q => q.KorisnikId == f.Id).ToList()
+                  ListaAktivnihUsluga = db.AktivneUslugeDbSet.Where(q => q.KorisnikId == f.Id).ToList(),
+                  ListaRacuna = db.RacuniDbSet.Where(q => q.KorisnikId == f.Id).ToList(),
+                  ListaSmetnji = db.SmetnjeDbSet.Where(q => q.KorisnikId == f.Id).ToList(),
 
               }).Single();
+
+            model.ListaZahtjeva = db.ZahtjevDbSet.Where(q => q.JMBG == k.JMBG).ToList();
+
 
 
             return View(model);
@@ -279,10 +285,8 @@ namespace app.Areas.admin.Controllers
         }
 
 
-        public ActionResult Search(int? page, string jmbg)
+        public ActionResult Search(int? page, string jmbg, string Sifra, string ImePrezime)
         {
-
-
 
 
             KorisnikSearchVM model = new KorisnikSearchVM();
@@ -291,6 +295,16 @@ namespace app.Areas.admin.Controllers
 
             if (!string.IsNullOrEmpty(jmbg))
                 users = users.Where(i => i.JMBG == jmbg).ToList();
+            if (!string.IsNullOrEmpty(ImePrezime))
+                users = users.Where(i => i.Ime.Contains(ImePrezime) || i.Prezime.Contains(ImePrezime)).ToList();
+
+            if (!string.IsNullOrEmpty(Sifra))
+            {
+                int a = Convert.ToInt32(Sifra);
+
+                if (a>0 && a<99999)
+                    users = users.Where(i => i.Id == a).ToList();
+            }
 
 
             model.ListaRezultata = users.ToPagedList(page ?? 1, 10);

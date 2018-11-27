@@ -270,8 +270,8 @@ namespace app.Controllers
                 if (korisnik == true)
                 {
                     //TempData["zahtjev"] = "zahtjev";
-                    TempData["Message"] = "Uspješno ste se prijavili!";
-                    TempData["code"] = "info";
+                    //TempData["Message"] = "Uspješno ste se prijavili!";
+                    //TempData["code"] = "info";
 
                     Session["logiran_korisnik"] = k.Id;
                     Session["imeprezime"] = k.Ime + " " + k.Prezime;
@@ -281,8 +281,8 @@ namespace app.Controllers
                 }
                 else
                 {
-                    TempData["Message"] = "Uspješno ste se prijavili!";
-                    TempData["code"] = "info";
+                    //TempData["Message"] = "Uspješno ste se prijavili!";
+                    //TempData["code"] = "info";
 
                     Session["logiran_uposlenik"] = u.Id;
                     Session["role"] = u.Uloga.Sifra;
@@ -309,8 +309,8 @@ namespace app.Controllers
             Session["logiran_uposlenik"] = null;
             Session["role"] = null;
 
-            TempData["Message"] = "Uspješno ste se odjavili!";
-            TempData["code"] = "info";
+            //TempData["Message"] = "Uspješno ste se odjavili!";
+            //TempData["code"] = "info";
 
 
             return RedirectToAction("Index", "Home", new { area = "" });
