@@ -16,10 +16,14 @@
     <div class="row">
 
 
-        <div class="col-9">
+        <div class="col-3">
             @Html.TextBoxFor(m => @Model.JMBG, new { @class = "form-control", @placeholder = "Unesite JMBG korisnika..." })
-
-
+        </div>
+        <div class="col-3">
+            @Html.TextBoxFor(m => @Model.Sifra, new { @class = "form-control", @placeholder = "Unesite šifru korisnika..." })
+        </div>
+        <div class="col-3">
+            @Html.TextBoxFor(m => @Model.ImePrezime, new { @class = "form-control", @placeholder = "Unesite ime ili prezime korisnika..." })
         </div>
         <div class="col-3">
             <input type="submit" name="submit" value="Prikaži" class="btn btn-secondary btn-block" />
@@ -106,7 +110,10 @@
         @Html.PagedListPager((IPagedList)Model.ListaRezultata, page => Url.Action("Search", new
    {
        page,
-       OdabranaKategorija = Request.QueryString["OdabranaKategorija"]
+       OdabranaKategorija = Request.QueryString["OdabranaKategorija"],
+       Sifra = Request.QueryString["Sifra"],
+       ImePrezime = Request.QueryString["ImePrezime"]
+       
    }))
 
 

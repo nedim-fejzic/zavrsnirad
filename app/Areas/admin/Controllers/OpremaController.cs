@@ -302,15 +302,14 @@ namespace app.Areas.admin.Controllers
 
             if (!ModelState.IsValid)
             {
-                
                 model.DatumZaduzenja = DateTime.Today;
                 model.ListaKorisnika = db.KorisnikDbSet.ToList();
+                Uredjaj u = db.UredjajDbSet.Where(f => f.Id == model.Id).FirstOrDefault(); ;
+                model.OpremaId = model.Id;
+                model.device = u;
 
                 return View(model);
             }
-
-
-
 
             // zaduzi uredjaj
             UredjajZaduzenje uz = new UredjajZaduzenje()
