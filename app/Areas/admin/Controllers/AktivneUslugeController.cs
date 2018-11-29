@@ -207,7 +207,35 @@ namespace app.Areas.admin.Controllers
 
             return View(model);
         }
+        [HttpPost]
+        public ActionResult NovaAktivacija(AktivneUslugeNovaAktivacijaVM model)
+        {
 
+            if (!ModelState.IsValid)
+            {
+                model.ListaPaketa = db.PaketDbSet.ToList().OrderBy(c => c.TipUslugaId).ToList();
+                model.ListaKorisnika = db.KorisnikDbSet.OrderBy(c => c.Ime).ToList();
+                return View(model);
+            }
+
+            Korisnik k = db.KorisnikDbSet.Find(model.KorisnikId);
+
+            AktivneUsluge a = new AktivneUsluge()
+            {
+                KorisnikId = k.Id,
+                AdresaInstalacije = k.Adresa,
+                AktivnaUsluga = true,
+                DatumAktivacije = DateTime.Now,
+                DatumInstalacije = DateTime.Now,
+                PaketId = model.PaketId
+
+            };
+
+            db.AktivneUslugeDbSet.Add(a);
+            db.SaveChanges();
+
+            return RedirectToAction("Detalji", new { id = k.Id });
+        }
 
 
 

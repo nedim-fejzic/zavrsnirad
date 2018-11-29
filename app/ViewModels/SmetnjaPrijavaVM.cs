@@ -25,6 +25,7 @@ namespace app.ViewModels
 
         [Display(Name = "Opis smetnji: ")]
         [Required(ErrorMessage = "Molimo opišite smetnje koje imate!")]
+        [StringLength(1000, MinimumLength = 6, ErrorMessage = "Molimo upotpunite opis smetnje!")]
         public string Opis { get; set; }
 
     }

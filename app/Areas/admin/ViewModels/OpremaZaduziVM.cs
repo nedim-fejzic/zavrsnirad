@@ -21,9 +21,9 @@ namespace app.Areas.admin.ViewModels
         public int KorisnikId { get; set; }
         public List<Korisnik> ListaKorisnika { get; set; }
 
-        [DataType(DataType.DateTime) ]
+        [DataType(DataType.Date) ]
         [Required(ErrorMessage = "Unesite datum zaduženja!")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime   DatumZaduzenja { get; set; }
 
        

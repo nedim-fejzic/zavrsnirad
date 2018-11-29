@@ -67,6 +67,7 @@ namespace app.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Create(SmetnjeDodajVM model)
         {
+
             if (ModelState.IsValid)
             {
 

@@ -57,42 +57,54 @@ namespace app.Controllers
         [HttpPost]
         public ActionResult Prijava(SmetnjaPrijavaVM model)
         {
-            var sad = DateTime.Now;
-
-
-            Smetnje s = new Smetnje();
-            s.AktivnaUslugaId = model.AktivnaUslugaId;
-            s.DatumUocavanja = model.DatumUocavanja;
-            s.DatumZatvaranja = null;
-            s.KorisnikId = model.KorisnikId;
-            s.SmetnjeStatusId = 1;
-            s.Opis = model.Opis;
-            s.DatumOtvaranja = sad;
-
-            // generisemo id 
-            int ajdi = 1;
-            var fg = db.SmetnjeDbSet.OrderByDescending(u => u.Id).FirstOrDefault();
-            if (fg != null)
+            if (ModelState.IsValid)
             {
-                ajdi = fg.Id + 1;
+                var sad = DateTime.Now;
+
+
+                Smetnje s = new Smetnje();
+                s.AktivnaUslugaId = model.AktivnaUslugaId;
+                s.DatumUocavanja = model.DatumUocavanja;
+                s.DatumZatvaranja = null;
+                s.KorisnikId = model.KorisnikId;
+                s.SmetnjeStatusId = 1;
+                s.Opis = model.Opis;
+                s.DatumOtvaranja = sad;
+
+                // generisemo id 
+                int ajdi = 1;
+                var fg = db.SmetnjeDbSet.OrderByDescending(u => u.Id).FirstOrDefault();
+                if (fg != null)
+                {
+                    ajdi = fg.Id + 1;
+                }
+
+
+                s.BrojSmetnje = ajdi + "" + sad.ToString("HHmm");
+
+
+
+
+
+                db.SmetnjeDbSet.Add(s);
+                db.SaveChanges();
+
+
+                TempData["Message"] = "Uspješno prijavljena smetnja pod brojem: <b>" + s.BrojSmetnje + "</b>";
+                TempData["code"] = "info";
+
+                return RedirectToAction("Index");
+
             }
 
+            int korisnikid = (int)Session["logiran_korisnik"];
+            Korisnik k = db.KorisnikDbSet.Find(korisnikid);
+            model.ListaAktivnihUsluga = db.AktivneUslugeDbSet.Where(c => c.KorisnikId == korisnikid).ToList();
+            model.KorisnikId = korisnikid;
+            model.ListaSmetnjaStatus = db.SmetnjeStatusDbSet.ToList();
 
-            s.BrojSmetnje = ajdi + "" + sad.ToString("HHmm");
+            return View(model);
 
-
-
-
-
-            db.SmetnjeDbSet.Add(s);
-            db.SaveChanges();
-
-
-            TempData["Message"] = "Uspješno prijavljena smetnja pod brojem: <b>" + s.BrojSmetnje + "</b>";
-            TempData["code"] = "info";
-
-
-            return RedirectToAction("Index");
 
         }
 

@@ -14,6 +14,11 @@
 @using (Html.BeginForm("Search", "Korisnik", FormMethod.Get))
 {
     <div class="row">
+       <div class="col-12">
+           @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       </div>
+
+
 
 
         <div class="col-3">
@@ -124,9 +129,6 @@
         <i class="fas fa-user-plus"></i> DODAJ KORISNIKA
     </a>
 
-    <a href="@Request.UrlReferrer" class="btn btn-secondary  hvr-icon-back " title="Nazad">
-        <i class="fas fa-chevron-circle-left "></i>
-        Nazad
-    </a>
+   
 
 </div>

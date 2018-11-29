@@ -288,10 +288,16 @@ namespace app.Areas.admin.Controllers
         public ActionResult Search(int? page, string jmbg, string Sifra, string ImePrezime)
         {
 
+         
 
             KorisnikSearchVM model = new KorisnikSearchVM();
 
             var users = db.KorisnikDbSet.OrderByDescending(x => x.DatumIzmjene).ToList();
+
+
+
+           
+
 
             if (!string.IsNullOrEmpty(jmbg))
                 users = users.Where(i => i.JMBG == jmbg).ToList();
@@ -300,10 +306,19 @@ namespace app.Areas.admin.Controllers
 
             if (!string.IsNullOrEmpty(Sifra))
             {
-                int a = Convert.ToInt32(Sifra);
+                if (!Regex.IsMatch(Sifra, @"^\d+$"))
+                {
+                    users = users.Where(i => i.Id == 887456).ToList();
 
-                if (a>0 && a<99999)
-                    users = users.Where(i => i.Id == a).ToList();
+                }
+                else
+                {
+                    int a = Convert.ToInt32(Sifra);
+
+                    if (a > 0 && a < 99999)
+                        users = users.Where(i => i.Id == a).ToList();
+                }
+               
             }
 
 
@@ -346,6 +361,22 @@ namespace app.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Lozinka(KorisnikLozinkaVM model)
         {
+
+            if (!ModelState.IsValid)
+            {
+
+                var user = db.KorisnikDbSet.Find(model.KorisnikId);
+
+                if (user != null)
+                {
+                    model.KorisnikId = user.Id;
+                }
+
+                model.ListaKorisnika = db.KorisnikDbSet.ToList();
+
+                return View(model);
+            }
+
 
             Korisnik k = db.KorisnikDbSet.Find(model.KorisnikId);
 

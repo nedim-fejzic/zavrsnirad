@@ -22,9 +22,11 @@ namespace app.Areas.admin.ViewModels
 
         public string AltText { get; set; }
 
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Unesite broj!")]
         [Display(Name = "Download speed")]
         public string DownloadSpeed { get; set; }
 
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Unesite broj!")]
         [Display(Name = "Upload speed")]
         public string UploadSpeed { get; set; }
 

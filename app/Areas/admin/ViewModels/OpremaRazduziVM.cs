@@ -20,8 +20,8 @@ namespace app.Areas.admin.ViewModels
 
 
         [Required(ErrorMessage = "Unesite datum povratka uređaja!")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? DatumVracanja { get; set; }
     }
 }
