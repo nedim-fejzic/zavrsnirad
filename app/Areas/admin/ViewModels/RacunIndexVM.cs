@@ -19,5 +19,9 @@ namespace app.Areas.admin.ViewModels
         public IPagedList<Racuni> ListaRezultata { get; set; }
 
 
+        public string tip { get; set; }
+        public string PlacenoRacuna { get; set; }
+        public string NijePlacenoRacuna { get; set; }
+
     }
 }

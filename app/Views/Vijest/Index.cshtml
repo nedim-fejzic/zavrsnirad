@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <small>Objavljeno: @x.DatumObjave.ToShortDateString()</small>
+                    <small>Objavljeno: @x.DatumObjave.ToString("dd.MM.yyyy")</small>
                     <a href='@Url.Action("Detalji", "Vijest", new { @id = x.Id})' class="btn btn-info float-right btn-sm">
                         Detalji
                     </a>

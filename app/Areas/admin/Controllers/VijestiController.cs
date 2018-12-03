@@ -19,7 +19,6 @@ namespace app.Areas.admin.Controllers
     {
         private MojKontekst db = new MojKontekst();
 
-        // GET: admin/Vijesti
         public ActionResult Index(int? page, int? OdabranaKategorija, string Naziv)
         {
             int id = OdabranaKategorija ?? 0;
@@ -57,14 +56,11 @@ namespace app.Areas.admin.Controllers
 
             return View(model);
         }
-
         public string rijesisehtmla(string input)
         {
           
             return Regex.Replace(Regex.Replace(input, @"<[^>]+>|&nbsp;", "").Trim(), @"\s{2,}", " ");
         }
-
-        // GET: admin/Vijesti/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -92,7 +88,6 @@ namespace app.Areas.admin.Controllers
 
             return View(model);
         }
-
         public ActionResult Dodaj()
         {
             VijestiDodajVM model = new VijestiDodajVM();
@@ -140,7 +135,6 @@ namespace app.Areas.admin.Controllers
             return View(model);
 
         }
-
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -219,13 +213,6 @@ namespace app.Areas.admin.Controllers
             model.ListaKategorija = db.VijestiKategorijaDbSet.ToList();
             return View(model);
         }
-
-
-
-
-
-
-        // GET: admin/Vijesti/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -239,8 +226,6 @@ namespace app.Areas.admin.Controllers
             }
             return View(vijesti);
         }
-
-        // POST: admin/Vijesti/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -250,7 +235,6 @@ namespace app.Areas.admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -259,17 +243,5 @@ namespace app.Areas.admin.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-        //public string KreirajPutanjuZaSnimanjeSlike(string nazivSlike)
-        //{
-        //    return Path.Combine(Server.MapPath("~/Slike/"), nazivSlike);
-        //}
-        //public string KreirajPutanjuZaSnimanjeSlikeUBazu(string nazivSlike)
-        //{
-        //    return "~/Slike/" + nazivSlike;
-        //}
-
-
     }
 }

@@ -54,8 +54,8 @@ namespace app.Areas.admin.Controllers
             model.ListaKategorija = db.ZahtjevStatusDbSet.ToList();
             model.ListaKategorija.Insert(0, new Models.ZahtjevStatus() { Id = 0, Naziv = "Odaberite status zahtjeva..." });
 
-
-            var u = db.ZahtjevPromjenaDbSet.Where(c=>c.ZatvorenZahtjev!=true).OrderByDescending(x => x.Datum).ToList();
+            //Where(c=>c.ZatvorenZahtjev!=true)
+            var u = db.ZahtjevPromjenaDbSet.OrderByDescending(x => x.Datum).ToList();
 
 
             if (id != 0)

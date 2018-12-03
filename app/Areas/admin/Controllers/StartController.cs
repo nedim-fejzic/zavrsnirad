@@ -29,26 +29,16 @@ namespace app.Areas.admin.Controllers
             model.MenadzerOprema = db.UredjajDbSet.Where(c => c.UUpotrebi == false).Count().ToString();
             model.MenadzerPaketi = db.PaketDbSet.Count().ToString();
             model.MenadzerAktivneUsluge = db.AktivneUslugeDbSet.Count().ToString();
-
-
-
-
             return View(model);
         }
-
-
-
         public ActionResult Logout()
         {
-
             Session["logiran_korisnik"] = null;
             Session["imeprezime"] = null;
             Session["logiran_uposlenik"] = null;
             Session["role"] = null;
-
             //TempData["Message"] = "Uspješno ste se odjavili!";
             //TempData["code"] = "info";
-
 
             return RedirectToAction("Index", "Home", new { area = "" });
         }

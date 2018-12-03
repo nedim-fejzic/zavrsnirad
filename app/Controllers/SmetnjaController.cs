@@ -57,6 +57,25 @@ namespace app.Controllers
         [HttpPost]
         public ActionResult Prijava(SmetnjaPrijavaVM model)
         {
+            DateTime temp;
+            if (model.DatumUocavanja!=null)
+            {
+                if (DateTime.TryParse(model.DatumUocavanja.ToString(), out temp))
+                {
+                    if (model.DatumUocavanja.Value.Year<2018)
+                    {
+                        ModelState.AddModelError("DatumUocavanja", "Datum uočavanja smetnje nije ispravan!");
+
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("DatumUocavanja", "Datum uočavanja smetnje nije ispravan!");
+
+                }
+            }
+
+
             if (ModelState.IsValid)
             {
                 var sad = DateTime.Now;

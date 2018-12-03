@@ -19,9 +19,6 @@ namespace app.Areas.admin.Controllers
 
         public ActionResult Index(int? page, string Sifra, int? OdabraniKorisnik, int? OdabraniStatus)
         {
-
-            // broj smetnje       -  Korisnik ID    -     status
-
             int idKorisnik = OdabraniKorisnik ?? 0;
             int idStatus = OdabraniStatus ?? 0;
 
@@ -36,7 +33,6 @@ namespace app.Areas.admin.Controllers
             model.ListaStatusa = db.SmetnjeStatusDbSet.ToList();
             model.ListaStatusa.Insert(0, new Models.SmetnjeStatus() { Id = 0, Naziv = "Odaberite status prijave...." });
 
-
             var u = db.SmetnjeDbSet.OrderByDescending(x => x.DatumOtvaranja ).ToList();
             u = u.OrderBy(x => x.SmetnjeStatusId).ToList();
 
@@ -49,16 +45,12 @@ namespace app.Areas.admin.Controllers
             if (!string.IsNullOrEmpty(Sifra))
                 u = u.Where(i => i.BrojSmetnje == Sifra).ToList();
 
-
             model.ListaRezultata = u.ToPagedList(page ?? 1, 10);
 
             return View(model);
-
         }
-
         public ActionResult Create()
         {
-
             SmetnjeDodajVM model = new SmetnjeDodajVM();
             model.ListaAktivnihUsluga = db.AktivneUslugeDbSet.ToList();
 
@@ -67,11 +59,8 @@ namespace app.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Create(SmetnjeDodajVM model)
         {
-
             if (ModelState.IsValid)
             {
-
-                // 
                 var sad = DateTime.Now;
                 Smetnje s = new Smetnje();
                 s.AktivnaUslugaId = model.AktivnaUslugaId;
@@ -82,7 +71,6 @@ namespace app.Areas.admin.Controllers
                 s.Opis = model.Opis;
                 s.DatumOtvaranja = sad;
 
-                // generisemo id 
                 int ajdi = 1;
                 var fg = db.SmetnjeDbSet.OrderByDescending(u => u.Id).FirstOrDefault();
                 if (fg != null)
@@ -90,20 +78,12 @@ namespace app.Areas.admin.Controllers
                     ajdi = fg.Id + 1;
                 }
 
-
                 s.BrojSmetnje = ajdi + "" + sad.ToString("HHmm");
-
-
-
-
-
                 db.SmetnjeDbSet.Add(s);
                 db.SaveChanges();
 
-
                 TempData["Message"] = "Uspješno prijavljena smetnja pod brojem: <b>" + s.BrojSmetnje + "</b>";
                 TempData["code"] = "info";
-
 
                 return RedirectToAction("Index");
             }
@@ -111,7 +91,6 @@ namespace app.Areas.admin.Controllers
             model.ListaAktivnihUsluga = db.AktivneUslugeDbSet.ToList();
             return View(model);
         }
-
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -139,23 +118,17 @@ namespace app.Areas.admin.Controllers
                 model.Usluga = s.AktivnaUsluga.Paket.Naziv;
 
             }
-         
-
             model.ListaOdgovora = db.SmetnjeOdgovori.Where(c => c.SmetnjaId == model.Id).ToList();
-
 
             return View(model);
         }
-
         public ActionResult Odgovor(SmetnjeDetaljiVM model)
         {
-
             Smetnje s = db.SmetnjeDbSet.Find(model.Id);
             if (s == null)
             {
                 return HttpNotFound();
             }
-
 
             if (model.Odgovor == null || model.Odgovor == "")
             {
@@ -167,21 +140,15 @@ namespace app.Areas.admin.Controllers
             }
 
             SmetnjeOdgovori o = new SmetnjeOdgovori();
-
             o.SmetnjaId = model.Id;
             o.Poruka = model.Odgovor;
-            // ovdje id logiranog uposlenika
-
             o.UposlenikId = Convert.ToInt32(Session["logiran_uposlenik"]);
-
             o.Datum = DateTime.Now;
-
             db.SmetnjeOdgovori.Add(o);
             db.SaveChanges();
             return RedirectToAction("Details", new { id = model.Id });
 
         }
-
         public ActionResult Status(int id)
         {
             Smetnje s = db.SmetnjeDbSet.Find(id);
@@ -189,7 +156,6 @@ namespace app.Areas.admin.Controllers
             {
                 return HttpNotFound();
             }
-
 
             if (s.SmetnjeStatusId == 2)
             {
@@ -201,7 +167,6 @@ namespace app.Areas.admin.Controllers
                 s.SmetnjeStatusId = 2;
                 s.DatumZatvaranja = DateTime.Now;
 
-                // uposlenik koji je zatvorio
                 s.UposlenikId = 1;
                 db.SaveChanges();
 
@@ -212,8 +177,6 @@ namespace app.Areas.admin.Controllers
 
             return RedirectToAction("Details", new { id = id });
         }
-
-        // GET: admin/Smetnje/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -228,10 +191,6 @@ namespace app.Areas.admin.Controllers
             ViewBag.SmetnjeStatusId = new SelectList(db.SmetnjeStatusDbSet, "Id", "Naziv", smetnje.SmetnjeStatusId);
             return View(smetnje);
         }
-
-        // POST: admin/Smetnje/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,BrojSmetnje,AktivnaUslugaId,DatumUocavanja,SmetnjeStatusId,Opis")] Smetnje smetnje)
@@ -245,8 +204,6 @@ namespace app.Areas.admin.Controllers
             ViewBag.SmetnjeStatusId = new SelectList(db.SmetnjeStatusDbSet, "Id", "Naziv", smetnje.SmetnjeStatusId);
             return View(smetnje);
         }
-
-        // GET: admin/Smetnje/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -260,8 +217,6 @@ namespace app.Areas.admin.Controllers
             }
             return View(smetnje);
         }
-
-        // POST: admin/Smetnje/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -271,7 +226,6 @@ namespace app.Areas.admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

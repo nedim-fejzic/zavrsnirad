@@ -20,57 +20,22 @@ namespace app.Areas.admin.Controllers
     {
         private MojKontekst db = new MojKontekst();
 
-
-        // GET: admin/Korisnik
         public ActionResult Index()
         {
-
-
             return RedirectToAction("Search");
-
-
-
-            //prikaz korisnika
-            //KorisnikIndexVM model = new KorisnikIndexVM();
-
-            //model.KorisniciRedovi = db.KorisnikDbSet
-            // .Select(x => new KorisnikRed
-            // {
-            //     Id = x.Id,
-            //     ImePrezime = x.Ime + " " + x.Prezime,
-            //     JMBG = x.JMBG,
-            //     Opcina = x.Opcina.NazivOpcine
-
-
-            // }).ToList();
-
-
-
-
-            //return View(model);
-
         }
-
         public ActionResult Dodaj()
         {
             KorisnikDodajVM model = new KorisnikDodajVM();
             model.ListaOpcina = db.OpcinaDbSet.ToList();
-
             return View(model);
-
         }
         [HttpPost]
         public ActionResult Dodaj(KorisnikDodajVM model)
         {
-
-
-
             if (!ModelState.IsValid)
             {
-
-
                 model.ListaOpcina = db.OpcinaDbSet.ToList();
-
                 return View(model);
             }
 
@@ -78,14 +43,11 @@ namespace app.Areas.admin.Controllers
             {
                 if (k.JMBG == model.JMBG)
                 {
-
                     ModelState.AddModelError("JMBG", "Korisnik sa istim JMBG vec postoji!");
                     model.ListaOpcina = db.OpcinaDbSet.ToList();
-
                     return View(model);
                 }
             }
-
 
             Korisnik v = new Korisnik()
             {
@@ -100,14 +62,10 @@ namespace app.Areas.admin.Controllers
                 Prezime = model.Prezime,
                 Telefon = model.Telefon
             };
-
             db.KorisnikDbSet.Add(v);
             db.SaveChanges();
-
             return RedirectToAction("Index");
-
         }
-
         public ActionResult Uredi(int? id)
         {
 
@@ -175,7 +133,6 @@ namespace app.Areas.admin.Controllers
             return RedirectToAction("Index");
 
         }
-
         public ActionResult Zahtjev(int? ZahtjevId)
         {
 
@@ -242,11 +199,6 @@ namespace app.Areas.admin.Controllers
 
             return RedirectToAction("Detalji", "Korisnik", new { id = v.Id, area = "Admin" });
         }
-
-
-
-
-
         public ActionResult Detalji(int? id)
         {
 
@@ -270,7 +222,7 @@ namespace app.Areas.admin.Controllers
                   Ime = f.Ime,
                   Prezime = f.Prezime,
                   Lokacija = f.Opcina.NazivOpcine + " " + f.Naselje + " " + f.Adresa,
-                  ListaAktivnihUsluga = db.AktivneUslugeDbSet.Where(q => q.KorisnikId == f.Id).ToList(),
+                  ListaAktivnihUsluga = db.AktivneUslugeDbSet.Where(q => q.KorisnikId == f.Id && q.AktivnaUsluga == true).ToList(),
                   ListaRacuna = db.RacuniDbSet.Where(q => q.KorisnikId == f.Id).ToList(),
                   ListaSmetnji = db.SmetnjeDbSet.Where(q => q.KorisnikId == f.Id).ToList(),
 
@@ -283,43 +235,35 @@ namespace app.Areas.admin.Controllers
             return View(model);
 
         }
-
-
         public ActionResult Search(int? page, string jmbg, string Sifra, string ImePrezime)
         {
-
-         
-
             KorisnikSearchVM model = new KorisnikSearchVM();
-
             var users = db.KorisnikDbSet.OrderByDescending(x => x.DatumIzmjene).ToList();
-
-
-
-           
-
 
             if (!string.IsNullOrEmpty(jmbg))
                 users = users.Where(i => i.JMBG == jmbg).ToList();
             if (!string.IsNullOrEmpty(ImePrezime))
                 users = users.Where(i => i.Ime.Contains(ImePrezime) || i.Prezime.Contains(ImePrezime)).ToList();
-
             if (!string.IsNullOrEmpty(Sifra))
             {
                 if (!Regex.IsMatch(Sifra, @"^\d+$"))
                 {
-                    users = users.Where(i => i.Id == 887456).ToList();
+                    ModelState.AddModelError(string.Empty, "Molimo unesite šifru u formatu broja!");
+                    users = users.Where(c => c.Id == 7897987).ToList();
 
                 }
                 else
                 {
-                    int a = Convert.ToInt32(Sifra);
+                    int x = 0;
 
-                    if (a > 0 && a < 99999)
-                        users = users.Where(i => i.Id == a).ToList();
+                    if (Int32.TryParse(Sifra, out x))
+                    {
+                        users = users.Where(c => c.Id == x).ToList();
+                    }
                 }
-               
             }
+
+
 
 
             model.ListaRezultata = users.ToPagedList(page ?? 1, 10);

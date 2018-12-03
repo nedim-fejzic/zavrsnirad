@@ -13,16 +13,13 @@ namespace app.Areas.admin.Controllers
     [AuthUposlenik]
     public class AktivneUslugeController : Controller
     {
-
         private MojKontekst db = new MojKontekst();
 
-        
-        // GET: admin/AktivneUsluge
         public ActionResult Index(int? page, int? ListaTipUsluga, int ? ListaPaketa, string ImePrezime)
         {
 
-            int tip = ListaPaketa ?? 0;
-            int usluga = ListaTipUsluga ?? 0;
+            int usluga = ListaPaketa ?? 0;
+            int tip = ListaTipUsluga ?? 0;
 
 
             AktivneUslugeIndexVm model = new AktivneUslugeIndexVm();
@@ -53,7 +50,6 @@ namespace app.Areas.admin.Controllers
             return View(model);
 
         }
-
         [HttpGet]
         public ActionResult Detalji(int id)
         {
@@ -73,10 +69,7 @@ namespace app.Areas.admin.Controllers
 
             return View(model);
         }
-      
-
-
-       public ActionResult Iskljuci(int id)
+        public ActionResult Iskljuci(int id)
         {
             //proslijedjen id usluge koju cemo iskljuciti
            
@@ -95,8 +88,6 @@ namespace app.Areas.admin.Controllers
 
             return RedirectToAction("Detalji", new {id = q.KorisnikId });
         }
-
-
         public ActionResult IskljuciSve(int id)
         {
             //proslijedjen id korisnika
@@ -130,18 +121,13 @@ namespace app.Areas.admin.Controllers
 
             return RedirectToAction("Detalji", new { id = id });
         }
-
         [HttpGet]
         public ActionResult Aktiviraj(int id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-
-            // korisnik id
             Korisnik k = db.KorisnikDbSet.Find(id);
             if (k == null)
             {
@@ -161,11 +147,23 @@ namespace app.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Aktiviraj(AktivneUslugeAktivirajVM model)
         {
-            // provjeri da li je trazena usluga vec aktivirana kod korisnika
-            // ako jeste dodaj gresku
+            DateTime temp;
+            if (model.DatumInstalacije != null)
+            {
+                if (DateTime.TryParse(model.DatumInstalacije.ToString(), out temp))
+                {
+                    if (model.DatumInstalacije.Value.Year < 2018)
+                    {
+                        ModelState.AddModelError("DatumInstalacije", "Datum instalacije nije ispravan!");
 
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("DatumInstalacije", "Datum instalacije nije ispravan!");
 
-
+                }
+            }
             if (!ModelState.IsValid)
             {
                 Korisnik vv = db.KorisnikDbSet.Find(model.KorisnikId);
@@ -174,9 +172,7 @@ namespace app.Areas.admin.Controllers
                 model.BrojUsluga = db.AktivneUslugeDbSet.Where(c => c.KorisnikId == model.KorisnikId && c.AktivnaUsluga == true).Count();
                 return View(model);
             }
-
             Korisnik k = db.KorisnikDbSet.Find(model.KorisnikId);
-
             AktivneUsluge a = new AktivneUsluge()
             {
                KorisnikId = k.Id,
@@ -187,30 +183,39 @@ namespace app.Areas.admin.Controllers
                PaketId = model.PaketId
                
             };
-
             db.AktivneUslugeDbSet.Add(a);
             db.SaveChanges();
 
             return RedirectToAction("Detalji", new {id = k.Id });
         }
-
         [HttpGet]
         public ActionResult NovaAktivacija()
         {
-            // id je usluga koju zelimo aktivirati
-            // potrebno je izabrati koji je g
-
-
             AktivneUslugeNovaAktivacijaVM model = new AktivneUslugeNovaAktivacijaVM();
             model.ListaPaketa = db.PaketDbSet.ToList().OrderBy(c => c.TipUslugaId).ToList();
             model.ListaKorisnika = db.KorisnikDbSet.OrderBy(c => c.Ime).ToList();
-
             return View(model);
         }
         [HttpPost]
         public ActionResult NovaAktivacija(AktivneUslugeNovaAktivacijaVM model)
         {
+            DateTime temp;
+            if (model.DatumInstalacije != null)
+            {
+                if (DateTime.TryParse(model.DatumInstalacije.ToString(), out temp))
+                {
+                    if (model.DatumInstalacije.Value.Year < 2018)
+                    {
+                        ModelState.AddModelError("DatumInstalacije", "Datum instalacije nije ispravan!");
 
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("DatumInstalacije", "Datum instalacije nije ispravan!");
+
+                }
+            }
             if (!ModelState.IsValid)
             {
                 model.ListaPaketa = db.PaketDbSet.ToList().OrderBy(c => c.TipUslugaId).ToList();
@@ -236,9 +241,5 @@ namespace app.Areas.admin.Controllers
 
             return RedirectToAction("Detalji", new { id = k.Id });
         }
-
-
-
-
     }
 }

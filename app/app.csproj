@@ -398,8 +398,10 @@
     <Content Include="Slike\ikone\korisnici.png" />
     <Content Include="Slike\ikone\lista-color.png" />
     <Content Include="Slike\ikone\lock.png" />
+    <Content Include="Slike\ikone\nijeplac.png" />
     <Content Include="Slike\ikone\oprema.png" />
     <Content Include="Slike\ikone\paketi.png" />
+    <Content Include="Slike\ikone\plac.png" />
     <Content Include="Slike\ikone\promjenapass.png" />
     <Content Include="Slike\ikone\racuni.png" />
     <Content Include="Slike\ikone\smetnje.png" />

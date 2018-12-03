@@ -8,6 +8,60 @@
     Layout = "~/Areas/admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+
+
+
+
+<div class="row">
+
+
+
+   <br />
+
+    <div class="col-md-4 hvr-shrink">
+        <a href="@Url.Action("Index", "Racun",new { tip = "P" })">
+            <div class="info-blok">
+
+                <div class="info-part-1">
+                    <div class="blok-natpis">
+                        <h3>@Html.Raw(Model.PlacenoRacuna)</h3>
+                        <p>računa plaćeno</p>
+                    </div>
+                </div>
+
+                <div class="info-part-2">
+                    <div class="">
+                        <img src="~/Slike/ikone/plac.png" class="blok-slika" />
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 hvr-shrink">
+        <a href="@Url.Action("Index", "Racun",new { tip = "N" })">
+            <div class="info-blok">
+
+                <div class="info-part-1">
+                    <div class="blok-natpis">
+                        <h3>@Html.Raw(Model.NijePlacenoRacuna)</h3>
+                        <p>računa nije plaćeno</p>
+                    </div>
+                </div>
+
+                <div class="info-part-2">
+                    <div class="">
+                        <img src="~/Slike/ikone/nijeplac.png" class="blok-slika" />
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+
+</div>
+
 <br />
 
 
@@ -72,6 +126,7 @@
                     <th>Period do</th>
                     <th>Iznos sa PDV</th>
                     <th>Datum izdavanja</th>
+                    <th>Status</th>
                     <th>Akcija</th>
 
                 </tr>
@@ -104,6 +159,13 @@
                             <td>@x.ObracunskiPeriodDO.ToShortDateString()</td>
                             <td>@x.UkupnoSaPDV.ToString("0.00")</td>
                             <td>@x.DatumIzdavanja.ToShortDateString()</td>
+                            <td>
+                                @if (x.Placen)
+                                {
+                                   @Html.Raw("PLAĆEN")}
+                                else
+                                { @Html.Raw("NIJE PLAĆEN")}
+                            </td>
 
                             <td>
                                 @Html.ActionLink("Detalji", "Detalji", new { id = x.Id }, new { @class = "btn btn-secondary btn-sm" })

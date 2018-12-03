@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,8 +20,7 @@ namespace app.Areas.admin.Controllers
 
         private MojKontekst db = new MojKontekst();
 
-        // GET: admin/Racun
-        public ActionResult Index(int? page, int? OdabranKorisnik, string Naziv)
+        public ActionResult Index(int? page, int? OdabranKorisnik, string Naziv, string tip)
         {
 
             int id = OdabranKorisnik ?? 0;
@@ -41,7 +41,23 @@ namespace app.Areas.admin.Controllers
                 u = u.Where(i =>  i.Sifra.Contains(Naziv)).ToList();
 
 
+            if (tip != null && tip != "")
+            {
+                if (tip == "P")
+                {
+                    u = u.Where(i => i.Placen == true).ToList();
+
+                }
+                else if (tip == "N")
+                {
+                    u = u.Where(i => i.Placen == false).ToList();
+                }
+            }
+
             model.ListaRezultata = u.ToPagedList(page ?? 1, 10);
+            model.tip = tip;
+            model.PlacenoRacuna = db.RacuniDbSet.Where(c => c.Placen == true).Count().ToString();
+            model.NijePlacenoRacuna = db.RacuniDbSet.Where(c => c.Placen == false).Count().ToString();
 
             return View(model);
 
@@ -51,38 +67,51 @@ namespace app.Areas.admin.Controllers
         [HttpGet]
         public ActionResult Kreiraj()
         {
-            //
             RacunKreirajVM model = new RacunKreirajVM();
-
             model.Mjesec = DateTime.Now.Month.ToString();
             model.Godina = DateTime.Now.Year.ToString();
-
-
-
             return View(model);
         }
         [HttpPost]
         public ActionResult Kreiraj(RacunKreirajVM model)
         {
-
-            // provjeri postoje li racuni za prosle mjesece
-            if (DateTime.Now.Month == Int32.Parse(model.Mjesec))
+            if (!string.IsNullOrEmpty(model.Mjesec))
+            {
+                if (!Regex.IsMatch(model.Mjesec, @"^\d+$"))
+                {
+                    ModelState.AddModelError(string.Empty, "Niste unijeli ispravan mjesec!");
+                    return View(model);
+                }
+            }
+            if (!string.IsNullOrEmpty(model.Godina))
+            {
+                if (!Regex.IsMatch(model.Mjesec, @"^\d+$"))
+                {
+                    ModelState.AddModelError(string.Empty, "Niste unijeli ispravnu godinu!");
+                    return View(model);
+                }
+            }
+            int mjesec = Int32.Parse(model.Mjesec);
+            if (DateTime.Now.Month == mjesec)
             {
                 ModelState.AddModelError(string.Empty, "Racuni se mogu generisati samo za prethodni mjesec!");
                 return View(model);
-
             }
-
+            if (db.RacuniDbSet.Where(c=>c.ObracunskiPeriodOD.Month== mjesec).Count()>0)
+            {
+                ModelState.AddModelError(string.Empty, "Već ste generisali račune za mjesec " + model.Mjesec + "!");
+                return View(model);
+            }
 
             int brojRacuna = 0;
 
-            // uzmi sve korisnike
             var korisnici = db.KorisnikDbSet.ToList();
-
             foreach (var x in korisnici)
             {
-                // provjeri za svakog korisnika ima li aktivnih usluga ako ima napravi racun
-                var aktivne = db.AktivneUslugeDbSet.Where(c => c.KorisnikId == x.Id && c.AktivnaUsluga != false ).ToList();
+                var datum = new DateTime(Int32.Parse(model.Godina), Int32.Parse(model.Mjesec), 1);
+                var datumdo = datum.AddMonths(1).AddDays(-1);
+
+                var aktivne = db.AktivneUslugeDbSet.Where(c => c.KorisnikId == x.Id  && c.DatumAktivacije< datumdo ).ToList();
                 if (aktivne !=null && aktivne.Count()>0)
                 {
                     Racuni racun = new Racuni();
@@ -103,6 +132,7 @@ namespace app.Areas.admin.Controllers
                     {
                         RacuniStavke rs = new RacuniStavke();
                         rs.RacunId = racun.Id;
+                        bool temp = false;
 
                         rs.AktivneUslugeId = stavka.Id;
                         rs.DatumPocetka = racun.ObracunskiPeriodOD;
@@ -110,16 +140,22 @@ namespace app.Areas.admin.Controllers
                         rs.IznosBezPDV = Math.Round(stavka.Paket.CijenaBezPdv, 2);
                         rs.IznosSaPDV = Math.Round(stavka.Paket.CijenaSaPdv, 2);
 
+                        // ako je usluga aktivirana u toku mjeseca, pocetni datum promjeniti
                         if (stavka.DatumAktivacije > rs.DatumPocetka)
                         {
                             rs.DatumPocetka = stavka.DatumAktivacije;
+                            temp = true;
                         }
-                        if (stavka.DatumZatvaranja > rs.DatumPocetka && stavka.DatumZatvaranja < rs.DatumKraja)
+                        if (stavka.DatumZatvaranja < rs.DatumKraja)
                         {
                             rs.DatumKraja = stavka.DatumZatvaranja??rs.DatumKraja;
                         }
 
-
+                        if (temp)
+                        {
+                            rs.IznosBezPDV = Math.Round(stavka.Paket.CijenaBezPdv/30*(rs.DatumKraja-rs.DatumPocetka).TotalDays, 2);
+                            rs.IznosSaPDV = Math.Round(rs.IznosBezPDV*1.17, 2);
+                        }
 
 
                         db.RacuniStavkeDbSet.Add(rs);

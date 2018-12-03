@@ -16,7 +16,6 @@ namespace app.Areas.admin.Controllers
     {
         private MojKontekst db = new MojKontekst();
 
-        // GET: admin/Pakets
         public ActionResult Index()
         {
             PaketIndexVM model = new PaketIndexVM();
@@ -40,7 +39,6 @@ namespace app.Areas.admin.Controllers
 
             return View(model);
         }
-
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -71,11 +69,8 @@ namespace app.Areas.admin.Controllers
 
               }).Single();
 
-
             return View(model);
         }
-
-        // GET: admin/Pakets/Create
         public ActionResult Create()
         {
             PaketDodajVM model = new PaketDodajVM();
@@ -83,7 +78,6 @@ namespace app.Areas.admin.Controllers
 
             return View(model);
         }
-
        [HttpPost]
         public ActionResult Create(PaketDodajVM model)
         {
@@ -109,7 +103,6 @@ namespace app.Areas.admin.Controllers
                         TipUslugaId = model.TipUslugaId
                     };
 
-
                     db.PaketDbSet.Add(p);
                     db.SaveChanges();
 
@@ -119,13 +112,10 @@ namespace app.Areas.admin.Controllers
                 else
                     ModelState.AddModelError("ImageUpload", "Podrzani formati su: jpg i png!");
             }
-           
 
             model.ListaTipovaUsluga = db.TipUslugaDbSet.ToList();
             return View(model);
         }
-
-        // GET: admin/Pakets/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -157,13 +147,8 @@ namespace app.Areas.admin.Controllers
 
                 }).Single();
 
-
             return View(model);
         }
-
-        // POST: admin/Pakets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public ActionResult Edit(PaketUrediVM model)
         {
@@ -173,21 +158,14 @@ namespace app.Areas.admin.Controllers
 
                if (model.ImageUpload!= null )
                 {
-                    /// ako je korisnik ucitao novu sliku izmjeni staru
-                    /// 
-
-                    
                     if (p.ImageUrl == null) 
                     {
                         p.ImageUrl = FileUploader.UploadFile("Slike", model.ImageUpload); ;
-
                     }
                     else if((model.ImageUpload.ContentLength > 0) && (model.ImageUpload.ContentType == "image/jpeg" || model.ImageUpload.ContentType == "image/png"))
                     {
-
                         FileUploader.ObrisiFile(p.ImageUrl);
                         p.ImageUrl = FileUploader.UploadFile("Slike", model.ImageUpload); ;
-                       
                     }
                     else
                     {
@@ -204,21 +182,14 @@ namespace app.Areas.admin.Controllers
                 p.AltText = model.AltText;
                 p.AktivnaUsluga = model.AktivnaUsluga;
                 p.FlatRate = model.FlatRate;
-
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-          
 
             model.ListaTipovaUsluga  = db.TipUslugaDbSet.ToList();
             return View(model);
-
-
-
         }
-
-        // GET: admin/Pakets/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -232,8 +203,6 @@ namespace app.Areas.admin.Controllers
             }
             return View(paket);
         }
-
-        // POST: admin/Pakets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -243,7 +212,6 @@ namespace app.Areas.admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

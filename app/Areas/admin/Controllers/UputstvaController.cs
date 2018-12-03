@@ -19,8 +19,6 @@ namespace app.Areas.admin.Controllers
 
         private MojKontekst db = new MojKontekst();
 
-
-        // GET: admin/Uputstva
         public ActionResult Index(int? page, int? OdabranaKategorija, string Naziv)
         {
 
@@ -50,11 +48,9 @@ namespace app.Areas.admin.Controllers
 
             return View(model);
         }
-
         [HttpGet]
         public ActionResult Dodaj()
         {
-
             UputstvaDodajVM model = new UputstvaDodajVM();
             model.ListaKategorija = db.UputstvaKategorijeDbSet.ToList();
 
@@ -63,8 +59,6 @@ namespace app.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Dodaj(UputstvaDodajVM model)
         {
-            //Validiraj i ucitaj upustvo i napravai folder
-
             if (ModelState.IsValid)
             {
                 if ((model.FileUpload != null && model.FileUpload.ContentLength > 0) && (model.FileUpload.ContentType == "application/pdf"))
@@ -97,11 +91,9 @@ namespace app.Areas.admin.Controllers
                     ModelState.AddModelError("FileUpload", "Molimo izaberite uputstvo u PDF formatu!");
             }
 
-
             model.ListaKategorija = db.UputstvaKategorijeDbSet.ToList();
             return View(model);
         }
-
         [HttpGet]
         public ActionResult Uredi(int id)
         {
@@ -137,35 +129,26 @@ namespace app.Areas.admin.Controllers
 
                 if (model.FileUpload != null)
                 {
-                    /// ako je korisnik ucitao novu sliku izmjeni staru
                     if (v.Putanja == null)
                     {
                         v.Putanja = FileUploader.UploadFile("PDF", model.FileUpload); ;
                         v.NazivDokumenta = model.FileUpload.FileName;
-
                     }
                     else if ((model.FileUpload.ContentLength > 0) && (model.FileUpload.ContentType == "application/pdf"))
                     {
-
                         FileUploader.ObrisiFile(v.Putanja);
                         v.Putanja = FileUploader.UploadFile("PDF", model.FileUpload); 
                         v.NazivDokumenta = model.FileUpload.FileName;
-
                     }
                     else
                     {
                         ModelState.AddModelError("FileUpload", "Molimo izaberite uputstvo u PDF formatu!");
                     }
                 }
-
-
-
                 v.DatumDodavanja = DateTime.Now;
                 v.Naslov = model.Naslov;
                 v.UputstvoKategorijaID = model.UputstvoKategorijaID;
                 v.Vidljivo = model.Vidljivo;
-
-
 
                 db.SaveChanges();
 
@@ -175,33 +158,23 @@ namespace app.Areas.admin.Controllers
             model.ListaKategorija = db.UputstvaKategorijeDbSet.ToList();
             return View(model);
         }
-
-
         [HttpGet]
         public ActionResult GetPDF(string s)
         {
-
-
             if (!System.IO.File.Exists(HttpContext.Server.MapPath(s)))
             {
                 return HttpNotFound();
             }
-
             return File(s, MediaTypeNames.Application.Pdf);
         }
-
-         public FileStreamResult DajPDF(string s)
+        public FileStreamResult DajPDF(string s)
         {
             FileStream fs = new FileStream(s, FileMode.Open, FileAccess.Read);
             return File(fs, "application/pdf");
         }
-
-
-
         [HttpGet]
         public ActionResult Detalji(int id)
         {
-
             if (db.UputstvaDbSet.Find(id) == null)
             {
                 return HttpNotFound();

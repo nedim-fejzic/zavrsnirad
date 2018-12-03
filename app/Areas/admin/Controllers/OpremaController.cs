@@ -78,7 +78,23 @@ namespace app.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Dodaj(OpremaDodajVM model)
         {
+            DateTime temp;
+            if (model.DatumNabavke != null)
+            {
+                if (DateTime.TryParse(model.DatumNabavke.ToString(), out temp))
+                {
+                    if (model.DatumNabavke.Year < 2016)
+                    {
+                        ModelState.AddModelError("DatumNabavke", "Datum nabavke nije ispravan!");
 
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("DatumNabavke", "Datum nabavke nije ispravan!");
+
+                }
+            }
 
             if (!ModelState.IsValid)
             {
@@ -278,6 +294,7 @@ namespace app.Areas.admin.Controllers
                 return HttpNotFound();
             }
 
+
         
             OpremaZaduziVM model = new OpremaZaduziVM();
 
@@ -299,6 +316,24 @@ namespace app.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Zaduzi(OpremaZaduziVM model)
         {
+            DateTime temp;
+
+            if (model.DatumZaduzenja != null)
+            {
+                if (DateTime.TryParse(model.DatumZaduzenja.ToString(), out temp))
+                {
+                    if (model.DatumZaduzenja.Year < 2016)
+                    {
+                        ModelState.AddModelError("DatumZaduzenja", "Datum zaduženja nije ispravan!");
+
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("DatumZaduzenja", "Datum zaduženja nije ispravan!");
+
+                }
+            }
 
             if (!ModelState.IsValid)
             {
@@ -364,6 +399,24 @@ namespace app.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Razduzi(OpremaRazduziVM model)
         {
+            DateTime temp;
+            if (model.DatumVracanja != null)
+            {
+                if (DateTime.TryParse(model.DatumVracanja.ToString(), out temp))
+                {
+                    if (model.DatumVracanja.Value.Year < 2016)
+                    {
+                        ModelState.AddModelError("DatumVracanja", "Datum vraćanja nije ispravan!");
+
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("DatumVracanja", "Datum vraćanja nije ispravan!");
+
+                }
+            }
+
             Uredjaj u = db.UredjajDbSet.Where(f => f.Id == model.Id).FirstOrDefault(); ;
             UredjajZaduzenje uz = db.UredjajZaduzenjeDbSet.Where(v => v.UredjajId == u.Id).FirstOrDefault();
 

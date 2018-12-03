@@ -11,9 +11,6 @@ namespace app.Areas.admin.Controllers
         // GET: admin/Usluge
         public ActionResult Index()
         {
-
-
-
             return View();
         }
     }
